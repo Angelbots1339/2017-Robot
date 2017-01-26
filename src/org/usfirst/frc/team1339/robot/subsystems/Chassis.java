@@ -5,6 +5,7 @@ import org.usfirst.frc.team1339.robot.commands.ArcadeDrive;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -18,6 +19,9 @@ public class Chassis extends Subsystem {
 	public static CANTalon leftFrontMotor = new CANTalon(RobotMap.leftFrontMotor);
 	public static CANTalon leftBackMotor = new CANTalon(RobotMap.leftBackMotor);
 
+	public static Solenoid rightSolenoid = new Solenoid(RobotMap.solenoidRight);
+	public static Solenoid leftSolenoid = new Solenoid(RobotMap.solenoidLeft);
+	
 	double leftLastSpeed, rightLastSpeed;
 	double rightSpeed, leftSpeed;
 	double rate = 0.085;

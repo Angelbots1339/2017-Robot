@@ -42,6 +42,10 @@ public class RobotMap {
 	public static int rightFrontMotor = 0;
 	public static int rightBackMotor = 0;
 	
+	//Solenoids
+	public static int solenoidLeft = 0;
+	public static int solenoidRight = 1;
+	
 	
 	
 	
