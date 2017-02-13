@@ -33,7 +33,7 @@ public class OI {
 	
 	Button ViewButton = new JoystickButton(stick, RobotMap.xboxViewButton);
 	Button MenuButton = new JoystickButton(stick, RobotMap.xboxMenuButton);
-	
+	//Joystick Buttons
 	private JoystickButton AButton = new JoystickButton(stick, RobotMap.xboxAbutton);
 	private JoystickButton BButton = new JoystickButton(stick, RobotMap.xboxBbutton);
 	private JoystickButton XButton = new JoystickButton(stick, RobotMap.xboxXbutton);
