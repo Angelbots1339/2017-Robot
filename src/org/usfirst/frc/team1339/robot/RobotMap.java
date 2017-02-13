@@ -41,12 +41,12 @@ public class RobotMap {
 	public final static int xboxRightStickButton = 9;
 	
 	//Left Drive Motors
-	public final static int leftFront = 0;
-	public final static int leftBack = 0;
+	public final static int leftFront = 4;
+	public final static int leftBack = 3;
 	
 	//Right Drive Motors
-	public final static int rightFront = 0;
-	public final static int rightBack = 0;
+	public final static int rightFront = 5;
+	public final static int rightBack = 6;
 	
 	//Intake Motors
 	public final static int intakeTop = 0;
