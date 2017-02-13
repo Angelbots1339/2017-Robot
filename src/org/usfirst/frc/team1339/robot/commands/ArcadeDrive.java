@@ -8,15 +8,21 @@ public class ArcadeDrive extends CommandBase{
 	
 	double throttle, turn;
 	Joystick stick;
-	
+	/**
+	 * 
+	 */
 	public ArcadeDrive(){
 		requires(chassis);
 	}
-	
+	/**
+	 * 
+	 */
 	protected void initialize(){
 		
 	}
-	
+	/**
+	 * 
+	 */
 	protected void execute(){
 		stick = oi.getXboxStick();
 		throttle = stick.getRawAxis(RobotMap.xboxLeftYAxis);
@@ -24,7 +30,9 @@ public class ArcadeDrive extends CommandBase{
 		
 		chassis.driveWithJoystick(throttle, turn);
 	}
-	
+	/**
+	 * 
+	 */
 	protected boolean isFinished(){
 		return false;
 	}

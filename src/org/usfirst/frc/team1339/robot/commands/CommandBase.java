@@ -2,6 +2,7 @@ package org.usfirst.frc.team1339.robot.commands;
 
 import org.usfirst.frc.team1339.robot.OI;
 import org.usfirst.frc.team1339.robot.subsystems.Chassis;
+import org.usfirst.frc.team1339.robot.subsystems.Shifting;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -19,6 +20,7 @@ public abstract class CommandBase extends Command {
     public static OI oi;
     
     public static Chassis chassis = new Chassis();
+    public static Shifting shifting = new Shifting();
 
     
     

@@ -44,10 +44,6 @@ public class OI {
 	private JoystickButton rightStickButton = new JoystickButton(stick, RobotMap.xboxRightStickButton);
 	private JoystickButton leftStickButton = new JoystickButton(stick, RobotMap.xboxLeftStickButton);
 	
-	
-	
-
-	
 	public Joystick getXboxStick(){
 		return stick;
 	}

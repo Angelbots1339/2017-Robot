@@ -14,13 +14,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Chassis extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	public static CANTalon rightFrontMotor = new CANTalon(RobotMap.rightFrontMotor);
-	public static CANTalon rightBackMotor = new CANTalon(RobotMap.rightBackMotor);
-	public static CANTalon leftFrontMotor = new CANTalon(RobotMap.leftFrontMotor);
-	public static CANTalon leftBackMotor = new CANTalon(RobotMap.leftBackMotor);
-
-	public static Solenoid rightSolenoid = new Solenoid(RobotMap.solenoidRight);
-	public static Solenoid leftSolenoid = new Solenoid(RobotMap.solenoidLeft);
+	private static CANTalon rightFrontMotor = new CANTalon(RobotMap.rightFront);
+	private static CANTalon rightBackMotor = new CANTalon(RobotMap.rightBack);
+	private static CANTalon leftFrontMotor = new CANTalon(RobotMap.leftFront);
+	private static CANTalon leftBackMotor = new CANTalon(RobotMap.leftBack);
 	
 	double leftLastSpeed, rightLastSpeed;
 	double rightSpeed, leftSpeed;
@@ -30,14 +27,22 @@ public class Chassis extends Subsystem {
 		// Set the default command for a subsystem here.
 		setDefaultCommand(new ArcadeDrive());
 	}
-
+	/**
+	 * Sets motor values.
+	 * @param right = right motor value.
+	 * @param left = left motor value.
+	 */
 	public void setMotorValues(double right, double left){
 		rightFrontMotor.set(right);
-		rightBackMotor.set(-right);		
-		leftFrontMotor.set(left);
+		rightBackMotor.set(right);		
+		leftFrontMotor.set(-left);
 		leftBackMotor.set(-left);
 	}
-
+	/**
+	 * Classic Arcade Drive.
+	 * @param throttle = Throttle value from joystick. (-1 <= x <= 1)
+	 * @param turn = Turn value from joystick. (-1 <= x <= 1)
+	 */
 	public void driveWithJoystick(double throttle, double turn){
 		double right = throttle;
 		double left = throttle;
@@ -72,7 +77,6 @@ public class Chassis extends Subsystem {
 			rightSpeed = rightLastSpeed - rate;
 		else
 			rightSpeed = right;
-
 
 		setMotorValues(leftSpeed, rightSpeed);
 
