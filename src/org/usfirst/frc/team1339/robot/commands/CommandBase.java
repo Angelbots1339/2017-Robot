@@ -14,18 +14,17 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author Author
  */
 public abstract class CommandBase extends Command {
-    
-    Command autonomousCommand;
 
     public static OI oi;
     
-    public static Chassis chassis = new Chassis();
-    public static Shifting shifting = new Shifting();
-
-    
+    public static Chassis chassis;
+    public static Shifting shifting;
     
     public static void init() {
+    	chassis = new Chassis();
+    	shifting = new Shifting();
         oi = new OI();
+        
     }
 
     public CommandBase(String name) {

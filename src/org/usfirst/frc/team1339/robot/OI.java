@@ -1,7 +1,8 @@
 package org.usfirst.frc.team1339.robot;
 
+import org.usfirst.frc.team1339.robot.commands.*;
+
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
@@ -9,55 +10,41 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	//// CREATING BUTTONS
-	// One type of button is a joystick button which is any button on a
-	//// joystick.
-	// You create one by telling it which joystick it's on and which button
-	// number it is.
-	// Joystick stick = new Joystick(port);
-	// Button button = new JoystickButton(stick, buttonNumber);
-
-	// There are a few additional built in buttons you can use. Additionally,
-	// by subclassing Button you can create custom triggers and bind those to
-	// commands the same as any other Button.
-
-	//// TRIGGERING COMMANDS WITH BUTTONS
-	// Once you have a button, it's trivial to bind it to a button in one of
-	// three ways:
-
-	// Start the command when the button is pressed and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenPressed(new ExampleCommand());
 	
-	Joystick stick = new Joystick(RobotMap.xboxPort);
+	private Joystick xboxStick = new Joystick(RobotMap.xboxPort);
 	
-	Button ViewButton = new JoystickButton(stick, RobotMap.xboxViewButton);
-	Button MenuButton = new JoystickButton(stick, RobotMap.xboxMenuButton);
+	
 	//Joystick Buttons
-	private JoystickButton AButton = new JoystickButton(stick, RobotMap.xboxAbutton);
-	private JoystickButton BButton = new JoystickButton(stick, RobotMap.xboxBbutton);
-	private JoystickButton XButton = new JoystickButton(stick, RobotMap.xboxXbutton);
-	private JoystickButton YButton = new JoystickButton(stick, RobotMap.xboxYbutton);
-	private JoystickButton rightBumper = new JoystickButton(stick, RobotMap.xboxRightBumper);
-	private JoystickButton leftBumper = new JoystickButton(stick, RobotMap.xboxLeftBumper);
+	private JoystickButton aButton = new JoystickButton(xboxStick, RobotMap.xboxAButton);
+	private JoystickButton bButton = new JoystickButton(xboxStick, RobotMap.xboxBButton);
+	private JoystickButton xButton = new JoystickButton(xboxStick, RobotMap.xboxXButton);
+	private JoystickButton yButton = new JoystickButton(xboxStick, RobotMap.xboxYButton);
+	private JoystickButton rightBumper = new JoystickButton(xboxStick, RobotMap.xboxRightBumper);
+	private JoystickButton leftBumper = new JoystickButton(xboxStick, RobotMap.xboxLeftBumper);
+	private JoystickButton viewButton = new JoystickButton(xboxStick, RobotMap.xboxViewButton);
+	private JoystickButton menuButton = new JoystickButton(xboxStick, RobotMap.xboxMenuButton);
+	private JoystickButton rightStickButton = new JoystickButton(xboxStick, RobotMap.xboxRightStickButton);
+	private JoystickButton leftStickButton = new JoystickButton(xboxStick, RobotMap.xboxLeftStickButton);
 	
-	private JoystickButton rightStickButton = new JoystickButton(stick, RobotMap.xboxRightStickButton);
-	private JoystickButton leftStickButton = new JoystickButton(stick, RobotMap.xboxLeftStickButton);
+	public OI(){
+		aButton.whenPressed(new ShiftLow());
+		yButton.whenPressed(new ShiftHigh());
+	}
 	
 	public Joystick getXboxStick(){
-		return stick;
+		return xboxStick;
 	}
 	public JoystickButton getAButton(){
-		return AButton;
+		return aButton;
 	}
 	public JoystickButton getBButton(){
-		return BButton;
+		return bButton;
 	}
 	public JoystickButton getXButton(){
-		return XButton;
+		return xButton;
 	}
 	public JoystickButton getYButton(){
-		return YButton;
+		return yButton;
 	}
 	public JoystickButton getLeftBumper(){
 		return leftBumper;
@@ -70,6 +57,12 @@ public class OI {
 	}
 	public JoystickButton getRightStickButton(){
 		return rightStickButton;
+	}
+	public JoystickButton getviewButton(){
+		return viewButton;
+	}
+	public JoystickButton getMenuButton(){
+		return menuButton;
 	}
 	
 

@@ -9,13 +9,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Shifting extends Subsystem {
+	
 	Solenoid solenoidIn, solenoidOut;
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+	public boolean isHighGear;
 
 	public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     }
     
     public Shifting() {
@@ -30,6 +28,12 @@ public class Shifting extends Subsystem {
     	solenoidIn.set(value);
     }
     
-    
+    public boolean isHighGear() {
+		return isHighGear;
+	}
+
+	public void setIsHighGear(boolean isHighGear) {
+		this.isHighGear = isHighGear;
+	}
 }
 

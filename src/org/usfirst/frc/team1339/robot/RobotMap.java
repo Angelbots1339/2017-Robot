@@ -7,15 +7,6 @@ package org.usfirst.frc.team1339.robot;
  * floating around.
  */
 public class RobotMap {
-	// For example to map the left and right motors, you could define the
-	// following variables to use with your drivetrain subsystem.
-	// public static int leftMotor = 1;
-	// public static int rightMotor = 2;
-
-	// If you are using multiple modules, make sure to define both the port
-	// number and the module. For example you with a rangefinder:
-	// public static int rangefinderPort = 1;
-	// public static int rangefinderModule = 1;
 	
 	//Controller Ports
 	public final static int xboxPort = 0;
@@ -29,22 +20,20 @@ public class RobotMap {
 	public final static int xboxRightYAxis = 5;
 	
 	//Buttons
-	public final static int xboxAbutton = 0;
-	public final static int xboxBbutton = 1;
-	public final static int xboxXbutton = 2;
-	public final static int xboxYbutton = 3;
-	public final static int xboxLeftBumper = 4;
-	public final static int xboxRightBumper = 5;
-	public final static int xboxViewButton = 6;
-	public final static int xboxMenuButton = 7;
-	public final static int xboxLeftStickButton = 8;
-	public final static int xboxRightStickButton = 9;
+	public final static int xboxAButton = 1;
+	public final static int xboxBButton = 2;
+	public final static int xboxXButton = 3;
+	public final static int xboxYButton = 4;
+	public final static int xboxLeftBumper = 5;
+	public final static int xboxRightBumper = 6;
+	public final static int xboxViewButton = 7;
+	public final static int xboxMenuButton = 8;
+	public final static int xboxLeftStickButton = 9;
+	public final static int xboxRightStickButton = 10;
 	
-	//Left Drive Motors
+	//Drive Motors
 	public final static int leftFront = 4;
 	public final static int leftBack = 3;
-	
-	//Right Drive Motors
 	public final static int rightFront = 5;
 	public final static int rightBack = 6;
 	
@@ -54,7 +43,7 @@ public class RobotMap {
 	
 	//Solenoids
 	public final static int shiftIn = 0;
-	public final static int shiftOut = 0;
+	public final static int shiftOut = 1;
 	public final static int frontPanelOneIn = 0;
 	public final static int frontPanelOneOut = 0;
 	public final static int frontPanelTwoIn = 0;
