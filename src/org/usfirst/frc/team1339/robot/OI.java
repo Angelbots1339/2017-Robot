@@ -27,9 +27,12 @@ public class OI {
 	private JoystickButton rightStickButton = new JoystickButton(xboxStick, RobotMap.xboxRightStickButton);
 	private JoystickButton leftStickButton = new JoystickButton(xboxStick, RobotMap.xboxLeftStickButton);
 	
+	private JoystickButton twoButton = new JoystickButton(operatorStick, RobotMap.operatorTwoButton);
+	
 	public OI(){
 		aButton.whenPressed(new ShiftLow());
 		yButton.whenPressed(new ShiftHigh());
+		twoButton.whenPressed(new ClimberDrive());
 	}
 	
 	public Joystick getMadCatzStick(){
@@ -68,6 +71,11 @@ public class OI {
 	public JoystickButton getMenuButton(){
 		return menuButton;
 	}
+	public JoystickButton getTwoButton(){
+		return twoButton;
+	}
+	
+	
 	
 
 	// Run the command while the button is being held down and interrupt it once

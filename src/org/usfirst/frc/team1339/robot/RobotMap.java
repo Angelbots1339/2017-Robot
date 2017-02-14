@@ -37,6 +37,8 @@ public class RobotMap {
 	public final static int xboxLeftStickButton = 9;
 	public final static int xboxRightStickButton = 10;
 	
+	public final static int operatorTwoButton = 2;
+	
 	//Drive Motors
 	public final static int leftFront = 4;
 	public final static int leftBack = 3;
