@@ -20,6 +20,11 @@ public class RobotMap {
 	public final static int xboxRightXAxis = 4;
 	public final static int xboxRightYAxis = 5;
 	
+	public final static int operatorXAxis = 0;
+	public final static int operatorYAxis = 1;
+	public final static int operatorZAxis = 2;
+	public final static int operatorZRotate = 3;
+	
 	//Buttons
 	public final static int xboxAButton = 1;
 	public final static int xboxBButton = 2;
@@ -39,8 +44,11 @@ public class RobotMap {
 	public final static int rightBack = 6;
 	
 	//Intake Motors
-	public final static int intakeTop = 0;
-	public final static int intakeBottom = 0;
+	public final static int intakeTop = 2;
+	public final static int intakeBottom = 7;
+	
+	//Climbing Motor
+	public final static int climbMotor = 8;
 	
 	//Solenoids
 	public final static int shiftIn = 0;

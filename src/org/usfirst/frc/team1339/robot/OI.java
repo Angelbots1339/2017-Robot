@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	
 	private Joystick xboxStick = new Joystick(RobotMap.xboxPort);
+	private Joystick operatorStick = new Joystick(RobotMap.operatorPort);
 	
 	
 	//Joystick Buttons
@@ -31,6 +32,9 @@ public class OI {
 		yButton.whenPressed(new ShiftHigh());
 	}
 	
+	public Joystick getMadCatzStick(){
+		return operatorStick;
+	}
 	public Joystick getXboxStick(){
 		return xboxStick;
 	}
