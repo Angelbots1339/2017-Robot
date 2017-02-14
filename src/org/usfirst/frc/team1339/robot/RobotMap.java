@@ -10,6 +10,7 @@ public class RobotMap {
 	
 	//Controller Ports
 	public final static int xboxPort = 0;
+	public final static int operatorPort = 1;
 	
 	//Axis
 	public final static int xboxLeftXAxis = 0;
