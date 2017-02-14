@@ -5,12 +5,16 @@ import org.usfirst.frc.team1339.robot.commands.ArcadeDrive;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Chassis extends Subsystem {
 	private static CANTalon rightFrontMotor, rightBackMotor,
 		leftFrontMotor, leftBackMotor;
 	
+	private ADXRS450_Gyro spartanGyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
+
 	public Chassis(){
 		rightFrontMotor = new CANTalon(RobotMap.rightFront);
 		rightBackMotor = new CANTalon(RobotMap.rightBack);
@@ -20,6 +24,14 @@ public class Chassis extends Subsystem {
 	
 	public void initDefaultCommand() {
 		setDefaultCommand(new ArcadeDrive());
+	}
+	
+	public double getSpartanGyro() {
+		return spartanGyro.getAngle();
+	}
+	
+	public double getSpartanGyroRate(){
+		return spartanGyro.getRate();
 	}
 	
 	public void setMotorValues(double right, double left){
