@@ -14,6 +14,7 @@ public class ArcadeDrive extends CommandBase{
 	}
 
 	protected void initialize(){
+		arduino.setNum(0);
 		
 	}
 

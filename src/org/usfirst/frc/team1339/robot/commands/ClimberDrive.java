@@ -2,8 +2,6 @@ package org.usfirst.frc.team1339.robot.commands;
 
 import org.usfirst.frc.team1339.robot.subsystems.Climb;
 
-import edu.wpi.first.wpilibj.Joystick;
-
 public class ClimberDrive extends CommandBase {
 	
 	double throttle = .65;

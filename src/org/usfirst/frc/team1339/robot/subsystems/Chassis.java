@@ -7,13 +7,20 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Chassis extends Subsystem {
+	//Motors
 	private static CANTalon rightFrontMotor, rightBackMotor,
 		leftFrontMotor, leftBackMotor;
 	
+	//Sensors
 	private ADXRS450_Gyro spartanGyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
+	private Ultrasonic ultraLeft = new Ultrasonic(RobotMap.ultraLeftOut,
+			RobotMap.ultraLeftIn);
+	private Ultrasonic ultraRight = new Ultrasonic(RobotMap.ultraRightOut,
+			RobotMap.ultraRightIn);
 
 	public Chassis(){
 		rightFrontMotor = new CANTalon(RobotMap.rightFront);
@@ -34,6 +41,14 @@ public class Chassis extends Subsystem {
 		return spartanGyro.getRate();
 	}
 	
+	public double getUltraLeft(){
+		return ultraLeft.getRangeInches();
+	}
+	
+	public double getUltraRight(){
+		return ultraRight.getRangeInches();
+	}
+	
 	public void setMotorValues(double right, double left){
 		rightFrontMotor.set(-right);
 		rightBackMotor.set(-right);		
@@ -48,7 +63,6 @@ public class Chassis extends Subsystem {
 
 		if (Math.abs(throttle) > 0.1) turningThrottleScale = Math.abs(throttle);
 		else turningThrottleScale = 0.75;
-
 
 		right -= turn * turningThrottleScale;  
 		left += turn * turningThrottleScale;

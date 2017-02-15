@@ -66,6 +66,14 @@ public class RobotMap {
 	public final static int backPanelTwoIn = 0;
 	public final static int backPanelTwoOut = 0;
 
-
-
+	//Ultrasonics
+	public final static int ultraLeftOut = 0;
+	public final static int ultraLeftIn = 1;
+	public final static int ultraRightOut = 2;
+	public final static int ultraRightIn = 3;
+	
+	//Arduino
+	public final static int bitOnePort = 4;
+	public final static int bitTwoPort = 5;
+	public final static int bitThreePort = 6;
 }
