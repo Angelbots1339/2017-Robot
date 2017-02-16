@@ -6,6 +6,7 @@ import org.usfirst.frc.team1339.robot.commands.ArcadeDrive;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -21,6 +22,8 @@ public class Chassis extends Subsystem {
 			RobotMap.ultraLeftIn);
 	private Ultrasonic ultraRight = new Ultrasonic(RobotMap.ultraRightOut,
 			RobotMap.ultraRightIn);
+	private Encoder leftDrive = new Encoder(RobotMap.leftDriveAEncoder, RobotMap.leftDriveBEncoder);
+	private Encoder rightDrive = new Encoder(RobotMap.rightDriveAEncoder, RobotMap.rightDriveBEncoder);
 
 	public Chassis(){
 		rightFrontMotor = new CANTalon(RobotMap.rightFront);

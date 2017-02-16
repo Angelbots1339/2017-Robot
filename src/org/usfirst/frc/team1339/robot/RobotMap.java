@@ -72,6 +72,12 @@ public class RobotMap {
 	public final static int ultraRightOut = 2;
 	public final static int ultraRightIn = 3;
 	
+	//Encoders
+	public final static int leftDriveAEncoder = 0;
+	public final static int leftDriveBEncoder = 1;
+	public final static int rightDriveAEncoder = 2;
+	public final static int rightDriveBEncoder = 3;
+	
 	//Arduino
 	public final static int bitOnePort = 4;
 	public final static int bitTwoPort = 5;
