@@ -21,6 +21,8 @@ public abstract class CommandBase extends Command {
     public static Intake intake;
     public static Climb climb;
     public static Arduino arduino;
+    public static GearRamp gearRamp;
+    public static GearHolder gearHolder;
     
     public static void init() {
         oi = new OI();
@@ -30,6 +32,8 @@ public abstract class CommandBase extends Command {
         intake = new Intake();
         climb = new Climb();
         arduino = new Arduino();
+        gearRamp = new GearRamp();
+        gearHolder = new GearHolder();
     }
 
     public CommandBase(String name) {

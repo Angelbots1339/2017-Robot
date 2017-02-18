@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Chassis extends Subsystem {
 	//Motors
-	private static CANTalon rightFrontMotor, rightBackMotor,
+	private CANTalon rightFrontMotor, rightBackMotor,
 		leftFrontMotor, leftBackMotor;
 	
 	//Sensors
@@ -22,8 +22,8 @@ public class Chassis extends Subsystem {
 			RobotMap.ultraLeftIn);
 	private Ultrasonic ultraRight = new Ultrasonic(RobotMap.ultraRightOut,
 			RobotMap.ultraRightIn);
-	private Encoder leftDrive = new Encoder(RobotMap.leftDriveAEncoder, RobotMap.leftDriveBEncoder);
-	private Encoder rightDrive = new Encoder(RobotMap.rightDriveAEncoder, RobotMap.rightDriveBEncoder);
+	private Encoder leftEnc = new Encoder(RobotMap.leftDriveAEncoder, RobotMap.leftDriveBEncoder);
+	private Encoder rightEnc = new Encoder(RobotMap.rightDriveAEncoder, RobotMap.rightDriveBEncoder);
 
 	public Chassis(){
 		rightFrontMotor = new CANTalon(RobotMap.rightFront);
@@ -50,6 +50,14 @@ public class Chassis extends Subsystem {
 	
 	public double getUltraRight(){
 		return ultraRight.getRangeInches();
+	}
+	
+	public int getRightEnc(){
+		return rightEnc.get();
+	}
+	
+	public int getLeftEnc(){
+		return leftEnc.get();
 	}
 	
 	public void setMotorValues(double right, double left){

@@ -40,6 +40,10 @@ public class RobotMap {
 
 	//Mad Catz Buttons
 	public final static int operatorTwoButton = 2;
+	public final static int operatorThreeButton = 3;
+	public final static int operatorFourButton = 4;
+	public final static int operatorFiveButton = 5;
+	public final static int operatorSixButton = 6;
 
 	//Drive Motors
 	public final static int leftFront = 4;
@@ -55,16 +59,12 @@ public class RobotMap {
 	public final static int climbMotor = 8;
 
 	//Solenoids
-	public final static int shiftIn = 0;
-	public final static int shiftOut = 1;
-	public final static int frontPanelOneIn = 0;
-	public final static int frontPanelOneOut = 0;
-	public final static int frontPanelTwoIn = 0;
-	public final static int frontPanelTwoOut = 0;
-	public final static int backPanelOneIn = 0;
-	public final static int backPanelOneOut = 0;
-	public final static int backPanelTwoIn = 0;
-	public final static int backPanelTwoOut = 0;
+	public final static int shiftIn = 2;
+	public final static int shiftOut = 3;
+	public final static int gearRampDown = 0;
+	public final static int gearRampUp = 1;
+	public final static int gearHolderDown = 4;
+	public final static int gearHolderUp = 5;
 
 	//Ultrasonics
 	public final static int ultraLeftOut = 0;

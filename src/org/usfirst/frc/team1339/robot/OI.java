@@ -28,11 +28,17 @@ public class OI {
 	private JoystickButton leftStickButton = new JoystickButton(xboxStick, RobotMap.xboxLeftStickButton);
 	
 	private JoystickButton twoButton = new JoystickButton(operatorStick, RobotMap.operatorTwoButton);
+	private JoystickButton threeButton = new JoystickButton(operatorStick, RobotMap.operatorThreeButton);
+	private JoystickButton fourButton = new JoystickButton(operatorStick, RobotMap.operatorFourButton);
+	private JoystickButton fiveButton = new JoystickButton(operatorStick, RobotMap.operatorFiveButton);
+	private JoystickButton sixButton = new JoystickButton(operatorStick, RobotMap.operatorSixButton);
 	
 	public OI(){
 		aButton.whenPressed(new ShiftLow());
 		yButton.whenPressed(new ShiftHigh());
 		twoButton.whenPressed(new ClimberDrive());
+		threeButton.whenPressed(new GearRampUp());
+		fiveButton.whenPressed(new GearRampDown());
 	}
 	
 	public Joystick getMadCatzStick(){
