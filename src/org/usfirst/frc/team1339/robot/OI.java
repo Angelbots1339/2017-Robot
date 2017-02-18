@@ -1,6 +1,10 @@
 package org.usfirst.frc.team1339.robot;
 
-import org.usfirst.frc.team1339.robot.commands.*;
+import org.usfirst.frc.team1339.robot.commands.ClimberDrive;
+import org.usfirst.frc.team1339.robot.commands.GearRampDown;
+import org.usfirst.frc.team1339.robot.commands.GearRampUp;
+import org.usfirst.frc.team1339.robot.commands.ShiftHigh;
+import org.usfirst.frc.team1339.robot.commands.ShiftLow;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -36,7 +40,7 @@ public class OI {
 	public OI(){
 		aButton.whenPressed(new ShiftLow());
 		yButton.whenPressed(new ShiftHigh());
-		twoButton.whenPressed(new ClimberDrive());
+		twoButton.whileHeld(new ClimberDrive(1.0));
 		threeButton.whenPressed(new GearRampUp());
 		fiveButton.whenPressed(new GearRampDown());
 	}

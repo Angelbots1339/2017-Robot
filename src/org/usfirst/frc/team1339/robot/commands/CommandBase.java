@@ -25,8 +25,6 @@ public abstract class CommandBase extends Command {
     public static GearHolder gearHolder;
     
     public static void init() {
-        oi = new OI();
-        
     	chassis = new Chassis();
     	shifting = new Shifting();
         intake = new Intake();
@@ -34,6 +32,8 @@ public abstract class CommandBase extends Command {
         arduino = new Arduino();
         gearRamp = new GearRamp();
         gearHolder = new GearHolder();
+        
+        oi = new OI();
     }
 
     public CommandBase(String name) {

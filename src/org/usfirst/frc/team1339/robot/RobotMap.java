@@ -59,12 +59,12 @@ public class RobotMap {
 	public final static int climbMotor = 8;
 
 	//Solenoids
-	public final static int shiftIn = 2;
-	public final static int shiftOut = 3;
+	public final static int shiftIn = 4;
+	public final static int shiftOut = 5;
 	public final static int gearRampDown = 0;
 	public final static int gearRampUp = 1;
-	public final static int gearHolderDown = 4;
-	public final static int gearHolderUp = 5;
+	public final static int gearHolderDown = 2;
+	public final static int gearHolderUp = 3;
 
 	//Ultrasonics
 	public final static int ultraLeftOut = 0;
@@ -73,13 +73,13 @@ public class RobotMap {
 	public final static int ultraRightIn = 3;
 	
 	//Encoders
-	public final static int leftDriveAEncoder = 0;
-	public final static int leftDriveBEncoder = 1;
-	public final static int rightDriveAEncoder = 2;
-	public final static int rightDriveBEncoder = 3;
+	public final static int leftDriveAEncoder = 4;
+	public final static int leftDriveBEncoder = 5;
+	public final static int rightDriveAEncoder = 6;
+	public final static int rightDriveBEncoder = 7;
 	
 	//Arduino
-	public final static int bitOnePort = 4;
-	public final static int bitTwoPort = 5;
-	public final static int bitThreePort = 6;
+	public final static int bitOnePort = 8;
+	public final static int bitTwoPort = 9;
+	public final static int bitThreePort = 10;
 }
