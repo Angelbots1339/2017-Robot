@@ -1,10 +1,6 @@
 package org.usfirst.frc.team1339.robot;
 
-import org.usfirst.frc.team1339.robot.commands.ClimberDrive;
-import org.usfirst.frc.team1339.robot.commands.GearRampDown;
-import org.usfirst.frc.team1339.robot.commands.GearRampUp;
-import org.usfirst.frc.team1339.robot.commands.ShiftHigh;
-import org.usfirst.frc.team1339.robot.commands.ShiftLow;
+import org.usfirst.frc.team1339.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -31,18 +27,26 @@ public class OI {
 	private JoystickButton rightStickButton = new JoystickButton(xboxStick, RobotMap.xboxRightStickButton);
 	private JoystickButton leftStickButton = new JoystickButton(xboxStick, RobotMap.xboxLeftStickButton);
 	
+	private JoystickButton oneButton = new JoystickButton(operatorStick, RobotMap.operatorOneButton);
 	private JoystickButton twoButton = new JoystickButton(operatorStick, RobotMap.operatorTwoButton);
 	private JoystickButton threeButton = new JoystickButton(operatorStick, RobotMap.operatorThreeButton);
 	private JoystickButton fourButton = new JoystickButton(operatorStick, RobotMap.operatorFourButton);
 	private JoystickButton fiveButton = new JoystickButton(operatorStick, RobotMap.operatorFiveButton);
 	private JoystickButton sixButton = new JoystickButton(operatorStick, RobotMap.operatorSixButton);
+	private JoystickButton sevenButton = new JoystickButton(operatorStick, RobotMap.operatorSevenButton);
+	
 	
 	public OI(){
 		aButton.whenPressed(new ShiftLow());
 		yButton.whenPressed(new ShiftHigh());
-		twoButton.whileHeld(new ClimberDrive(1.0));
+		twoButton.whenPressed(new AutoClimb(0.7, 35));
 		threeButton.whenPressed(new GearRampUp());
 		fiveButton.whenPressed(new GearRampDown());
+		fourButton.whenPressed(new GearHolderUp());
+		sixButton.whenPressed(new GearHolderDown());
+		oneButton.whenPressed(new PancakeOut());
+		sevenButton.whenPressed(new PancakeIn());
+		
 	}
 	
 	public Joystick getMadCatzStick(){

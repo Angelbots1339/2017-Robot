@@ -15,9 +15,13 @@ public class Climb extends Subsystem {
 		climbMotor = new CANTalon(RobotMap.climbMotor);
 	}
 
-	public static void setMotorValue(double throttle){
+	public void setMotorValue(double throttle){
 		climbMotor.set(throttle);
 		SmartDashboard.putNumber("Current", climbMotor.getOutputCurrent());
+	}
+	
+	public double returnCurrentDraw(){
+		return climbMotor.getOutputCurrent();
 	}
 	
     public void initDefaultCommand() {
