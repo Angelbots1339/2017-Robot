@@ -2,6 +2,7 @@ package org.usfirst.frc.team1339.robot.commands;
 
 import org.usfirst.frc.team1339.robot.OI;
 import org.usfirst.frc.team1339.robot.subsystems.*;
+import org.usfirst.frc.team1339.utils.Vision;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -23,6 +24,7 @@ public abstract class CommandBase extends Command {
     public static Arduino arduino;
     public static GearRamp gearRamp;
     public static GearHolder gearHolder;
+    public static Vision vision;
     
     public static void init() {
     	chassis = new Chassis();
@@ -32,6 +34,7 @@ public abstract class CommandBase extends Command {
         arduino = new Arduino();
         gearRamp = new GearRamp();
         gearHolder = new GearHolder();
+        vision = new Vision();
         
         oi = new OI();
     }

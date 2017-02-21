@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1339.robot;
 
 import org.usfirst.frc.team1339.robot.commands.*;
+import org.usfirst.frc.team1339.robot.commands.groups.*;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -37,8 +38,15 @@ public class OI {
 	
 	
 	public OI(){
+		//Xbox Buttons
 		aButton.whenPressed(new ShiftLow());
 		yButton.whenPressed(new ShiftHigh());
+		xButton.whenPressed(new AutoDelivery());
+		bButton.whileHeld(new RunVisionThrottle());
+		rightBumper.whileHeld(new PixyVision());
+		leftBumper.whenPressed(new GyroTurn(-45));
+		
+		//Operator Buttons
 		twoButton.whenPressed(new AutoClimb(0.7, 35));
 		threeButton.whenPressed(new GearRampUp());
 		fiveButton.whenPressed(new GearRampDown());
@@ -46,7 +54,6 @@ public class OI {
 		sixButton.whenPressed(new GearHolderDown());
 		oneButton.whenPressed(new PancakeOut());
 		sevenButton.whenPressed(new PancakeIn());
-		
 	}
 	
 	public Joystick getMadCatzStick(){
@@ -88,15 +95,4 @@ public class OI {
 	public JoystickButton getTwoButton(){
 		return twoButton;
 	}
-	
-	
-	
-
-	// Run the command while the button is being held down and interrupt it once
-	// the button is released.
-	// button.whileHeld(new ExampleCommand());
-
-	// Start the command when the button is released and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenReleased(new ExampleCommand());
 }

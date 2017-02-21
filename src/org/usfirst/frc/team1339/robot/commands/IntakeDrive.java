@@ -3,6 +3,7 @@ package org.usfirst.frc.team1339.robot.commands;
 import org.usfirst.frc.team1339.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
  *
@@ -27,6 +28,8 @@ public class IntakeDrive extends CommandBase {
     	stick = oi.getMadCatzStick();
     	throttle = stick.getRawAxis(RobotMap.operatorYAxis);
     	intake.setMotorValues(throttle, throttle);
+    	if(throttle > 0.05 && gearRamp.isPlateUp())
+    		Scheduler.getInstance().add(new GearRampDown());
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -86,4 +86,25 @@ public class RobotMap {
 	public final static int bitOnePort = 8;
 	public final static int bitTwoPort = 9;
 	public final static int bitThreePort = 10;
+	
+	//PID Values
+	public final static double gyroTurnP = 0.02;
+	public final static double gyroTurnI = 0;
+	public final static double gyroTurnD = 0;
+	
+	public final static double ultraP = 0.05;
+	public final static double ultraI = 0;
+	public final static double ultraD = 0;
+	
+	public final static double visionTurnP = 0.002;
+	public final static double visionTurnI = 0;
+	public final static double visionTurnD = 0;
+	
+	public final static double visionThrottleP = 0.02;
+	public final static double visionThrottleI = 0;
+	public final static double visionThrottleD = 0;
+
+	public final static double pixyTurnP = 0.04;
+	public final static double pixyTurnI = 0;
+	public final static double pixyTurnD = 0;
 }
