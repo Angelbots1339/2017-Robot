@@ -170,6 +170,28 @@ public class Chassis extends Subsystem {
 		setMotorValues(left, right);
 	}
 	
+	public void ultraGear(int[] centerX, double dist){
+		double visionOutput = 0;
+		double distOutput = 0;
+		double targetSum = 0;
+
+		distOutput = ultraPID.calculate(dist);
+		
+		for(int i = 0; i < centerX.length; i++){
+			targetSum += centerX[i];
+		}
+		double targetAvg = targetSum/centerX.length;
+		if(centerX.length != 0){
+			visionOutput = visionTurnPID.calculate(targetAvg);
+		}
+		
+		visionOutput = Math.pow(visionOutput, 3);
+
+		double right = distOutput + visionOutput;
+		double left = distOutput - visionOutput;
+		setMotorValues(left, right);
+	}
+	
 	public void setMotorValues(double right, double left){
 		rightFrontMotor.set(-right);
 		rightBackMotor.set(-right);		

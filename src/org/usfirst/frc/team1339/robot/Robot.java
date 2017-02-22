@@ -99,6 +99,7 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Gyro", CommandBase.chassis.getSpartanGyro());
 		SmartDashboard.putNumber("Left Ultrasonic", CommandBase.chassis.getUltraLeft());
+		SmartDashboard.putNumber("Right Ultrasonic", CommandBase.chassis.getUltraRight());
 	}
 
 	/**

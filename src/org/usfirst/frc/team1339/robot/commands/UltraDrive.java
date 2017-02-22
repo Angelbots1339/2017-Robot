@@ -10,7 +10,8 @@ public class UltraDrive extends CommandBase {
 	double[] ultraLeft = new double[numAvg];
 	double leftTotal = 0;
 	double rightTotal = 0;
-	int ind = 0; 
+	int ind = 0;
+	int counter = 0;
 	
 	double setpoint;
 	
@@ -58,11 +59,13 @@ public class UltraDrive extends CommandBase {
     	double avg = (left + right) / 2;
     	
     	chassis.ultraDist(avg);
+    	if(chassis.ultraPID.onTarget(1)) counter++;
+    	else counter = 0;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return chassis.ultraPID.onTarget(2);
+        return counter == 3;
     }
 
     // Called once after isFinished returns true

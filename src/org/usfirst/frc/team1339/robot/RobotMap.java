@@ -92,9 +92,9 @@ public class RobotMap {
 	public final static double gyroTurnI = 0;
 	public final static double gyroTurnD = 0;
 	
-	public final static double ultraP = 0.05;
+	public final static double ultraP = 0.025;
 	public final static double ultraI = 0;
-	public final static double ultraD = 0;
+	public final static double ultraD = 0.0;
 	
 	public final static double visionTurnP = 0.002;
 	public final static double visionTurnI = 0;

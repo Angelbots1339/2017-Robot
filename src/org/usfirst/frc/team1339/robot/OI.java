@@ -44,7 +44,7 @@ public class OI {
 		xButton.whenPressed(new AutoDelivery());
 		bButton.whileHeld(new RunVisionThrottle());
 		rightBumper.whileHeld(new PixyVision());
-		leftBumper.whenPressed(new GyroTurn(-45));
+		leftBumper.whenPressed(new UltraGear(12));
 		
 		//Operator Buttons
 		twoButton.whenPressed(new AutoClimb(0.7, 35));
