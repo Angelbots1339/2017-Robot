@@ -2,6 +2,7 @@
 package org.usfirst.frc.team1339.robot;
 
 import org.usfirst.frc.team1339.robot.commands.CommandBase;
+import org.usfirst.frc.team1339.robot.commands.groups.AutoDelivery;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -28,6 +29,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		CommandBase.init();
+		autonomousCommand = new AutoDelivery();
 	}
 
 	/**
@@ -88,7 +90,7 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-		CommandBase.chassis.resetGyro();
+		//CommandBase.chassis.resetGyro();
 	}
 
 	/**
@@ -100,6 +102,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Gyro", CommandBase.chassis.getSpartanGyro());
 		SmartDashboard.putNumber("Left Ultrasonic", CommandBase.chassis.getUltraLeft());
 		SmartDashboard.putNumber("Right Ultrasonic", CommandBase.chassis.getUltraRight());
+		SmartDashboard.putNumber("left encoder", CommandBase.chassis.getLeftEnc());
+		SmartDashboard.putNumber("right encoder", CommandBase.chassis.getRightEnc());
 	}
 
 	/**

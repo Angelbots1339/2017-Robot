@@ -7,7 +7,7 @@ public class GearRampDown extends CommandBase {
 	
 	public GearRampDown() {
 		requires(gearRamp);
-		setTimeout(0.05);
+		setTimeout(0.3);
 	}
 
 	protected void initialize() {

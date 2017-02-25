@@ -27,9 +27,12 @@ public class IntakeDrive extends CommandBase {
     protected void execute() {
     	stick = oi.getMadCatzStick();
     	throttle = stick.getRawAxis(RobotMap.operatorYAxis);
+    	if(Math.abs(throttle) < 0.1) throttle = 0;
     	intake.setMotorValues(throttle, throttle);
-    	if(throttle > 0.05 && gearRamp.isPlateUp())
-    		Scheduler.getInstance().add(new GearRampDown());
+    	if(Math.abs(throttle) > 0){
+    		if(gearRamp.isPlateUp()) Scheduler.getInstance().add(new GearRampDown());
+    		if(gearHolder.isPlateUp()) Scheduler.getInstance().add(new GearHolderUp());
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

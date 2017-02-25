@@ -67,32 +67,30 @@ public class RobotMap {
 	public final static int gearRampUp = 1;
 	public final static int gearHolderDown = 2;
 	public final static int gearHolderUp = 3;
-	public final static int pancakeOut = 4;
-	public final static int pancakeIn = 5;
 
 	//Ultrasonics
-	public final static int ultraLeftOut = 0;
-	public final static int ultraLeftIn = 1;
-	public final static int ultraRightOut = 2;
-	public final static int ultraRightIn = 3;
+	public final static int ultraLeftOut = 1;
+	public final static int ultraLeftIn = 0;
+	public final static int ultraRightOut = 3;
+	public final static int ultraRightIn = 2;
 	
 	//Encoders
-	public final static int leftDriveAEncoder = 4;
-	public final static int leftDriveBEncoder = 5;
-	public final static int rightDriveAEncoder = 6;
-	public final static int rightDriveBEncoder = 7;
+	public final static int leftDriveAEncoder = 10;
+	public final static int leftDriveBEncoder = 11;
+	public final static int rightDriveAEncoder = 12;
+	public final static int rightDriveBEncoder = 13;
 	
 	//Arduino
-	public final static int bitOnePort = 8;
-	public final static int bitTwoPort = 9;
-	public final static int bitThreePort = 10;
+	public final static int bitOnePort = 14;
+	public final static int bitTwoPort = 15;
+	public final static int bitThreePort = 16;
 	
 	//PID Values
 	public final static double gyroTurnP = 0.02;
 	public final static double gyroTurnI = 0;
 	public final static double gyroTurnD = 0;
 	
-	public final static double ultraP = 0.025;
+	public final static double ultraP = 0.031;
 	public final static double ultraI = 0;
 	public final static double ultraD = 0.0;
 	

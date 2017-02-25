@@ -23,7 +23,7 @@ public class Chassis extends Subsystem {
 			RobotMap.ultraLeftIn);
 	private Ultrasonic ultraRight = new Ultrasonic(RobotMap.ultraRightOut,
 			RobotMap.ultraRightIn);
-	private Encoder leftEnc = new Encoder(RobotMap.leftDriveAEncoder, RobotMap.leftDriveBEncoder);
+	private Encoder leftEnc = new Encoder(RobotMap.leftDriveAEncoder, RobotMap.leftDriveBEncoder, true);
 	private Encoder rightEnc = new Encoder(RobotMap.rightDriveAEncoder, RobotMap.rightDriveBEncoder);
 	
 	//PID

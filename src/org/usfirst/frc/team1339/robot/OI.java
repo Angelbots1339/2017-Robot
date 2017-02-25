@@ -1,7 +1,15 @@
 package org.usfirst.frc.team1339.robot;
 
-import org.usfirst.frc.team1339.robot.commands.*;
-import org.usfirst.frc.team1339.robot.commands.groups.*;
+import org.usfirst.frc.team1339.robot.commands.AutoClimb;
+import org.usfirst.frc.team1339.robot.commands.GearHolderDown;
+import org.usfirst.frc.team1339.robot.commands.GearHolderUp;
+import org.usfirst.frc.team1339.robot.commands.GearRampDown;
+import org.usfirst.frc.team1339.robot.commands.GearRampUp;
+import org.usfirst.frc.team1339.robot.commands.RunVisionThrottle;
+import org.usfirst.frc.team1339.robot.commands.ShiftHigh;
+import org.usfirst.frc.team1339.robot.commands.ShiftLow;
+import org.usfirst.frc.team1339.robot.commands.UltraGear;
+import org.usfirst.frc.team1339.robot.commands.groups.AutoDelivery;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -43,17 +51,15 @@ public class OI {
 		yButton.whenPressed(new ShiftHigh());
 		xButton.whenPressed(new AutoDelivery());
 		bButton.whileHeld(new RunVisionThrottle());
-		rightBumper.whileHeld(new PixyVision());
-		leftBumper.whenPressed(new UltraGear(12));
+		//rightBumper.whileHeld(new PixyVision());
+		leftBumper.whenPressed(new UltraGear(18));
 		
 		//Operator Buttons
-		twoButton.whenPressed(new AutoClimb(0.7, 35));
+		twoButton.whenPressed(new AutoClimb(0.7, 25));
 		threeButton.whenPressed(new GearRampUp());
 		fiveButton.whenPressed(new GearRampDown());
 		fourButton.whenPressed(new GearHolderUp());
 		sixButton.whenPressed(new GearHolderDown());
-		oneButton.whenPressed(new PancakeOut());
-		sevenButton.whenPressed(new PancakeIn());
 	}
 	
 	public Joystick getMadCatzStick(){
