@@ -39,7 +39,13 @@ public class RobotMap {
 	public final static int operatorZRotate = 3;
 
 	//Mad Catz Buttons
+	public final static int operatorOneButton = 1;
 	public final static int operatorTwoButton = 2;
+	public final static int operatorThreeButton = 3;
+	public final static int operatorFourButton = 4;
+	public final static int operatorFiveButton = 5;
+	public final static int operatorSixButton = 6;
+	public final static int operatorSevenButton = 7;
 
 	//Drive Motors
 	public final static int leftFront = 4;
@@ -55,31 +61,48 @@ public class RobotMap {
 	public final static int climbMotor = 8;
 
 	//Solenoids
-	public final static int shiftIn = 0;
-	public final static int shiftOut = 1;
-	public final static int frontPanelOneIn = 0;
-	public final static int frontPanelOneOut = 0;
-	public final static int frontPanelTwoIn = 0;
-	public final static int frontPanelTwoOut = 0;
-	public final static int backPanelOneIn = 0;
-	public final static int backPanelOneOut = 0;
-	public final static int backPanelTwoIn = 0;
-	public final static int backPanelTwoOut = 0;
+	public final static int shiftIn = 7;
+	public final static int shiftOut = 6;
+	public final static int gearRampDown = 0;
+	public final static int gearRampUp = 1;
+	public final static int gearHolderDown = 2;
+	public final static int gearHolderUp = 3;
 
 	//Ultrasonics
-	public final static int ultraLeftOut = 0;
-	public final static int ultraLeftIn = 1;
-	public final static int ultraRightOut = 2;
-	public final static int ultraRightIn = 3;
+	public final static int ultraLeftOut = 1;
+	public final static int ultraLeftIn = 0;
+	public final static int ultraRightOut = 3;
+	public final static int ultraRightIn = 2;
 	
 	//Encoders
-	public final static int leftDriveAEncoder = 0;
-	public final static int leftDriveBEncoder = 1;
-	public final static int rightDriveAEncoder = 2;
-	public final static int rightDriveBEncoder = 3;
+	public final static int leftDriveAEncoder = 10;
+	public final static int leftDriveBEncoder = 11;
+	public final static int rightDriveAEncoder = 12;
+	public final static int rightDriveBEncoder = 13;
 	
 	//Arduino
-	public final static int bitOnePort = 4;
-	public final static int bitTwoPort = 5;
-	public final static int bitThreePort = 6;
+	public final static int bitOnePort = 14;
+	public final static int bitTwoPort = 15;
+	public final static int bitThreePort = 16;
+	
+	//PID Values
+	public final static double gyroTurnP = 0.02;
+	public final static double gyroTurnI = 0;
+	public final static double gyroTurnD = 0;
+	
+	public final static double ultraP = 0.031;
+	public final static double ultraI = 0;
+	public final static double ultraD = 0.0;
+	
+	public final static double visionTurnP = 0.002;
+	public final static double visionTurnI = 0;
+	public final static double visionTurnD = 0;
+	
+	public final static double visionThrottleP = 0.02;
+	public final static double visionThrottleI = 0;
+	public final static double visionThrottleD = 0;
+
+	public final static double pixyTurnP = 0.04;
+	public final static double pixyTurnI = 0;
+	public final static double pixyTurnD = 0;
 }

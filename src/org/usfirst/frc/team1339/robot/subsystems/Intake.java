@@ -17,8 +17,10 @@ public class Intake extends Subsystem {
 	}
 	
 	public void setMotorValues(double top, double bottom){
-		intakeTop.set(top/2);
-		intakeBottom.set(bottom/2);
+		top *= .5;
+		bottom *= .5;
+		intakeTop.set(top);
+		intakeBottom.set(bottom);
 	}
 	
     public void initDefaultCommand() {

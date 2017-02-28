@@ -1,13 +1,12 @@
 package org.usfirst.frc.team1339.robot.commands;
 
-import org.usfirst.frc.team1339.robot.subsystems.Climb;
-
 public class ClimberDrive extends CommandBase {
 	
-	double throttle = .65;
+	double throttle;
 	
-    public ClimberDrive() {
+    public ClimberDrive(double throttle) {
         requires(climb);
+        this.throttle = throttle;
     }
 
     // Called just before this Command runs the first time
@@ -16,7 +15,7 @@ public class ClimberDrive extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Climb.setMotorValue(throttle);
+    	climb.setMotorValue(throttle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -26,10 +25,12 @@ public class ClimberDrive extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
+    	climb.setMotorValue(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	climb.setMotorValue(0);
     }
 }

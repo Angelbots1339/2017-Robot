@@ -2,6 +2,7 @@ package org.usfirst.frc.team1339.robot.commands;
 
 import org.usfirst.frc.team1339.robot.OI;
 import org.usfirst.frc.team1339.robot.subsystems.*;
+import org.usfirst.frc.team1339.utils.Vision;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -21,15 +22,23 @@ public abstract class CommandBase extends Command {
     public static Intake intake;
     public static Climb climb;
     public static Arduino arduino;
+    public static GearRamp gearRamp;
+    public static GearHolder gearHolder;
+    public static Vision vision;
+    public static PixyCam pixy;
     
     public static void init() {
-        oi = new OI();
-        
     	chassis = new Chassis();
     	shifting = new Shifting();
         intake = new Intake();
         climb = new Climb();
         arduino = new Arduino();
+        gearRamp = new GearRamp();
+        gearHolder = new GearHolder();
+        vision = new Vision();
+        pixy = new PixyCam();
+        
+        oi = new OI();
     }
 
     public CommandBase(String name) {

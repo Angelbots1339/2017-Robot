@@ -1,6 +1,15 @@
 package org.usfirst.frc.team1339.robot;
 
-import org.usfirst.frc.team1339.robot.commands.*;
+import org.usfirst.frc.team1339.robot.commands.AutoClimb;
+import org.usfirst.frc.team1339.robot.commands.GearHolderDown;
+import org.usfirst.frc.team1339.robot.commands.GearHolderUp;
+import org.usfirst.frc.team1339.robot.commands.GearRampDown;
+import org.usfirst.frc.team1339.robot.commands.GearRampUp;
+import org.usfirst.frc.team1339.robot.commands.RunVisionThrottle;
+import org.usfirst.frc.team1339.robot.commands.ShiftHigh;
+import org.usfirst.frc.team1339.robot.commands.ShiftLow;
+import org.usfirst.frc.team1339.robot.commands.UltraGear;
+import org.usfirst.frc.team1339.robot.commands.groups.AutoDelivery;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -27,12 +36,30 @@ public class OI {
 	private JoystickButton rightStickButton = new JoystickButton(xboxStick, RobotMap.xboxRightStickButton);
 	private JoystickButton leftStickButton = new JoystickButton(xboxStick, RobotMap.xboxLeftStickButton);
 	
+	private JoystickButton oneButton = new JoystickButton(operatorStick, RobotMap.operatorOneButton);
 	private JoystickButton twoButton = new JoystickButton(operatorStick, RobotMap.operatorTwoButton);
+	private JoystickButton threeButton = new JoystickButton(operatorStick, RobotMap.operatorThreeButton);
+	private JoystickButton fourButton = new JoystickButton(operatorStick, RobotMap.operatorFourButton);
+	private JoystickButton fiveButton = new JoystickButton(operatorStick, RobotMap.operatorFiveButton);
+	private JoystickButton sixButton = new JoystickButton(operatorStick, RobotMap.operatorSixButton);
+	private JoystickButton sevenButton = new JoystickButton(operatorStick, RobotMap.operatorSevenButton);
+	
 	
 	public OI(){
+		//Xbox Buttons
 		aButton.whenPressed(new ShiftLow());
 		yButton.whenPressed(new ShiftHigh());
-		twoButton.whenPressed(new ClimberDrive());
+		xButton.whenPressed(new AutoDelivery());
+		bButton.whileHeld(new RunVisionThrottle());
+		//rightBumper.whileHeld(new PixyVision());
+		leftBumper.whenPressed(new UltraGear(18));
+		
+		//Operator Buttons
+		twoButton.whenPressed(new AutoClimb(0.7, 25));
+		threeButton.whenPressed(new GearRampUp());
+		fiveButton.whenPressed(new GearRampDown());
+		fourButton.whenPressed(new GearHolderUp());
+		sixButton.whenPressed(new GearHolderDown());
 	}
 	
 	public Joystick getMadCatzStick(){
@@ -74,15 +101,4 @@ public class OI {
 	public JoystickButton getTwoButton(){
 		return twoButton;
 	}
-	
-	
-	
-
-	// Run the command while the button is being held down and interrupt it once
-	// the button is released.
-	// button.whileHeld(new ExampleCommand());
-
-	// Start the command when the button is released and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenReleased(new ExampleCommand());
 }
