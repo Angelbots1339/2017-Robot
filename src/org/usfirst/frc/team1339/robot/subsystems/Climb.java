@@ -15,7 +15,7 @@ public class Climb extends Subsystem {
 		climbMotor = new CANTalon(RobotMap.climbMotor);
 	}
 
-	public static void setMotorValues(double throttle){
+	public static void setMotorValue(double throttle){
 		climbMotor.set(throttle);
 	}
 	

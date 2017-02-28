@@ -5,12 +5,26 @@ import org.usfirst.frc.team1339.robot.commands.ArcadeDrive;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Chassis extends Subsystem {
+	//Motors
 	private static CANTalon rightFrontMotor, rightBackMotor,
 		leftFrontMotor, leftBackMotor;
 	
+	//Sensors
+	private ADXRS450_Gyro spartanGyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
+	private Ultrasonic ultraLeft = new Ultrasonic(RobotMap.ultraLeftOut,
+			RobotMap.ultraLeftIn);
+	private Ultrasonic ultraRight = new Ultrasonic(RobotMap.ultraRightOut,
+			RobotMap.ultraRightIn);
+	private Encoder leftDrive = new Encoder(RobotMap.leftDriveAEncoder, RobotMap.leftDriveBEncoder);
+	private Encoder rightDrive = new Encoder(RobotMap.rightDriveAEncoder, RobotMap.rightDriveBEncoder);
+
 	public Chassis(){
 		rightFrontMotor = new CANTalon(RobotMap.rightFront);
 		rightBackMotor = new CANTalon(RobotMap.rightBack);
@@ -20,6 +34,22 @@ public class Chassis extends Subsystem {
 	
 	public void initDefaultCommand() {
 		setDefaultCommand(new ArcadeDrive());
+	}
+	
+	public double getSpartanGyro() {
+		return spartanGyro.getAngle();
+	}
+	
+	public double getSpartanGyroRate(){
+		return spartanGyro.getRate();
+	}
+	
+	public double getUltraLeft(){
+		return ultraLeft.getRangeInches();
+	}
+	
+	public double getUltraRight(){
+		return ultraRight.getRangeInches();
 	}
 	
 	public void setMotorValues(double right, double left){
@@ -36,7 +66,6 @@ public class Chassis extends Subsystem {
 
 		if (Math.abs(throttle) > 0.1) turningThrottleScale = Math.abs(throttle);
 		else turningThrottleScale = 0.75;
-
 
 		right -= turn * turningThrottleScale;  
 		left += turn * turningThrottleScale;

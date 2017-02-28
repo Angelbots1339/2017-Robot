@@ -2,8 +2,6 @@ package org.usfirst.frc.team1339.robot.commands;
 
 import org.usfirst.frc.team1339.robot.subsystems.Climb;
 
-import edu.wpi.first.wpilibj.Joystick;
-
 public class ClimberDrive extends CommandBase {
 	
 	double throttle = .65;
@@ -18,7 +16,7 @@ public class ClimberDrive extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Climb.setMotorValues(throttle);
+    	Climb.setMotorValue(throttle);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -14,7 +14,6 @@ public class ArcadeDrive extends CommandBase{
 	}
 
 	protected void initialize(){
-		
 	}
 
 	protected void execute(){

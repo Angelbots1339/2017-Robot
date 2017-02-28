@@ -1,10 +1,7 @@
 package org.usfirst.frc.team1339.robot.commands;
 
 import org.usfirst.frc.team1339.robot.OI;
-import org.usfirst.frc.team1339.robot.subsystems.Chassis;
-import org.usfirst.frc.team1339.robot.subsystems.Climb;
-import org.usfirst.frc.team1339.robot.subsystems.Intake;
-import org.usfirst.frc.team1339.robot.subsystems.Shifting;
+import org.usfirst.frc.team1339.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -23,13 +20,16 @@ public abstract class CommandBase extends Command {
     public static Shifting shifting;
     public static Intake intake;
     public static Climb climb;
+    public static Arduino arduino;
     
     public static void init() {
+        oi = new OI();
+        
     	chassis = new Chassis();
     	shifting = new Shifting();
-        oi = new OI();
         intake = new Intake();
         climb = new Climb();
+        arduino = new Arduino();
     }
 
     public CommandBase(String name) {
