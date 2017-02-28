@@ -1,7 +1,11 @@
 package org.usfirst.frc.team1339.robot.subsystems;
 
+import java.util.ArrayList;
+
 import org.usfirst.frc.team1339.robot.RobotMap;
 import org.usfirst.frc.team1339.robot.commands.ArcadeDrive;
+import org.usfirst.frc.team1339.utils.MotionProfile;
+import org.usfirst.frc.team1339.utils.SplineProfile;
 import org.usfirst.frc.team1339.utils.SynchronousPID;
 
 import com.ctre.CANTalon;
@@ -9,13 +13,25 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Chassis extends Subsystem {
 	//Motors
 	private CANTalon rightFrontMotor, rightBackMotor,
 		leftFrontMotor, leftBackMotor;
+	
+	//Motion Profile
+	public MotionProfile ChassisMP = new MotionProfile(
+			RobotMap.chassisMPKp, RobotMap.chassisMPKi, RobotMap.chassisMPKd, 
+			RobotMap.chassisMPKa, RobotMap.chassisMPKv);
+	
+	//Spline Profile
+	public SplineProfile chassisSP = new SplineProfile(
+			RobotMap.splineMPKp, RobotMap.splineMPKi, RobotMap.splineMPKd,
+			RobotMap.splineMPKa, RobotMap.splineMPKv);
 	
 	//Sensors
 	private ADXRS450_Gyro spartanGyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
@@ -37,6 +53,10 @@ public class Chassis extends Subsystem {
 			(RobotMap.pixyTurnP, RobotMap.pixyTurnI, RobotMap.pixyTurnD);
 	public SynchronousPID ultraPID = new SynchronousPID
 			(RobotMap.ultraP, RobotMap.ultraI, RobotMap.ultraD);
+	
+	private double lastTime = 0, lastRightSpeed = 0, lastLeftSpeed = 0;
+	
+	private ArrayList<Double> accel = new ArrayList<Double>();
 
 	public Chassis(){
 		rightFrontMotor = new CANTalon(RobotMap.rightFront);
@@ -217,4 +237,52 @@ public class Chassis extends Subsystem {
 
 		setMotorValues(left, right);
 	}
+	
+	public void motionProfile(){
+    	ChassisMP.calculate(rightEnc.get(), leftEnc.get());
+    	double gyroOutput = gyroTurnPID.calculate(spartanGyro.getAngle());
+    	double rightSpeed = ChassisMP.getRightOutput();
+    	double leftSpeed = ChassisMP.getLeftOutput();
+    	rightSpeed -= gyroOutput;
+    	leftSpeed += gyroOutput;
+    	SmartDashboard.putNumber("MP output", rightSpeed);
+    	setMotorValues(leftSpeed, rightSpeed);
+    }
+    
+    public void splineProfile(){
+    	chassisSP.calculate(leftEnc.get(), rightEnc.get());
+    	double leftSpeed = chassisSP.getLeftOutput();
+    	double rightSpeed = chassisSP.getRightOutput();
+    	SmartDashboard.putNumber("spline speed", -leftSpeed);
+    	setMotorValues(leftSpeed, rightSpeed);
+    }
+	
+	public void calculate(){
+    	double rightEncSpeed = rightEnc.getRate();
+    	double rightSpeed = rightEncSpeed - lastRightSpeed;
+    	lastRightSpeed = rightEncSpeed;
+    	
+    	double leftEncSpeed = leftEnc.getRate();
+    	double leftSpeed = leftEncSpeed - lastLeftSpeed;
+    	lastLeftSpeed = leftEncSpeed;
+
+    	double currentTime = Timer.getFPGATimestamp();
+    	double time = currentTime - lastTime;
+    	lastTime = currentTime;
+    	
+    	double rightAcc = rightSpeed / time;
+    	double leftAcc = leftSpeed / time;
+
+    	double avg = (rightAcc + leftAcc) / 2;
+    	accel.add(avg);
+    	
+    	double speedAvg = (leftEncSpeed + rightEncSpeed) / 2;
+
+    	SmartDashboard.putNumber("MP speed", speedAvg);
+		SmartDashboard.putNumber("Accel Array", avg);
+    }
+	
+	 public ArrayList<Double> getAvgAcc(){
+	    	return accel;
+	    }
 }

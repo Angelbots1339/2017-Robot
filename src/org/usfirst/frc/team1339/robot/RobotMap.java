@@ -105,4 +105,26 @@ public class RobotMap {
 	public final static double pixyTurnP = 0.04;
 	public final static double pixyTurnI = 0;
 	public final static double pixyTurnD = 0;
+	
+	//Motion Profile Constants
+	public static double maxAcceleration;
+	public static double motionProfileFastScaleFactor = 0.95;
+	public static double motionProfileMediumScaleFactor = 0.75;
+	public static double motionProfileSlowScaleFactor = 0.5;
+	public static double maxCruiseSpeed;
+	public static double robotWidth;
+	public static double maxSplineVel;
+	
+	public static final double splineMPKp = 0.02;//0.02;
+	public static final double splineMPKi = 0.0;
+	public static final double splineMPKd = 0.0007;
+	public static final double splineMPKa = 0.00000005;
+	public static final double splineMPKv = 0.000005;
+
+	public static final double chassisMPKp = 0.0008;
+	public static final double chassisMPKi = 0.0;
+	public static final double chassisMPKd = 0.0;
+	public static final double chassisMPKa = 0.00000005;
+	public static final double chassisMPKv = 0.000005;
+	
 }
