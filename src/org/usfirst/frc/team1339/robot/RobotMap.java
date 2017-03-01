@@ -102,7 +102,7 @@ public class RobotMap {
 	public final static double visionThrottleI = 0;
 	public final static double visionThrottleD = 0;
 
-	public final static double pixyTurnP = 0.04;
+	public final static double pixyTurnP = 0.0035;
 	public final static double pixyTurnI = 0;
 	public final static double pixyTurnD = 0;
 }

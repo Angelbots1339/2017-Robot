@@ -7,15 +7,19 @@ import org.usfirst.frc.team1339.utils.SynchronousPID;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Chassis extends Subsystem {
 	//Motors
 	private CANTalon rightFrontMotor, rightBackMotor,
 		leftFrontMotor, leftBackMotor;
+	
+	private Compressor comp = new Compressor();
 	
 	//Sensors
 	private ADXRS450_Gyro spartanGyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
@@ -77,7 +81,20 @@ public class Chassis extends Subsystem {
 	}
 	
 	public int getLeftEnc(){
-		return leftEnc.get();
+		return leftEnc.get() * 2;
+	}
+	
+	public void resetRightEnc(){
+		rightEnc.reset();
+	}
+	
+	public void resetLeftEnc(){
+		leftEnc.reset();
+	}
+	
+	public void resetEncs(){
+		resetRightEnc();
+		resetLeftEnc();
 	}
 	
 	public void runGyroPid(){
@@ -100,23 +117,6 @@ public class Chassis extends Subsystem {
 			double output = visionTurnPID.calculate(targetAvg);
 			double left = -output;
 			double right = output;
-			setMotorValues(left, right);
-		}
-	}
-	
-	public void runPixyPid(int[] centerX){
-		double targetSum = 0;
-		for(int i = 0; i < centerX.length; i++){
-			targetSum += centerX[i];
-		}
-		double targetAvg = targetSum/centerX.length;
-		if(centerX.length == 0){
-			setMotorValues(0, 0);
-		}
-		else{
-			double output = visionTurnPID.calculate(targetAvg);
-			double left = output;
-			double right = -output;
 			setMotorValues(left, right);
 		}
 	}
@@ -192,7 +192,22 @@ public class Chassis extends Subsystem {
 		setMotorValues(left, right);
 	}
 	
+	public void runPixyPid(int centerX){
+		double output = pixyTurnPID.calculate(centerX);
+		double left = -output;
+		double right = output;
+		setMotorValues(right, left);
+	}
+	
+	public void runPixyPidThrottle(int centerX, double throttle){
+		double output = pixyTurnPID.calculate(centerX);
+		double left = throttle - output;
+		double right = throttle + output;
+		setMotorValues(right, left);
+	}
+	
 	public void setMotorValues(double right, double left){
+		SmartDashboard.putBoolean("Pressurized?", comp.getPressureSwitchValue());
 		rightFrontMotor.set(-right);
 		rightBackMotor.set(-right);		
 		leftFrontMotor.set(left);

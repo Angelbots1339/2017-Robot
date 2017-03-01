@@ -5,6 +5,7 @@ import org.usfirst.frc.team1339.robot.commands.GearHolderDown;
 import org.usfirst.frc.team1339.robot.commands.GearHolderUp;
 import org.usfirst.frc.team1339.robot.commands.GearRampDown;
 import org.usfirst.frc.team1339.robot.commands.GearRampUp;
+import org.usfirst.frc.team1339.robot.commands.PixyVisionThrottle;
 import org.usfirst.frc.team1339.robot.commands.RunVisionThrottle;
 import org.usfirst.frc.team1339.robot.commands.ShiftHigh;
 import org.usfirst.frc.team1339.robot.commands.ShiftLow;
@@ -51,7 +52,7 @@ public class OI {
 		yButton.whenPressed(new ShiftHigh());
 		xButton.whenPressed(new AutoDelivery());
 		bButton.whileHeld(new RunVisionThrottle());
-		//rightBumper.whileHeld(new PixyVision());
+		rightBumper.whileHeld(new PixyVisionThrottle());
 		leftBumper.whenPressed(new UltraGear(18));
 		
 		//Operator Buttons

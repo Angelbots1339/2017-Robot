@@ -6,24 +6,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class PixyVision extends CommandBase{
 
 	int lastCenterX = 0;
-	
+	double lastTime = 0;
+
 	public PixyVision(){
 		requires(chassis);
 	}
 
 	protected void initialize(){
-		chassis.visionTurnPID.setSetpoint(170);
+		chassis.pixyTurnPID.setSetpoint(160);
+		
 	}
 
 	public void execute(){
 		int centerX = Integer.parseInt(NetworkTable.getTable("SmartDashboard").getString("pixy X", ""));
-		if(centerX != lastCenterX){
-			double angle = (170 - centerX) * 0.375;
-			SmartDashboard.putNumber("Pixy Angle", angle);
-			chassis.gyroTurnPID.setSetpoint(chassis.getSpartanGyro() + angle);
-			lastCenterX = centerX;
-		}
-		chassis.runGyroPid();
+		SmartDashboard.putNumber("Pixy CenterX", centerX);
+		chassis.runPixyPid(centerX);
 	}
 
 	public boolean isFinished(){
