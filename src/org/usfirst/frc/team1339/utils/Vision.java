@@ -20,10 +20,20 @@ public class Vision implements Runnable{
 	private ArrayList<Integer> centerX;
 	private ArrayList<Integer> heights;
 	private volatile Thread p;
+	private boolean hasCamera;
 
 	public Vision(){
-		camera = CameraServer.getInstance().addAxisCamera("10.13.39.11");
-		camera.setResolution(640, 480);
+		hasCamera = false;
+		while(!hasCamera){
+			try{
+				camera = CameraServer.getInstance().addAxisCamera("FRC:FRC@10.13.39.11:80/mjpeg.cgi");
+				hasCamera=true;
+			}
+			catch(Exception e){
+				System.out.println(e);
+			}
+		}
+		
 		cvSink = CameraServer.getInstance().getVideo();
 		pl = new Pipeline();
 		centerX = new ArrayList<Integer>();
