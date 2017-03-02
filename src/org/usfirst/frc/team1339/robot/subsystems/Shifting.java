@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Shifting extends Subsystem {
 	
-	Solenoid solenoidIn, solenoidOut;
-	public boolean isHighGear;
+	private Solenoid solenoidIn, solenoidOut;
+	private boolean isHighGear;
 
 	public void initDefaultCommand() {
     }

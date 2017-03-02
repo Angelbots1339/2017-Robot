@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1339.robot.commands;
 
+import edu.wpi.first.wpilibj.command.Scheduler;
+
 public class StraightMotionProfileHigh extends CommandBase {
 	
 	private double m_goal, tolerance, initialLeft, initialRight, m_decelerateVel;
@@ -14,6 +16,7 @@ public class StraightMotionProfileHigh extends CommandBase {
 
 	protected void initialize() {
 		// TODO Auto-generated method stub
+		if(!shifting.isHighGear()) Scheduler.getInstance().add(new ShiftHigh());
 		chassis.gyroTurnPID.setSetpoint(chassis.getSpartanGyro());
 		chassis.chassisMPHigh.configureNewProfile(m_goal, m_decelerateVel);
 		initialLeft = chassis.getLeftEnc();
@@ -23,8 +26,8 @@ public class StraightMotionProfileHigh extends CommandBase {
 
 	public void execute() {
 		// TODO Auto-generated method stub
-		//System.out.println("Running");
-		chassis.motionProfile();
+		//System.out.println("Running"); #Custom Scheduler
+		chassis.motionProfileHigh();
 		if((Math.abs(chassis.getLeftEnc() - m_goal - initialLeft) < tolerance)
 				&& (Math.abs(chassis.getRightEnc() - m_goal - initialRight) < tolerance)){
 			counter++;
@@ -38,12 +41,12 @@ public class StraightMotionProfileHigh extends CommandBase {
 
 	protected void end() {
 		// TODO Auto-generated method stub
-		chassis.setMotorValues(0, 0);
+		//chassis.setMotorValues(0, 0);
 	}
 
 	protected void interrupted() {
 		// TODO Auto-generated method stub
-		chassis.setMotorValues(0, 0);
+		//chassis.setMotorValues(0, 0);
 	}
 
 }
