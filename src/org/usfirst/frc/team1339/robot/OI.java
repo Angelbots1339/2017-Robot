@@ -8,7 +8,7 @@ import org.usfirst.frc.team1339.robot.commands.GearRampUp;
 import org.usfirst.frc.team1339.robot.commands.MaxAcceleration;
 import org.usfirst.frc.team1339.robot.commands.ShiftHigh;
 import org.usfirst.frc.team1339.robot.commands.ShiftLow;
-import org.usfirst.frc.team1339.robot.commands.StraightMotionProfile;
+import org.usfirst.frc.team1339.robot.commands.StraightMotionProfileLow;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -48,8 +48,8 @@ public class OI {
 		//Xbox Buttons
 		aButton.whenPressed(new ShiftLow());
 		yButton.whenPressed(new ShiftHigh());
-		xButton.whenPressed(new MaxAcceleration());
-		bButton.whenPressed(new StraightMotionProfile(1000, 60, 0));
+		//xButton.whenPressed(new MaxAcceleration());
+		bButton.whenPressed(new StraightMotionProfileLow(1000, 50, 0));
 		
 		//Operator Buttons
 		twoButton.whenPressed(new AutoClimb(0.7, 25));

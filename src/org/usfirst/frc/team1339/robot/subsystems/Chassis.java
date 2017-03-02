@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 import org.usfirst.frc.team1339.robot.RobotMap;
 import org.usfirst.frc.team1339.robot.commands.ArcadeDrive;
-import org.usfirst.frc.team1339.utils.MotionProfile;
-import org.usfirst.frc.team1339.utils.SplineProfile;
+import org.usfirst.frc.team1339.utils.MotionProfileHigh;
+import org.usfirst.frc.team1339.utils.MotionProfileLow;
+import org.usfirst.frc.team1339.utils.SplineProfileLow;
 import org.usfirst.frc.team1339.utils.SynchronousPID;
 
 import com.ctre.CANTalon;
@@ -23,15 +24,22 @@ public class Chassis extends Subsystem {
 	private CANTalon rightFrontMotor, rightBackMotor,
 		leftFrontMotor, leftBackMotor;
 	
-	//Motion Profile
-	public MotionProfile ChassisMP = new MotionProfile(
-			RobotMap.chassisMPKp, RobotMap.chassisMPKi, RobotMap.chassisMPKd, 
-			RobotMap.chassisMPKa, RobotMap.chassisMPKv);
+	//Motion Profile Low
+	public MotionProfileLow chassisMPLow = new MotionProfileLow(
+			RobotMap.chassisMPLowKp, RobotMap.chassisMPLowKi, 
+			RobotMap.chassisMPLowKd, RobotMap.chassisMPLowKa, 
+			RobotMap.chassisMPLowKv);
+	
+	public MotionProfileHigh chassisMPHigh = new MotionProfileHigh(
+			RobotMap.chassisMPHighKp, RobotMap.chassisMPHighKi, 
+			RobotMap.chassisMPHighKd, RobotMap.chassisMPHighKa,
+			RobotMap.chassisMPHighKv);
 	
 	//Spline Profile
-	public SplineProfile chassisSP = new SplineProfile(
-			RobotMap.splineMPKp, RobotMap.splineMPKi, RobotMap.splineMPKd,
-			RobotMap.splineMPKa, RobotMap.splineMPKv);
+	public SplineProfileLow chassisSP = new SplineProfileLow(
+			RobotMap.splineMPKp, RobotMap.splineMPKi, 
+			RobotMap.splineMPKd, RobotMap.splineMPKa, 
+			RobotMap.splineMPKv);
 	
 	//Sensors
 	private ADXRS450_Gyro spartanGyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
@@ -244,10 +252,10 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void motionProfile(){
-    	ChassisMP.calculate(rightEnc.get(), leftEnc.get());
+    	chassisMPLow.calculate(rightEnc.get(), leftEnc.get());
     	double gyroOutput = gyroTurnPID.calculate(spartanGyro.getAngle());
-    	double rightSpeed = ChassisMP.getRightOutput();
-    	double leftSpeed = ChassisMP.getLeftOutput();
+    	double rightSpeed = chassisMPLow.getRightOutput();
+    	double leftSpeed = chassisMPLow.getLeftOutput();
     	rightSpeed += gyroOutput;
     	leftSpeed -= gyroOutput;
     	SmartDashboard.putNumber("MP output", rightSpeed);
