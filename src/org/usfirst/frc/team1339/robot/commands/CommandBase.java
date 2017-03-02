@@ -25,7 +25,6 @@ public abstract class CommandBase extends Command {
     public static GearRamp gearRamp;
     public static GearHolder gearHolder;
     public static Vision vision;
-    public static PixyCam pixy;
     
     public static void init() {
     	chassis = new Chassis();
@@ -36,7 +35,6 @@ public abstract class CommandBase extends Command {
         gearRamp = new GearRamp();
         gearHolder = new GearHolder();
         vision = new Vision();
-        pixy = new PixyCam();
         
         oi = new OI();
     }
