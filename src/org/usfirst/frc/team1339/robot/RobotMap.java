@@ -86,9 +86,9 @@ public class RobotMap {
 	public final static int bitThreePort = 16;
 	
 	//PID Values
-	public final static double gyroTurnP = 0.08;
+	public final static double gyroTurnP = 0.075;
 	public final static double gyroTurnI = 0;
-	public final static double gyroTurnD = 0;
+	public final static double gyroTurnD = 0.001;
 	
 	public final static double ultraP = 0.031;
 	public final static double ultraI = 0;

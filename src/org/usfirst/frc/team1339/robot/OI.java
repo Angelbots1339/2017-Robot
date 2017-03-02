@@ -5,7 +5,8 @@ import org.usfirst.frc.team1339.robot.commands.GearHolderDown;
 import org.usfirst.frc.team1339.robot.commands.GearHolderUp;
 import org.usfirst.frc.team1339.robot.commands.GearRampDown;
 import org.usfirst.frc.team1339.robot.commands.GearRampUp;
-import org.usfirst.frc.team1339.robot.commands.MaxAcceleration;
+import org.usfirst.frc.team1339.robot.commands.RunVision;
+import org.usfirst.frc.team1339.robot.commands.RunVisionThrottle;
 import org.usfirst.frc.team1339.robot.commands.ShiftHigh;
 import org.usfirst.frc.team1339.robot.commands.ShiftLow;
 import org.usfirst.frc.team1339.robot.commands.StraightMotionProfileLow;
@@ -50,6 +51,7 @@ public class OI {
 		yButton.whenPressed(new ShiftHigh());
 		//xButton.whenPressed(new MaxAcceleration());
 		bButton.whenPressed(new StraightMotionProfileLow(1000, 50, 0));
+		xButton.whileHeld(new RunVisionThrottle());
 		
 		//Operator Buttons
 		twoButton.whenPressed(new AutoClimb(0.7, 25));
