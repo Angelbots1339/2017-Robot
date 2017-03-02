@@ -38,12 +38,12 @@ public class StraightMotionProfile extends CommandBase {
 
 	protected void end() {
 		// TODO Auto-generated method stub
-		//chassis.setMotorValues(0, 0);
+		chassis.setMotorValues(0, 0);
 	}
 
 	protected void interrupted() {
 		// TODO Auto-generated method stub
-		//chassis.setMotorValues(0, 0);
+		chassis.setMotorValues(0, 0);
 	}
 
 }

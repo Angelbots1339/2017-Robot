@@ -62,7 +62,6 @@ public class SplineProfile {
 	}
 	
 	public void configureSplineProfile(double radius, double angle, boolean direction) {
-		this.trajectoryFinished = false;
 		this.maxAcc = RobotMap.maxAcceleration;
 		this.cruiseVelScaleFactor = RobotMap.motionProfileSlowScaleFactor;
 		this.maxSplineVel = RobotMap.maxSplineVel;
@@ -90,7 +89,6 @@ public class SplineProfile {
 	}
 	
 	public void configureSplineProfile(double radius, double angle, double startVel, boolean direction){
-		this.trajectoryFinished = false;
 		this.angleInverted = angle < 0;
 		this.maxAcc = RobotMap.maxAcceleration;
 		this.cruiseVelScaleFactor = RobotMap.motionProfileSlowScaleFactor;

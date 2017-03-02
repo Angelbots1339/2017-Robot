@@ -5,11 +5,10 @@ import org.usfirst.frc.team1339.robot.commands.GearHolderDown;
 import org.usfirst.frc.team1339.robot.commands.GearHolderUp;
 import org.usfirst.frc.team1339.robot.commands.GearRampDown;
 import org.usfirst.frc.team1339.robot.commands.GearRampUp;
-import org.usfirst.frc.team1339.robot.commands.RunVisionThrottle;
+import org.usfirst.frc.team1339.robot.commands.MaxAcceleration;
 import org.usfirst.frc.team1339.robot.commands.ShiftHigh;
 import org.usfirst.frc.team1339.robot.commands.ShiftLow;
-import org.usfirst.frc.team1339.robot.commands.UltraGear;
-import org.usfirst.frc.team1339.robot.commands.groups.AutoDelivery;
+import org.usfirst.frc.team1339.robot.commands.StraightMotionProfile;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -49,10 +48,8 @@ public class OI {
 		//Xbox Buttons
 		aButton.whenPressed(new ShiftLow());
 		yButton.whenPressed(new ShiftHigh());
-		xButton.whenPressed(new AutoDelivery());
-		bButton.whileHeld(new RunVisionThrottle());
-		//rightBumper.whileHeld(new PixyVision());
-		leftBumper.whenPressed(new UltraGear(18));
+		xButton.whenPressed(new MaxAcceleration());
+		bButton.whenPressed(new StraightMotionProfile(1000, 60, 0));
 		
 		//Operator Buttons
 		twoButton.whenPressed(new AutoClimb(0.7, 25));

@@ -84,6 +84,11 @@ public class Chassis extends Subsystem {
 		spartanGyro.reset();
 	}
 	
+	public void resetEncoder(){
+		rightEnc.reset();
+		leftEnc.reset();
+	}
+	
 	public double getUltraLeft(){
 		return ultraLeft.getRangeInches();
 	}
@@ -97,7 +102,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public int getLeftEnc(){
-		return leftEnc.get();
+		return leftEnc.get() * 2;
 	}
 	
 	public void runGyroPid(){
@@ -243,10 +248,10 @@ public class Chassis extends Subsystem {
     	double gyroOutput = gyroTurnPID.calculate(spartanGyro.getAngle());
     	double rightSpeed = ChassisMP.getRightOutput();
     	double leftSpeed = ChassisMP.getLeftOutput();
-    	rightSpeed -= gyroOutput;
-    	leftSpeed += gyroOutput;
+    	rightSpeed += gyroOutput;
+    	leftSpeed -= gyroOutput;
     	SmartDashboard.putNumber("MP output", rightSpeed);
-    	setMotorValues(leftSpeed, rightSpeed);
+    	setMotorValues(-leftSpeed, -rightSpeed);
     }
     
     public void splineProfile(){
@@ -262,7 +267,7 @@ public class Chassis extends Subsystem {
     	double rightSpeed = rightEncSpeed - lastRightSpeed;
     	lastRightSpeed = rightEncSpeed;
     	
-    	double leftEncSpeed = leftEnc.getRate();
+    	double leftEncSpeed = leftEnc.getRate() * 2;
     	double leftSpeed = leftEncSpeed - lastLeftSpeed;
     	lastLeftSpeed = leftEncSpeed;
 

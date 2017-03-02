@@ -86,7 +86,7 @@ public class RobotMap {
 	public final static int bitThreePort = 16;
 	
 	//PID Values
-	public final static double gyroTurnP = 0.02;
+	public final static double gyroTurnP = 0.06;
 	public final static double gyroTurnI = 0;
 	public final static double gyroTurnD = 0;
 	
@@ -107,11 +107,11 @@ public class RobotMap {
 	public final static double pixyTurnD = 0;
 	
 	//Motion Profile Constants
-	public static double maxAcceleration;
+	public static double maxAcceleration = 7500;//20000;
 	public static double motionProfileFastScaleFactor = 0.95;
 	public static double motionProfileMediumScaleFactor = 0.75;
 	public static double motionProfileSlowScaleFactor = 0.5;
-	public static double maxCruiseSpeed;
+	public static double maxCruiseSpeed = 1500;
 	public static double robotWidth;
 	public static double maxSplineVel;
 	
@@ -121,9 +121,9 @@ public class RobotMap {
 	public static final double splineMPKa = 0.00000005;
 	public static final double splineMPKv = 0.000005;
 
-	public static final double chassisMPKp = 0.0008;
+	public static final double chassisMPKp = 0.0015;//0.0008
 	public static final double chassisMPKi = 0.0;
-	public static final double chassisMPKd = 0.0;
+	public static final double chassisMPKd = 0.0003;
 	public static final double chassisMPKa = 0.00000005;
 	public static final double chassisMPKv = 0.000005;
 	
