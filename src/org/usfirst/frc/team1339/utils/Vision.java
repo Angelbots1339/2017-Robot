@@ -9,10 +9,13 @@ import org.opencv.imgproc.Imgproc;
 
 import edu.wpi.cscore.AxisCamera;
 import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 
 public class Vision implements Runnable{
 
+	private UsbCamera usbCamera;
 	private AxisCamera camera;
 	private Object imgLock = new Object();
 	private CvSink cvSink;
@@ -20,11 +23,15 @@ public class Vision implements Runnable{
 	private ArrayList<Integer> centerX;
 	private ArrayList<Integer> heights;
 	private volatile Thread p;
+	private CvSource outputStream;
 
 	public Vision(){
-		//camera = CameraServer.getInstance().addAxisCamera("10.13.39.11");
-		camera.setResolution(640, 480);
+		//camera = CameraServer.getInstance().addAxisCamera("admin:team1339@10.13.39.11:8080/mjpeg.cgi");//10.13.39.11
+		usbCamera = CameraServer.getInstance().startAutomaticCapture();
+		usbCamera.setResolution(320, 240);
+		usbCamera.setExposureManual(10);
 		cvSink = CameraServer.getInstance().getVideo();
+		outputStream = CameraServer.getInstance().putVideo("Blur", 320, 240);
 		pl = new Pipeline();
 		centerX = new ArrayList<Integer>();
 		heights = new ArrayList<Integer>();
@@ -59,6 +66,7 @@ public class Vision implements Runnable{
 		while(p == thisThread){
 			cvSink.grabFrame(source);
 			pl.setsource0(source);
+			outputStream.putFrame(source);
 			try{
 				pl.process();
 				ArrayList<MatOfPoint> output = pl.filterContoursOutput();

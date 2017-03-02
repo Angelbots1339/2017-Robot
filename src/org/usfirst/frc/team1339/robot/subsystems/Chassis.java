@@ -23,24 +23,7 @@ public class Chassis extends Subsystem {
 	//Motors
 	private CANTalon rightFrontMotor, rightBackMotor,
 	leftFrontMotor, leftBackMotor;
-
-	//Motion Profile Low
-	public MotionProfileLow chassisMPLow = new MotionProfileLow(
-			RobotMap.chassisMPLowKp, RobotMap.chassisMPLowKi, 
-			RobotMap.chassisMPLowKd, RobotMap.chassisMPLowKa, 
-			RobotMap.chassisMPLowKv);
-
-	public MotionProfileHigh chassisMPHigh = new MotionProfileHigh(
-			RobotMap.chassisMPHighKp, RobotMap.chassisMPHighKi, 
-			RobotMap.chassisMPHighKd, RobotMap.chassisMPHighKa,
-			RobotMap.chassisMPHighKv);
-
-	//Spline Profile
-	public SplineProfileLow chassisSP = new SplineProfileLow(
-			RobotMap.splineMPKp, RobotMap.splineMPKi, 
-			RobotMap.splineMPKd, RobotMap.splineMPKa, 
-			RobotMap.splineMPKv);
-
+  
 	//Sensors
 	private ADXRS450_Gyro spartanGyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
 	private Ultrasonic ultraLeft = new Ultrasonic(RobotMap.ultraLeftOut,
@@ -62,10 +45,31 @@ public class Chassis extends Subsystem {
 	public SynchronousPID ultraPID = new SynchronousPID
 			(RobotMap.ultraP, RobotMap.ultraI, RobotMap.ultraD);
 
-	private double lastTime = 0, lastRightSpeed = 0, lastLeftSpeed = 0;
+	//Motion Profile Low
+	public MotionProfileLow chassisMPLow = new MotionProfileLow(
+			RobotMap.chassisMPLowKp, RobotMap.chassisMPLowKi, 
+			RobotMap.chassisMPLowKd, RobotMap.chassisMPLowKa, 
+			RobotMap.chassisMPLowKv);
 
+	//Motion Profile High
+	public MotionProfileHigh chassisMPHigh = new MotionProfileHigh(
+			RobotMap.chassisMPHighKp, RobotMap.chassisMPHighKi, 
+			RobotMap.chassisMPHighKd, RobotMap.chassisMPHighKa,
+			RobotMap.chassisMPHighKv);
+
+	//Spline Profile
+	public SplineProfileLow chassisSP = new SplineProfileLow(
+			RobotMap.splineMPKp, RobotMap.splineMPKi, 
+			RobotMap.splineMPKd, RobotMap.splineMPKa, 
+			RobotMap.splineMPKv);
+
+	private double lastTime = 0, lastRightSpeed = 0, lastLeftSpeed = 0;
+  
 	private ArrayList<Double> accel = new ArrayList<Double>();
 
+	/**
+	 * 
+	 */
 	public Chassis(){
 		rightFrontMotor = new CANTalon(RobotMap.rightFront);
 		rightBackMotor = new CANTalon(RobotMap.rightBack);
@@ -80,6 +84,7 @@ public class Chassis extends Subsystem {
 		setDefaultCommand(new ArcadeDrive());
 	}
 
+	//Getters and Setters for Sensors
 	public double getSpartanGyro() {
 		return spartanGyro.getAngle();
 	}
@@ -91,7 +96,15 @@ public class Chassis extends Subsystem {
 	public void resetGyro(){
 		spartanGyro.reset();
 	}
+  
+	public int getRightEnc(){
+		return rightEnc.get();
+	}
 
+	public int getLeftEnc(){
+		return leftEnc.get() * 2;
+	}
+  
 	public void resetEncoder(){
 		rightEnc.reset();
 		leftEnc.reset();
@@ -104,14 +117,36 @@ public class Chassis extends Subsystem {
 	public double getUltraRight(){
 		return ultraRight.getRangeInches();
 	}
+	
+	public void setMotorValues(double right, double left){
+		rightFrontMotor.set(-right);
+		rightBackMotor.set(-right);		
+		leftFrontMotor.set(left);
+		leftBackMotor.set(left);
 
-	public int getRightEnc(){
-		return rightEnc.get();
+		SmartDashboard.putNumber("Output R", right);
+		SmartDashboard.putNumber("Output L", left);
+		SmartDashboard.putNumber("Gyro Output" , getSpartanGyro());
 	}
 
-	public int getLeftEnc(){
-		return leftEnc.get() * 2;
-	}
+	public void driveWithJoystick(double throttle, double turn){
+		double right = throttle;
+		double left = throttle;
+		double turningThrottleScale;
+
+		if (Math.abs(throttle) > 0.1) turningThrottleScale = Math.abs(throttle);
+		else turningThrottleScale = 0.75;
+
+		right -= turn * turningThrottleScale;  
+		left += turn * turningThrottleScale;
+
+		if(Math.abs(right) <= 0.05)
+			right = 0;
+		if(Math.abs(left) <= 0.05)
+			left = 0;
+
+		setMotorValues(left, right);
+  }
 
 	public void runGyroPid(){
 		double output = gyroTurnPID.calculate(getSpartanGyro());
@@ -224,33 +259,7 @@ public class Chassis extends Subsystem {
 		double left = distOutput - visionOutput;
 		setMotorValues(left, right);
 	}
-
-	public void setMotorValues(double right, double left){
-		rightFrontMotor.set(-right);
-		rightBackMotor.set(-right);		
-		leftFrontMotor.set(left);
-		leftBackMotor.set(left);
-	}
-
-	public void driveWithJoystick(double throttle, double turn){
-		double right = throttle;
-		double left = throttle;
-		double turningThrottleScale;
-
-		if (Math.abs(throttle) > 0.1) turningThrottleScale = Math.abs(throttle);
-		else turningThrottleScale = 0.75;
-
-		right -= turn * turningThrottleScale;  
-		left += turn * turningThrottleScale;
-
-		if(Math.abs(right) <= 0.05)
-			right = 0;
-		if(Math.abs(left) <= 0.05)
-			left = 0;
-
-		setMotorValues(left, right);
-	}
-
+  
 	public void motionProfileLow(){
 		chassisMPLow.calculate(rightEnc.get(), leftEnc.get());
 		double gyroOutput = gyroTurnPID.calculate(spartanGyro.getAngle());
@@ -289,7 +298,6 @@ public class Chassis extends Subsystem {
 		double leftEncSpeed = leftEnc.getRate() * 2;
 		double leftSpeed = leftEncSpeed - lastLeftSpeed;
 		lastLeftSpeed = leftEncSpeed;
-
 		double currentTime = Timer.getFPGATimestamp();
 		double time = currentTime - lastTime;
 		lastTime = currentTime;

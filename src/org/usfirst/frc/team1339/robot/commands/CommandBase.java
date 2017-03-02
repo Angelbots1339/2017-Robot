@@ -34,7 +34,7 @@ public abstract class CommandBase extends Command {
         arduino = new Arduino();
         gearRamp = new GearRamp();
         gearHolder = new GearHolder();
-        //vision = new Vision();
+        vision = new Vision();
         
         oi = new OI();
     }

@@ -12,13 +12,13 @@ public class RunVision extends CommandBase{
 
 	protected void initialize(){
 		vision.start();
-		chassis.visionTurnPID.setSetpoint(150);
+		//chassis.visionTurnPID.setSetpoint(150);
 	}
 
 	public void execute(){
 		centerX = vision.getCenterX();
 		System.out.println(Arrays.toString(centerX));
-		chassis.runVisionPid(centerX);
+		//chassis.runVisionPid(centerX);
 	}
 
 	public boolean isFinished(){
