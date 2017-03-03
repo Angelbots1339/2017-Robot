@@ -30,6 +30,8 @@ public class PixyVisionThrottle extends CommandBase{
 		SmartDashboard.putNumber("Pixy CenterY", centerY);
 		SmartDashboard.putBoolean("Pixy Gear Found", gearFound);
 		
+		//if(!gearFound || centerY < 50) centerX = 160;
+		
 		chassis.runPixyPidThrottle(centerX, throttle);
 	}
 
