@@ -53,7 +53,7 @@ public class OI {
 		xButton.whenPressed(new AutoDelivery());
 		bButton.whileHeld(new RunVisionThrottle());
 		rightBumper.whileHeld(new PixyVisionThrottle());
-		leftBumper.whenPressed(new UltraGear(18));
+		leftBumper.whenPressed(new UltraGear(12));
 		
 		//Operator Buttons
 		twoButton.whenPressed(new AutoClimb(0.7, 25));

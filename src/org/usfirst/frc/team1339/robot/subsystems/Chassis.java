@@ -185,7 +185,7 @@ public class Chassis extends Subsystem {
 			visionOutput = visionTurnPID.calculate(targetAvg);
 		}
 		
-		visionOutput = Math.pow(visionOutput, 3);
+		//visionOutput = Math.pow(visionOutput, 3);
 
 		double right = distOutput + visionOutput;
 		double left = distOutput - visionOutput;

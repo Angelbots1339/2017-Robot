@@ -2,6 +2,8 @@ package org.usfirst.frc.team1339.robot.commands;
 
 import java.util.Arrays;
 
+import org.usfirst.frc.team1339.robot.RobotMap;
+
 public class RunVision extends CommandBase{
 
 	int[] centerX;
@@ -12,7 +14,7 @@ public class RunVision extends CommandBase{
 
 	protected void initialize(){
 		vision.start();
-		chassis.visionTurnPID.setSetpoint(150);
+		chassis.visionTurnPID.setSetpoint(RobotMap.visionSetPoint);
 	}
 
 	public void execute(){

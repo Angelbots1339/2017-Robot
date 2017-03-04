@@ -17,7 +17,7 @@ public class RunVisionThrottle extends CommandBase{
 	
 	protected void initialize(){
 		vision.start();
-		chassis.visionTurnPID.setSetpoint(150);
+		chassis.visionTurnPID.setSetpoint(RobotMap.visionSetPoint);
 	}
 	
 	public void execute(){
