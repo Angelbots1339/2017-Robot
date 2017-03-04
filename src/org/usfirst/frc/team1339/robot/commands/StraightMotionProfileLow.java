@@ -16,7 +16,7 @@ public class StraightMotionProfileLow extends CommandBase {
 
 	protected void initialize() {
 		// TODO Auto-generated method stub
-		if(shifting.isHighGear()) Scheduler.getInstance().add(new ShiftLow());
+		Scheduler.getInstance().add(new ShiftLow());
 		chassis.gyroTurnPID.setSetpoint(0);
 		chassis.chassisMPLow.configureNewProfile(m_goal, m_decelerateVel);
 		initialLeft = chassis.getLeftEnc();

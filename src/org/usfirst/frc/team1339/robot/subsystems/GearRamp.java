@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class GearRamp extends Subsystem {
 	
 	private Solenoid plateUp, plateDown;
-	private boolean isUp = false;
+	private boolean isUp = true;
 	
 	public GearRamp(){
 		plateUp = new Solenoid(RobotMap.gearRampUp);
