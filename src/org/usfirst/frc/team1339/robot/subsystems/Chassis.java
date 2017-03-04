@@ -128,7 +128,7 @@ public class Chassis extends Subsystem {
 
 		SmartDashboard.putNumber("Output R", right);
 		SmartDashboard.putNumber("Output L", left);
-		SmartDashboard.putNumber("Gyro Output" , getSpartanGyro());
+		//SmartDashboard.putNumber("Gyro Output" , getSpartanGyro());
 	}
 
 	public void driveWithJoystick(double throttle, double turn){
@@ -263,23 +263,25 @@ public class Chassis extends Subsystem {
 	}
 
 	public void motionProfileLow(){
-		chassisMPLow.calculate(rightEnc.get(), leftEnc.get());
-		double gyroOutput = gyroTurnPID.calculate(spartanGyro.getAngle());
+		chassisMPLow.calculate(leftEnc.get() * 2, rightEnc.get());
+		//double gyroOutput = 0;//gyroTurnPID.calculate(spartanGyro.getAngle());
 		double rightSpeed = chassisMPLow.getRightOutput();
 		double leftSpeed = chassisMPLow.getLeftOutput();
-		rightSpeed += gyroOutput;
-		leftSpeed -= gyroOutput;
-		SmartDashboard.putNumber("MP output", rightSpeed);
+		//rightSpeed -= gyroOutput;
+		//leftSpeed += gyroOutput;
+		SmartDashboard.putNumber("MP right output", rightSpeed);
+		SmartDashboard.putNumber("MP left output", leftSpeed);
+		//SmartDashboard.putNumber("Gyro Output", gyroOutput);
 		setMotorValues(-leftSpeed, -rightSpeed);
 	}
 
 	public void motionProfileHigh(){
-		chassisMPHigh.calculate(rightEnc.get(), leftEnc.get());
-		double gyroOutput = gyroTurnPID.calculate(spartanGyro.getAngle());
+		chassisMPHigh.calculate(leftEnc.get() * 2, rightEnc.get());
+		//double gyroOutput = gyroTurnPID.calculate(spartanGyro.getAngle());
 		double rightSpeed = chassisMPHigh.getRightOutput();
 		double leftSpeed = chassisMPHigh.getLeftOutput();
-		rightSpeed += gyroOutput;
-		leftSpeed -= gyroOutput;
+		//rightSpeed += gyroOutput;
+		//leftSpeed -= gyroOutput;
 		SmartDashboard.putNumber("MP output", rightSpeed);
 		setMotorValues(-leftSpeed, -rightSpeed);
 	}

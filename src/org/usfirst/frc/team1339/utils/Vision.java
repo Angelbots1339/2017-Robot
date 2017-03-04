@@ -28,10 +28,10 @@ public class Vision implements Runnable{
 	public Vision(){
 		//camera = CameraServer.getInstance().addAxisCamera("admin:team1339@10.13.39.11:8080/mjpeg.cgi");//10.13.39.11
 		usbCamera = CameraServer.getInstance().startAutomaticCapture();
-		usbCamera.setResolution(320, 240);
-		usbCamera.setExposureManual(10);
+		//usbCamera.setResolution(320, 240);
+		usbCamera.setExposureManual(20);
 		cvSink = CameraServer.getInstance().getVideo();
-		outputStream = CameraServer.getInstance().putVideo("Blur", 320, 240);
+		//outputStream = CameraServer.getInstance().putVideo("Blur", 320, 240);
 		pl = new Pipeline();
 		centerX = new ArrayList<Integer>();
 		heights = new ArrayList<Integer>();

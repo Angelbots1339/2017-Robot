@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team1339.robot;
 
 import org.usfirst.frc.team1339.robot.commands.AutoClimb;
@@ -8,7 +9,9 @@ import org.usfirst.frc.team1339.robot.commands.GearRampUp;
 import org.usfirst.frc.team1339.robot.commands.RunVisionThrottle;
 import org.usfirst.frc.team1339.robot.commands.ShiftHigh;
 import org.usfirst.frc.team1339.robot.commands.ShiftLow;
+import org.usfirst.frc.team1339.robot.commands.StraightMotionProfileHigh;
 import org.usfirst.frc.team1339.robot.commands.StraightMotionProfileLow;
+import org.usfirst.frc.team1339.robot.commands.groups.AutoDelivery;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -49,7 +52,8 @@ public class OI {
 		aButton.whenPressed(new ShiftLow());
 		yButton.whenPressed(new ShiftHigh());
 		//xButton.whenPressed(new MaxAcceleration());
-		//bButton.whenPressed(new StraightMotionProfileLow(2000, 50, 0));
+		bButton.whenPressed(new StraightMotionProfileHigh(1000, 50, 0));
+		//bButton.whenPressed(new AutoDelivery());
 		xButton.whileHeld(new RunVisionThrottle());
 		
 		//Operator Buttons
