@@ -94,7 +94,7 @@ public class RobotMap {
 	public final static double ultraI = 0;
 	public final static double ultraD = 0.0;
 	
-	public final static double visionTurnP = 0.003;
+	public final static double visionTurnP = 0.0025;
 	public final static double visionTurnI = 0;
 	public final static double visionTurnD = 0;
 	
@@ -107,5 +107,5 @@ public class RobotMap {
 	public final static double pixyTurnD = 0;
 	
 	//Vision Constants
-	public final static int visionSetPoint = 190;
+	public final static int visionSetPoint = 175;
 }

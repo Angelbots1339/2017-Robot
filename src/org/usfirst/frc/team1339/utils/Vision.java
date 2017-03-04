@@ -16,7 +16,7 @@ public class Vision implements Runnable{
 	private AxisCamera camera;
 	private Object imgLock = new Object();
 	private CvSink cvSink;
-	private Pipeline pl;
+	private GRIPPipeline pl;
 	private ArrayList<Integer> centerX;
 	private ArrayList<Integer> heights;
 	private volatile Thread p;
@@ -26,7 +26,7 @@ public class Vision implements Runnable{
 		camera.setResolution(640, 480);
 		cvSink = CameraServer.getInstance().getVideo();
 		CameraServer.getInstance().putVideo("output", 320, 240);
-		pl = new Pipeline();
+		pl = new GRIPPipeline();
 		centerX = new ArrayList<Integer>();
 		heights = new ArrayList<Integer>();
 	}
@@ -39,17 +39,25 @@ public class Vision implements Runnable{
 	public synchronized int[] getCenterX(){
 		int length = centerX.size();
 		int[] output = new int[length];
-		for(int x = 0; x < length; x++){
-			output[x] = centerX.get(x);
+		
+		try{
+			for(int x = 0; x < length; x++)
+				output[x] = centerX.get(x);
+		} catch(Exception e){
+			e.printStackTrace();
 		}
+		
 		return output;
 	}
 
 	public synchronized int[] getHeight(){
 		int length = heights.size();
 		int[] output = new int[length];
-		for(int x = 0; x < length; x++){
-			output[x] = heights.get(x);
+		try{
+			for(int x = 0; x < length; x++)
+				output[x] = heights.get(x);
+		} catch(Exception e){
+			e.printStackTrace();
 		}
 		return output;
 	}

@@ -11,6 +11,7 @@ import org.usfirst.frc.team1339.robot.commands.ShiftHigh;
 import org.usfirst.frc.team1339.robot.commands.ShiftLow;
 import org.usfirst.frc.team1339.robot.commands.UltraGear;
 import org.usfirst.frc.team1339.robot.commands.groups.AutoDelivery;
+import org.usfirst.frc.team1339.robot.commands.groups.AutoLeft;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -56,11 +57,13 @@ public class OI {
 		leftBumper.whenPressed(new UltraGear(12));
 		
 		//Operator Buttons
+		oneButton.whenPressed(new AutoLeft());
 		twoButton.whenPressed(new AutoClimb(0.7, 25));
 		threeButton.whenPressed(new GearRampUp());
 		fiveButton.whenPressed(new GearRampDown());
 		fourButton.whenPressed(new GearHolderUp());
 		sixButton.whenPressed(new GearHolderDown());
+		
 	}
 	
 	public Joystick getMadCatzStick(){

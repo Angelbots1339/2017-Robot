@@ -1,5 +1,9 @@
 package org.usfirst.frc.team1339.robot.commands.groups;
 
+import org.usfirst.frc.team1339.robot.commands.AutoDrive;
+import org.usfirst.frc.team1339.robot.commands.GearHolderDown;
+import org.usfirst.frc.team1339.robot.commands.GyroTurn;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -24,5 +28,9 @@ public class AutoRight extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    }
+    	
+    	addSequential(new AutoDrive(1, 1));
+    	addSequential(new GyroTurn(-60));
+    	//addSequential(new AutoDelivery());
+    	}
 }

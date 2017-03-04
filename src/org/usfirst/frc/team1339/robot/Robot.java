@@ -2,10 +2,11 @@
 package org.usfirst.frc.team1339.robot;
 
 import org.usfirst.frc.team1339.robot.commands.CommandBase;
-import org.usfirst.frc.team1339.robot.commands.groups.AutoDelivery;
+import org.usfirst.frc.team1339.robot.commands.groups.*;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -22,6 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
+	SendableChooser autoChooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -31,6 +33,12 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		CommandBase.init();
 		autonomousCommand = new AutoDelivery();
+		
+		autoChooser = new SendableChooser<Command>();
+		autoChooser.addDefault("Auto Mid", new AutoMid());
+		autoChooser.addObject("Auto Right", new AutoRight());
+		autoChooser.addObject("Auto Left", new AutoLeft());
+		SmartDashboard.putData("Auto Mode Chooser", autoChooser);
 	}
 
 	/**
@@ -59,18 +67,14 @@ public class Robot extends IterativeRobot {
 	 * chooser code above (like the commented example) or additional comparisons
 	 * to the switch structure below with additional strings & commands.
 	 */
+	
+	
+	
 	@Override
 	public void autonomousInit() {
 		
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
+		autonomousCommand = (Command) autoChooser.getSelected();
+		
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
