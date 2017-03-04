@@ -16,7 +16,7 @@ public class StraightMotionProfileHigh extends CommandBase {
 
 	protected void initialize() {
 		// TODO Auto-generated method stub
-		if(!shifting.isHighGear()) Scheduler.getInstance().add(new ShiftHigh());
+		Scheduler.getInstance().add(new ShiftHigh());
 		chassis.gyroTurnPID.setSetpoint(chassis.getSpartanGyro());
 		chassis.chassisMPHigh.configureNewProfile(m_goal, m_decelerateVel);
 		initialLeft = chassis.getLeftEnc();
@@ -41,12 +41,12 @@ public class StraightMotionProfileHigh extends CommandBase {
 
 	protected void end() {
 		// TODO Auto-generated method stub
-		//chassis.setMotorValues(0, 0);
+		chassis.setMotorValues(0, 0);
 	}
 
 	protected void interrupted() {
 		// TODO Auto-generated method stub
-		//chassis.setMotorValues(0, 0);
+		chassis.setMotorValues(0, 0);
 	}
 
 }

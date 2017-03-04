@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoDelivery extends CommandGroup {
 
     public AutoDelivery() {
-    	addSequential(new UltraGear(18));
+    	addSequential(new UltraGear(13));
     	addParallel(new GearHolderDown());
     	addSequential(new AutoDrive(-1, .5));
     	addSequential(new GearHolderUp());

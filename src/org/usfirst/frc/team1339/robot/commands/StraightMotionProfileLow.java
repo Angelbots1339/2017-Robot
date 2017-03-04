@@ -16,8 +16,8 @@ public class StraightMotionProfileLow extends CommandBase {
 
 	protected void initialize() {
 		// TODO Auto-generated method stub
-		if(shifting.isHighGear()) Scheduler.getInstance().add(new ShiftLow());
-		chassis.gyroTurnPID.setSetpoint(chassis.getSpartanGyro());
+		Scheduler.getInstance().add(new ShiftLow());
+		chassis.gyroTurnPID.setSetpoint(0);
 		chassis.chassisMPLow.configureNewProfile(m_goal, m_decelerateVel);
 		initialLeft = chassis.getLeftEnc();
 		initialRight = chassis.getRightEnc();
@@ -35,7 +35,7 @@ public class StraightMotionProfileLow extends CommandBase {
 
 	public boolean isFinished() {
 		// TODO Auto-generated method stub
-		return chassis.chassisMPLow.isFinishedTrajectory() && counter >= 10;
+		return chassis.chassisMPLow.isFinishedTrajectory() && counter >= 50;
 	}
 
 	protected void end() {

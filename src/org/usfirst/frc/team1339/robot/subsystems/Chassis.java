@@ -126,28 +126,27 @@ public class Chassis extends Subsystem {
 
 		SmartDashboard.putNumber("Output R", right);
 		SmartDashboard.putNumber("Output L", left);
-		SmartDashboard.putNumber("Gyro Output" , getSpartanGyro());
+		//SmartDashboard.putNumber("Gyro Output" , getSpartanGyro());
 	}
 
 	public void driveWithJoystick(double throttle, double turn){
-		double right = throttle;
 		double left = throttle;
+		double right = throttle;
 		double turningThrottleScale;
 
 		if (Math.abs(throttle) > 0.1) turningThrottleScale = Math.abs(throttle);
 		else turningThrottleScale = 0.75;
 
-		right -= turn * turningThrottleScale;  
-		left += turn * turningThrottleScale;
+		right += turn * turningThrottleScale;  
+		left -= turn * turningThrottleScale;
 
 		if(Math.abs(right) <= 0.05)
 			right = 0;
 		if(Math.abs(left) <= 0.05)
 			left = 0;
-
-		setMotorValues(left, right);
-  }
-
+    
+		setMotorValues(right, left);
+	}
 	public void runGyroPid(){
 		double output = gyroTurnPID.calculate(getSpartanGyro());
 		double left = -output;
@@ -166,9 +165,9 @@ public class Chassis extends Subsystem {
 		}
 		else{
 			double output = visionTurnPID.calculate(targetAvg);
-			double left = -output;
-			double right = output;
-			setMotorValues(left, right);
+			double left = output;
+			double right = -output;
+			setMotorValues(right, left);
 		}
 	}
 
@@ -183,9 +182,9 @@ public class Chassis extends Subsystem {
 		}
 		else{
 			double output = visionTurnPID.calculate(targetAvg);
-			double left = output;
-			double right = -output;
-			setMotorValues(left, right);
+			double left = -output;
+			double right = output;
+			setMotorValues(right, left);
 		}
 	}
 
@@ -201,9 +200,9 @@ public class Chassis extends Subsystem {
 		if(centerX.length != 0){
 			visionOutput = visionTurnPID.calculate(targetAvg);
 		}
-		right += visionOutput;
-		left -= visionOutput;
-		setMotorValues(left, right);
+		right -= visionOutput;
+		left += visionOutput;
+		setMotorValues(right, left);
 	}
 
 	public void ultraDist(double dist){
@@ -233,9 +232,9 @@ public class Chassis extends Subsystem {
 			distOutput = -visionThrottlePID.calculate(targetAvg);
 		}
 
-		double right = distOutput + gyroOutput;
-		double left = distOutput - gyroOutput;
-		setMotorValues(left, right);
+		double right = distOutput - gyroOutput;
+		double left = distOutput + gyroOutput;
+		setMotorValues(right, left);
 	}
 
 	public void ultraGear(int[] centerX, double dist){
@@ -255,39 +254,41 @@ public class Chassis extends Subsystem {
 
 		visionOutput = Math.pow(visionOutput, 3);
 
-		double right = distOutput + visionOutput;
-		double left = distOutput - visionOutput;
-		setMotorValues(left, right);
+		double right = distOutput - visionOutput;
+		double left = distOutput + visionOutput;
+		setMotorValues(right, left);
 	}
   
 	public void motionProfileLow(){
-		chassisMPLow.calculate(rightEnc.get(), leftEnc.get());
+		chassisMPLow.calculate(getRightEnc(), getLeftEnc());
 		double gyroOutput = gyroTurnPID.calculate(spartanGyro.getAngle());
 		double rightSpeed = chassisMPLow.getRightOutput();
 		double leftSpeed = chassisMPLow.getLeftOutput();
-		rightSpeed += gyroOutput;
-		leftSpeed -= gyroOutput;
-		SmartDashboard.putNumber("MP output", rightSpeed);
-		setMotorValues(-leftSpeed, -rightSpeed);
+		//rightSpeed -= gyroOutput;
+		//leftSpeed += gyroOutput;
+		SmartDashboard.putNumber("MP right output", rightSpeed);
+		SmartDashboard.putNumber("MP left output", leftSpeed);
+		SmartDashboard.putNumber("Gyro Output", gyroOutput);
+		setMotorValues(-rightSpeed, -leftSpeed);
 	}
 
 	public void motionProfileHigh(){
-		chassisMPHigh.calculate(rightEnc.get(), leftEnc.get());
-		double gyroOutput = gyroTurnPID.calculate(spartanGyro.getAngle());
+		chassisMPHigh.calculate(getRightEnc(), getLeftEnc());
+		//double gyroOutput = gyroTurnPID.calculate(spartanGyro.getAngle());
 		double rightSpeed = chassisMPHigh.getRightOutput();
 		double leftSpeed = chassisMPHigh.getLeftOutput();
-		rightSpeed += gyroOutput;
-		leftSpeed -= gyroOutput;
+		//rightSpeed += gyroOutput;
+		//leftSpeed -= gyroOutput;
 		SmartDashboard.putNumber("MP output", rightSpeed);
-		setMotorValues(-leftSpeed, -rightSpeed);
+		setMotorValues(-rightSpeed, -leftSpeed);
 	}
 
 	public void splineProfile(){
-		chassisSP.calculate(leftEnc.get(), rightEnc.get());
+		chassisSP.calculate(getRightEnc(), getLeftEnc());
 		double leftSpeed = chassisSP.getLeftOutput();
 		double rightSpeed = chassisSP.getRightOutput();
 		SmartDashboard.putNumber("spline speed", -leftSpeed);
-		setMotorValues(-leftSpeed, -rightSpeed);
+		setMotorValues(-rightSpeed, -leftSpeed);
 	}
 
 	public void calculate(){

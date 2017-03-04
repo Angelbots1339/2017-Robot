@@ -26,12 +26,11 @@ public class Vision implements Runnable{
 	private CvSource outputStream;
 
 	public Vision(){
-		//camera = CameraServer.getInstance().addAxisCamera("admin:team1339@10.13.39.11:8080/mjpeg.cgi");//10.13.39.11
-		usbCamera = CameraServer.getInstance().startAutomaticCapture();
-		usbCamera.setResolution(320, 240);
-		usbCamera.setExposureManual(10);
+		camera = CameraServer.getInstance().addAxisCamera("10.13.39.11");//10.13.39.11
+		camera.setResolution(320, 240);
+		//usbCamera.setExposureManual(20);
 		cvSink = CameraServer.getInstance().getVideo();
-		outputStream = CameraServer.getInstance().putVideo("Blur", 320, 240);
+		//outputStream = CameraServer.getInstance().putVideo("Blur", 320, 240);
 		pl = new Pipeline();
 		centerX = new ArrayList<Integer>();
 		heights = new ArrayList<Integer>();
@@ -66,7 +65,7 @@ public class Vision implements Runnable{
 		while(p == thisThread){
 			cvSink.grabFrame(source);
 			pl.setsource0(source);
-			outputStream.putFrame(source);
+			//outputStream.putFrame(source);
 			try{
 				pl.process();
 				ArrayList<MatOfPoint> output = pl.filterContoursOutput();

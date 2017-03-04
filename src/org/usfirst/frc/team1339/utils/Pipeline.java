@@ -52,9 +52,9 @@ public class Pipeline {
 	public void process() {
 		//Step  HSV_Threshold0:
 		Mat hsvThresholdInput = source0;
-		double[] hsvThresholdHue = {55.03597122302158, 115.49488054607508};
-		double[] hsvThresholdSaturation = {151.34892086330936, 255.0};
-		double[] hsvThresholdValue = {107.77877697841726, 255.0};
+		double[] hsvThresholdHue = {69, 77};
+		double[] hsvThresholdSaturation = {173, 255.0};
+		double[] hsvThresholdValue = {113, 255.0};
 		hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, hsvThresholdOutput);
 
 		//Step  CV_erode0:

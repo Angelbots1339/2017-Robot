@@ -86,9 +86,9 @@ public class RobotMap {
 	public final static int bitThreePort = 16;
 	
 	//PID Values
-	public final static double gyroTurnP = 0.080;
+	public final static double gyroTurnP = 0.000007;
 	public final static double gyroTurnI = 0;
-	public final static double gyroTurnD = 0.001;
+	public final static double gyroTurnD = 0.00;
 	
 	public final static double ultraP = 0.031;
 	public final static double ultraI = 0;
@@ -108,7 +108,7 @@ public class RobotMap {
 	
 	//Motion Profile Constants (in Encoder Clicks)
 	public static final double maxLowAcceleration = 7500;
-	public static final double maxHighAcceleration = 20000;
+	public static final double maxHighAcceleration = 15000;
 	public static final double motionProfileFastScaleFactor = 0.95;
 	public static final double motionProfileMediumScaleFactor = 0.75;
 	public static final double motionProfileSlowScaleFactor = 0.5;
@@ -124,18 +124,18 @@ public class RobotMap {
 	public static final double splineMPKv = 0.000005;
 
 	//Low Gear Motion Profile PID, Acceleration, and Velocity Constants.
-	public static final double chassisMPLowKp = 0.0013;//0.0008
+	public static final double chassisMPLowKp = 0.003;//0.0008 0.0013
 	public static final double chassisMPLowKi = 0.0;
-	public static final double chassisMPLowKd = 0.0005;
+	public static final double chassisMPLowKd = 0.000;//5;
 	public static final double chassisMPLowKa = 0.00000005;
 	public static final double chassisMPLowKv = 0.000005;
 	
 	//High Gear Motion Profile PID, Acceleration, and Velocity Constants.
 	//NEEDS TESTING
-	public static final double chassisMPHighKp = 0.0;
+	public static final double chassisMPHighKp = 0.003;
 	public static final double chassisMPHighKi = 0.0;
 	public static final double chassisMPHighKd = 0.0;
-	public static final double chassisMPHighKa = 0.0;
-	public static final double chassisMPHighKv = 0.0;
+	public static final double chassisMPHighKa = 0.0000005;
+	public static final double chassisMPHighKv = 0.00005;
 	
 }
