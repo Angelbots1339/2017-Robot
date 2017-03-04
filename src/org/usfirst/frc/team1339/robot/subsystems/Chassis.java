@@ -23,7 +23,7 @@ public class Chassis extends Subsystem {
 	//Motors
 	private CANTalon rightFrontMotor, rightBackMotor,
 	leftFrontMotor, leftBackMotor;
-
+  
 	//Sensors
 	private ADXRS450_Gyro spartanGyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
 	private Ultrasonic ultraLeft = new Ultrasonic(RobotMap.ultraLeftOut,
@@ -63,10 +63,8 @@ public class Chassis extends Subsystem {
 			RobotMap.splineMPKd, RobotMap.splineMPKa, 
 			RobotMap.splineMPKv);
 
-
 	private double lastTime = 0, lastRightSpeed = 0, lastLeftSpeed = 0;
-
-
+  
 	private ArrayList<Double> accel = new ArrayList<Double>();
 
 	/**
@@ -98,7 +96,7 @@ public class Chassis extends Subsystem {
 	public void resetGyro(){
 		spartanGyro.reset();
 	}
-	
+  
 	public int getRightEnc(){
 		return rightEnc.get();
 	}
@@ -106,7 +104,7 @@ public class Chassis extends Subsystem {
 	public int getLeftEnc(){
 		return leftEnc.get() * 2;
 	}
-	
+  
 	public void resetEncoder(){
 		rightEnc.reset();
 		leftEnc.reset();
@@ -146,10 +144,9 @@ public class Chassis extends Subsystem {
 			right = 0;
 		if(Math.abs(left) <= 0.05)
 			left = 0;
-
+    
 		setMotorValues(right, left);
 	}
-	
 	public void runGyroPid(){
 		double output = gyroTurnPID.calculate(getSpartanGyro());
 		double left = -output;
@@ -261,7 +258,7 @@ public class Chassis extends Subsystem {
 		double left = distOutput + visionOutput;
 		setMotorValues(right, left);
 	}
-
+  
 	public void motionProfileLow(){
 		chassisMPLow.calculate(getRightEnc(), getLeftEnc());
 		double gyroOutput = gyroTurnPID.calculate(spartanGyro.getAngle());
@@ -302,7 +299,6 @@ public class Chassis extends Subsystem {
 		double leftEncSpeed = leftEnc.getRate() * 2;
 		double leftSpeed = leftEncSpeed - lastLeftSpeed;
 		lastLeftSpeed = leftEncSpeed;
-
 		double currentTime = Timer.getFPGATimestamp();
 		double time = currentTime - lastTime;
 		lastTime = currentTime;
