@@ -2,6 +2,8 @@ package org.usfirst.frc.team1339.robot.commands;
 
 import java.util.Arrays;
 
+import org.usfirst.frc.team1339.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -29,7 +31,7 @@ public class UltraGear extends CommandBase {
     protected void initialize() {
     	vision.start();
     	chassis.ultraPID.setSetpoint(setpoint);
-    	chassis.visionTurnPID.setSetpoint(160);
+    	chassis.visionTurnPID.setSetpoint(RobotMap.visionSetPoint);
     	
     	leftTotal = 0;
     	rightTotal = 0;

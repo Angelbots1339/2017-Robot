@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoDelivery extends CommandGroup {
 
     public AutoDelivery() {
-    	addSequential(new UltraGear(18));
-    	addParallel(new GearHolderDown());
-    	addSequential(new AutoDrive(-1, .5));
+    	addSequential(new UltraGear(12));
+    	addSequential(new GearHolderDown());
+    	addSequential(new AutoDrive(-1, .2));
     	addSequential(new GearHolderUp());
     }
 }
