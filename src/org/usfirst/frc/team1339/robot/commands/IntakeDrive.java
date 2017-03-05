@@ -29,9 +29,9 @@ public class IntakeDrive extends CommandBase {
     	throttle = stick.getRawAxis(RobotMap.operatorYAxis);
     	if(Math.abs(throttle) < 0.1) throttle = 0;
     	intake.setMotorValues(throttle, throttle);
-    	if(Math.abs(throttle) > 0){
+    	if(Math.abs(throttle) > .5){
     		if(gearRamp.isPlateUp()) Scheduler.getInstance().add(new GearRampDown());
-    		if(gearHolder.isPlateUp()) Scheduler.getInstance().add(new GearHolderUp());
+    		if(!gearHolder.isPlateUp()) Scheduler.getInstance().add(new GearHolderUp());
     	}
     }
 

@@ -73,31 +73,31 @@ public class RobotMap {
 	public final static int ultraLeftIn = 0;
 	public final static int ultraRightOut = 3;
 	public final static int ultraRightIn = 2;
-	
+
 	//Encoders
 	public final static int leftDriveAEncoder = 10;
 	public final static int leftDriveBEncoder = 11;
 	public final static int rightDriveAEncoder = 12;
 	public final static int rightDriveBEncoder = 13;
-	
+
 	//Arduino
 	public final static int bitOnePort = 14;
 	public final static int bitTwoPort = 15;
 	public final static int bitThreePort = 16;
-	
+
 	//PID Values
-	public final static double gyroTurnP = 0.02;
+	public final static double gyroTurnP = 0.025;//.0275
 	public final static double gyroTurnI = 0;
 	public final static double gyroTurnD = 0;
-	
+
 	public final static double ultraP = 0.031;
 	public final static double ultraI = 0;
 	public final static double ultraD = 0.0;
-	
+
 	public final static double visionTurnP = 0.0025;
 	public final static double visionTurnI = 0;
 	public final static double visionTurnD = 0;
-	
+
 	public final static double visionThrottleP = 0.02;
 	public final static double visionThrottleI = 0;
 	public final static double visionThrottleD = 0;
@@ -105,7 +105,39 @@ public class RobotMap {
 	public final static double pixyTurnP = 0.0035;
 	public final static double pixyTurnI = 0;
 	public final static double pixyTurnD = 0;
-	
+
 	//Vision Constants
 	public final static int visionSetPoint = 175;
+
+	//Motion Profile Constants (in Encoder Clicks)
+	public static final double maxLowAcceleration = 7500;
+	public static final double maxHighAcceleration = 15000;
+	public static final double motionProfileFastScaleFactor = 0.95;
+	public static final double motionProfileMediumScaleFactor = 0.75;
+	public static final double motionProfileSlowScaleFactor = 0.5;
+	public static final double maxCruiseSpeed = 1500;
+	public static double robotWidth;
+	public static double maxSplineVel;
+
+	//Spline PID, Acceleration, and Velocity Constants.
+	public static final double splineMPKp = 0.02;//0.02;
+	public static final double splineMPKi = 0.0;
+	public static final double splineMPKd = 0.0007;
+	public static final double splineMPKa = 0.00000005;
+	public static final double splineMPKv = 0.000005;
+
+	//Low Gear Motion Profile PID, Acceleration, and Velocity Constants.
+	public static final double chassisMPLowKp = 0.003;//0.0008 0.0013
+	public static final double chassisMPLowKi = 0.0;
+	public static final double chassisMPLowKd = 0.000;//5;
+	public static final double chassisMPLowKa = 0.00000005;
+	public static final double chassisMPLowKv = 0.000005;
+
+	//High Gear Motion Profile PID, Acceleration, and Velocity Constants.
+	//NEEDS TESTING
+	public static final double chassisMPHighKp = 0.003;
+	public static final double chassisMPHighKi = 0.0;
+	public static final double chassisMPHighKd = 0.0;
+	public static final double chassisMPHighKa = 0.0000005;
+	public static final double chassisMPHighKv = 0.00005;
 }

@@ -19,12 +19,13 @@ public class UltraGear extends CommandBase {
 	int ind = 0;
 	int counter = 0;
 	
-	double setpoint;
+	double setpoint, limiter;
 	
-    public UltraGear(double setpoint) {
+    public UltraGear(double setpoint, double limiter) {
         // Use requires() here to declare subsystem dependencies
         requires(chassis);
         this.setpoint = setpoint;
+        this.limiter = limiter;
     }
 
     // Called just before this Command runs the first time
@@ -73,7 +74,7 @@ public class UltraGear extends CommandBase {
 		int[] centerX = vision.getCenterX();
 		SmartDashboard.putString("CENTERX", Arrays.toString(centerX));
     	
-    	chassis.ultraGear(centerX, avg);
+    	chassis.ultraGear(centerX, avg, limiter);
     	if(chassis.ultraPID.onTarget(2)) counter++;
     	else counter = 0;
     }

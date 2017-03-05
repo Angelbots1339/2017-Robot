@@ -2,11 +2,13 @@
 package org.usfirst.frc.team1339.robot;
 
 import org.usfirst.frc.team1339.robot.commands.CommandBase;
-import org.usfirst.frc.team1339.robot.commands.groups.*;
+import org.usfirst.frc.team1339.robot.commands.groups.AutoDelivery;
+import org.usfirst.frc.team1339.robot.commands.groups.AutoLeft;
+import org.usfirst.frc.team1339.robot.commands.groups.AutoMid;
+import org.usfirst.frc.team1339.robot.commands.groups.AutoRight;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -39,6 +41,8 @@ public class Robot extends IterativeRobot {
 		autoChooser.addObject("Auto Right", new AutoRight());
 		autoChooser.addObject("Auto Left", new AutoLeft());
 		SmartDashboard.putData("Auto Mode Chooser", autoChooser);
+		
+		CommandBase.chassis.resetGyro();
 	}
 
 	/**

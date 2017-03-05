@@ -2,6 +2,9 @@ package org.usfirst.frc.team1339.robot.subsystems;
 
 import org.usfirst.frc.team1339.robot.RobotMap;
 import org.usfirst.frc.team1339.robot.commands.ArcadeDrive;
+import org.usfirst.frc.team1339.utils.MotionProfileHigh;
+import org.usfirst.frc.team1339.utils.MotionProfileLow;
+import org.usfirst.frc.team1339.utils.SplineProfileLow;
 import org.usfirst.frc.team1339.utils.SynchronousPID;
 
 import com.ctre.CANTalon;
@@ -17,10 +20,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Chassis extends Subsystem {
 	//Motors
 	private CANTalon rightFrontMotor, rightBackMotor,
-		leftFrontMotor, leftBackMotor;
-	
+	leftFrontMotor, leftBackMotor;
+
 	private Compressor comp = new Compressor();
-	
+
 	//Sensors
 	private ADXRS450_Gyro spartanGyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
 	private Ultrasonic ultraLeft = new Ultrasonic(RobotMap.ultraLeftOut,
@@ -29,7 +32,7 @@ public class Chassis extends Subsystem {
 			RobotMap.ultraRightIn);
 	private Encoder leftEnc = new Encoder(RobotMap.leftDriveAEncoder, RobotMap.leftDriveBEncoder, true);
 	private Encoder rightEnc = new Encoder(RobotMap.rightDriveAEncoder, RobotMap.rightDriveBEncoder);
-	
+
 	//PID
 	public SynchronousPID gyroTurnPID = new SynchronousPID
 			(RobotMap.gyroTurnP, RobotMap.gyroTurnI, RobotMap.gyroTurnD);
@@ -42,68 +45,86 @@ public class Chassis extends Subsystem {
 	public SynchronousPID ultraPID = new SynchronousPID
 			(RobotMap.ultraP, RobotMap.ultraI, RobotMap.ultraD);
 
+	//Motion Profile Low
+	public MotionProfileLow chassisMPLow = new MotionProfileLow(
+			RobotMap.chassisMPLowKp, RobotMap.chassisMPLowKi, 
+			RobotMap.chassisMPLowKd, RobotMap.chassisMPLowKa, 
+			RobotMap.chassisMPLowKv);
+
+	//Motion Profile High
+	public MotionProfileHigh chassisMPHigh = new MotionProfileHigh(
+			RobotMap.chassisMPHighKp, RobotMap.chassisMPHighKi, 
+			RobotMap.chassisMPHighKd, RobotMap.chassisMPHighKa,
+			RobotMap.chassisMPHighKv);
+
+	//Spline Profile
+	public SplineProfileLow chassisSP = new SplineProfileLow(
+			RobotMap.splineMPKp, RobotMap.splineMPKi, 
+			RobotMap.splineMPKd, RobotMap.splineMPKa, 
+			RobotMap.splineMPKv);
+
 	public Chassis(){
 		rightFrontMotor = new CANTalon(RobotMap.rightFront);
 		rightBackMotor = new CANTalon(RobotMap.rightBack);
 		leftFrontMotor = new CANTalon(RobotMap.leftFront);
 		leftBackMotor = new CANTalon(RobotMap.leftBack);
-		
+
 		ultraLeft.setAutomaticMode(true);
 		ultraRight.setAutomaticMode(true);
 	}
-	
+
 	public void initDefaultCommand() {
 		setDefaultCommand(new ArcadeDrive());
 	}
-	
+
 	public double getSpartanGyro() {
 		return spartanGyro.getAngle();
 	}
-	
+
 	public double getSpartanGyroRate(){
 		return spartanGyro.getRate();
 	}
-	
+
 	public void resetGyro(){
 		spartanGyro.reset();
 	}
-	
+
 	public double getUltraLeft(){
 		return ultraLeft.getRangeInches();
 	}
-	
+
 	public double getUltraRight(){
 		return ultraRight.getRangeInches();
 	}
-	
+
 	public int getRightEnc(){
 		return rightEnc.get();
 	}
-	
+
 	public int getLeftEnc(){
 		return leftEnc.get() * 2;
 	}
-	
+
 	public void resetRightEnc(){
 		rightEnc.reset();
 	}
-	
+
 	public void resetLeftEnc(){
 		leftEnc.reset();
 	}
-	
+
 	public void resetEncs(){
 		resetRightEnc();
 		resetLeftEnc();
 	}
-	
+
 	public void runGyroPid(){
 		double output = gyroTurnPID.calculate(getSpartanGyro());
 		double left = -output;
 		double right = output;
 		setMotorValues(right, left);
 	}
-	
+
 	public void runVisionPid(int[] centerX){
 		double targetSum = 0;
 		for(int i = 0; i < centerX.length; i++){
@@ -120,7 +141,7 @@ public class Chassis extends Subsystem {
 			setMotorValues(left, right);
 		}
 	}
-	
+
 	public void runVisionPIDThrottle(int[] centerX, double throttle){
 		double visionOutput = 0;
 		double right = throttle;
@@ -137,17 +158,17 @@ public class Chassis extends Subsystem {
 		left -= visionOutput;
 		setMotorValues(left, right);
 	}
-	
+
 	public void ultraDist(double dist){
 		double output = ultraPID.calculate(dist);
 		setMotorValues(output, output);
 	}
-	
+
 	public void autoGear(int[] centerX, int[] heights){
 		double gyroOutput = 0;
 		double distOutput = 0;
 		double targetSum = 0;
-		
+
 		for(int i = 0; i < centerX.length; i++){
 			targetSum += centerX[i];
 		}
@@ -155,7 +176,7 @@ public class Chassis extends Subsystem {
 		if(centerX.length != 0){
 			gyroOutput = visionTurnPID.calculate(targetAvg);
 		}
-		
+
 		targetSum = 0;
 		for(int i = 0; i < heights.length; i++){
 			targetSum += heights[i];
@@ -169,14 +190,14 @@ public class Chassis extends Subsystem {
 		double left = distOutput - gyroOutput;
 		setMotorValues(left, right);
 	}
-	
-	public void ultraGear(int[] centerX, double dist){
+
+	public void ultraGear(int[] centerX, double dist, double limiter){
 		double visionOutput = 0;
 		double distOutput = 0;
 		double targetSum = 0;
 
-		distOutput = ultraPID.calculate(dist);
-		
+		distOutput = ultraPID.calculate(dist) * limiter;
+
 		for(int i = 0; i < centerX.length; i++){
 			targetSum += centerX[i];
 		}
@@ -184,21 +205,21 @@ public class Chassis extends Subsystem {
 		if(centerX.length != 0){
 			visionOutput = visionTurnPID.calculate(targetAvg);
 		}
-		
+
 		//visionOutput = Math.pow(visionOutput, 3);
 
 		double right = distOutput + visionOutput;
 		double left = distOutput - visionOutput;
 		setMotorValues(left, right);
 	}
-	
+
 	public void runPixyPid(int centerX){
 		double output = pixyTurnPID.calculate(centerX);
 		double left = -output;
 		double right = output;
 		setMotorValues(right, left);
 	}
-	
+
 	public void runPixyPidThrottle(int centerX, double throttle){
 		double output = pixyTurnPID.calculate(centerX);
 		double left = throttle - output;
@@ -206,6 +227,38 @@ public class Chassis extends Subsystem {
 		setMotorValues(right, left);
 	}
 	
+	public void motionProfileLow(){
+		chassisMPLow.calculate(getRightEnc(), getLeftEnc());
+		double gyroOutput = gyroTurnPID.calculate(spartanGyro.getAngle());
+		double rightSpeed = chassisMPLow.getRightOutput();
+		double leftSpeed = chassisMPLow.getLeftOutput();
+		//rightSpeed -= gyroOutput;
+		//leftSpeed += gyroOutput;
+		SmartDashboard.putNumber("MP right output", rightSpeed);
+		SmartDashboard.putNumber("MP left output", leftSpeed);
+		SmartDashboard.putNumber("Gyro Output", gyroOutput);
+		setMotorValues(-rightSpeed, -leftSpeed);
+	}
+
+	public void motionProfileHigh(){
+		chassisMPHigh.calculate(getRightEnc(), getLeftEnc());
+		//double gyroOutput = gyroTurnPID.calculate(spartanGyro.getAngle());
+		double rightSpeed = chassisMPHigh.getRightOutput();
+		double leftSpeed = chassisMPHigh.getLeftOutput();
+		//rightSpeed += gyroOutput;
+		//leftSpeed -= gyroOutput;
+		SmartDashboard.putNumber("MP output", rightSpeed);
+		setMotorValues(-rightSpeed, -leftSpeed);
+	}
+
+	public void splineProfile(){
+		chassisSP.calculate(getRightEnc(), getLeftEnc());
+		double leftSpeed = chassisSP.getLeftOutput();
+		double rightSpeed = chassisSP.getRightOutput();
+		SmartDashboard.putNumber("spline speed", -leftSpeed);
+		setMotorValues(-rightSpeed, -leftSpeed);
+	}
+
 	public void setMotorValues(double right, double left){
 		SmartDashboard.putBoolean("Pressurized?", comp.getPressureSwitchValue());
 		rightFrontMotor.set(-right);
@@ -219,7 +272,7 @@ public class Chassis extends Subsystem {
 		double left = throttle;
 		double turningThrottleScale;
 
-		if (Math.abs(throttle) > 0.1) turningThrottleScale = Math.abs(throttle);
+		if (Math.abs(throttle) > 0.1) turningThrottleScale = Math.abs(throttle) * 2;
 		else turningThrottleScale = 0.75;
 
 		right -= turn * turningThrottleScale;  

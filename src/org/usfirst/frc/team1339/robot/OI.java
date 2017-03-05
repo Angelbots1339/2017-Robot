@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1339.robot;
 
 import org.usfirst.frc.team1339.robot.commands.AutoClimb;
+import org.usfirst.frc.team1339.robot.commands.AutoIntake;
 import org.usfirst.frc.team1339.robot.commands.GearHolderDown;
 import org.usfirst.frc.team1339.robot.commands.GearHolderUp;
 import org.usfirst.frc.team1339.robot.commands.GearRampDown;
@@ -9,9 +10,10 @@ import org.usfirst.frc.team1339.robot.commands.PixyVisionThrottle;
 import org.usfirst.frc.team1339.robot.commands.RunVisionThrottle;
 import org.usfirst.frc.team1339.robot.commands.ShiftHigh;
 import org.usfirst.frc.team1339.robot.commands.ShiftLow;
+import org.usfirst.frc.team1339.robot.commands.StraightMotionProfileLow;
 import org.usfirst.frc.team1339.robot.commands.UltraGear;
-import org.usfirst.frc.team1339.robot.commands.groups.AutoDelivery;
-import org.usfirst.frc.team1339.robot.commands.groups.AutoLeft;
+import org.usfirst.frc.team1339.robot.commands.groups.AutoRight;
+import org.usfirst.frc.team1339.utils.AngelMath;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -51,18 +53,19 @@ public class OI {
 		//Xbox Buttons
 		aButton.whenPressed(new ShiftLow());
 		yButton.whenPressed(new ShiftHigh());
-		xButton.whenPressed(new AutoDelivery());
+		xButton.whileHeld(new PixyVisionThrottle());
 		bButton.whileHeld(new RunVisionThrottle());
-		rightBumper.whileHeld(new PixyVisionThrottle());
-		leftBumper.whenPressed(new UltraGear(12));
+		rightBumper.whenPressed(new StraightMotionProfileLow(AngelMath.inchesToClicks(12*8), 25, 0));
+		leftBumper.whenPressed(new UltraGear(12, 1));
 		
 		//Operator Buttons
-		oneButton.whenPressed(new AutoLeft());
-		twoButton.whenPressed(new AutoClimb(0.7, 25));
+		oneButton.whenPressed(new AutoRight());
+		twoButton.whileHeld(new AutoClimb(0.8, 25));
 		threeButton.whenPressed(new GearRampUp());
 		fiveButton.whenPressed(new GearRampDown());
 		fourButton.whenPressed(new GearHolderUp());
 		sixButton.whenPressed(new GearHolderDown());
+		sevenButton.whileHeld(new AutoIntake(0.6));
 		
 	}
 	

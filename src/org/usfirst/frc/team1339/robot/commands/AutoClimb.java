@@ -19,12 +19,13 @@ public class AutoClimb extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	climb.setMotorValue(throttle);
+    	if(climb.returnCurrentDraw() > tolerance) climb.setMotorValue(0); 
+    	else climb.setMotorValue(throttle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (climb.returnCurrentDraw() > tolerance);
+        return false;
     }
 
     // Called once after isFinished returns true

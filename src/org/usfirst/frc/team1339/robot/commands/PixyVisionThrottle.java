@@ -22,15 +22,21 @@ public class PixyVisionThrottle extends CommandBase{
 	public void execute(){
 		stick = oi.getXboxStick();
 		double throttle = stick.getRawAxis(RobotMap.xboxLeftYAxis);
+		int centerX = 160;
+		int centerY = 120;
 		
-		int centerX = Integer.parseInt(NetworkTable.getTable("SmartDashboard").getString("pixy X", ""));
-		int centerY = Integer.parseInt(NetworkTable.getTable("SmartDashboard").getString("pixy Y", ""));
-		boolean gearFound = Boolean.parseBoolean(NetworkTable.getTable("SmartDashboard").getString("gear found", ""));
+		try{
+			centerX = Integer.parseInt((NetworkTable.getTable("SmartDashboard").getString("pixy X", "")));
+			centerY = Integer.parseInt(NetworkTable.getTable("SmartDashboard").getString("pixy Y", ""));
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
 		SmartDashboard.putNumber("Pixy CenterX", centerX);
 		SmartDashboard.putNumber("Pixy CenterY", centerY);
-		SmartDashboard.putBoolean("Pixy Gear Found", gearFound);
 		
-		//if(!gearFound || centerY < 50) centerX = 160;
+		if(centerY < 25) centerX = 160;
 		
 		chassis.runPixyPidThrottle(centerX, throttle);
 	}
