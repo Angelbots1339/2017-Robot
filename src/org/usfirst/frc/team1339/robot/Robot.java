@@ -34,9 +34,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		CommandBase.init();
-		autonomousCommand = new AutoDelivery();
 		
-		autoChooser = new SendableChooser<Command>();
+		autoChooser = new SendableChooser();
 		autoChooser.addDefault("Auto Mid", new AutoMid());
 		autoChooser.addObject("Auto Right", new AutoRight());
 		autoChooser.addObject("Auto Left", new AutoLeft());
@@ -77,7 +76,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		
-		autonomousCommand = (Command) autoChooser.getSelected();
+		//autonomousCommand = (Command) autoChooser.getSelected();
+		autonomousCommand = new AutoMid();
 		
 		if (autonomousCommand != null)
 			autonomousCommand.start();
@@ -99,6 +99,7 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		
 		CommandBase.chassis.resetEncs();
 	}
 

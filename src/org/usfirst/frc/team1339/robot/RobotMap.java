@@ -61,10 +61,10 @@ public class RobotMap {
 	public final static int climbMotor = 8;
 
 	//Solenoids
-	public final static int shiftIn = 7;
-	public final static int shiftOut = 6;
-	public final static int gearRampDown = 0;
-	public final static int gearRampUp = 1;
+	public final static int shiftIn = 6;
+	public final static int shiftOut = 7;
+	public final static int gearRampDown = 5;
+	public final static int gearRampUp = 4;
 	public final static int gearHolderDown = 2;
 	public final static int gearHolderUp = 3;
 

@@ -25,7 +25,6 @@ public class Vision implements Runnable{
 		camera = CameraServer.getInstance().addAxisCamera("10.13.39.37");
 		camera.setResolution(640, 480);
 		cvSink = CameraServer.getInstance().getVideo();
-		CameraServer.getInstance().putVideo("output", 320, 240);
 		pl = new GRIPPipeline();
 		centerX = new ArrayList<Integer>();
 		heights = new ArrayList<Integer>();
@@ -65,7 +64,7 @@ public class Vision implements Runnable{
 	public void run() {
 		Mat source = new Mat();
 		Thread thisThread = Thread.currentThread();
-		while(p == thisThread){
+		while(p == thisThread && !Thread.interrupted()){
 			cvSink.grabFrame(source);
 			pl.setsource0(source);
 			try{
@@ -90,6 +89,7 @@ public class Vision implements Runnable{
 	public void stop(){
 		centerX.clear();
 		heights.clear();
+
 		p = null;
 	}
 }

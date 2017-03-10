@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team1339.robot;
 
 import org.usfirst.frc.team1339.robot.commands.AutoClimb;
@@ -12,6 +13,7 @@ import org.usfirst.frc.team1339.robot.commands.ShiftHigh;
 import org.usfirst.frc.team1339.robot.commands.ShiftLow;
 import org.usfirst.frc.team1339.robot.commands.StraightMotionProfileLow;
 import org.usfirst.frc.team1339.robot.commands.UltraGear;
+import org.usfirst.frc.team1339.robot.commands.groups.AutoDelivery;
 import org.usfirst.frc.team1339.robot.commands.groups.AutoRight;
 import org.usfirst.frc.team1339.utils.AngelMath;
 
@@ -51,21 +53,21 @@ public class OI {
 	
 	public OI(){
 		//Xbox Buttons
-		aButton.whenPressed(new ShiftLow());
-		yButton.whenPressed(new ShiftHigh());
+		//aButton.whenPressed(new ShiftLow());
+		//yButton.whenPressed(new AutoDelivery());
 		xButton.whileHeld(new PixyVisionThrottle());
 		bButton.whileHeld(new RunVisionThrottle());
-		rightBumper.whenPressed(new StraightMotionProfileLow(AngelMath.inchesToClicks(12*8), 25, 0));
-		leftBumper.whenPressed(new UltraGear(12, 1));
+		rightBumper.whenPressed(new ShiftHigh());
+		leftBumper.whenPressed(new ShiftLow());
 		
 		//Operator Buttons
-		oneButton.whenPressed(new AutoRight());
+		//oneButton.whenPressed(new AutoRight());
 		twoButton.whileHeld(new AutoClimb(0.8, 25));
 		threeButton.whenPressed(new GearRampUp());
 		fiveButton.whenPressed(new GearRampDown());
 		fourButton.whenPressed(new GearHolderUp());
 		sixButton.whenPressed(new GearHolderDown());
-		sevenButton.whileHeld(new AutoIntake(0.6));
+		//sevenButton.whileHeld(new AutoIntake(0.6));
 		
 	}
 	
