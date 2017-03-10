@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoRight extends CommandGroup {
 
     public AutoRight() {
-    	addSequential(new GearRampUp());
+    	addParallel(new AutoStartUp());
     	addSequential(new StraightMotionProfileLow(AngelMath.inchesToClicks((12*6.5)), 25, 0), 3);
     	addSequential(new Chill(0.1));
     	addSequential(new GyroTurn(-60), 2);

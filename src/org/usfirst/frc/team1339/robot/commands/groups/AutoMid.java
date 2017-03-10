@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoMid extends CommandGroup {
 
     public AutoMid() {
-    	addSequential(new GearRampUp());
+    	addParallel(new AutoStartUp());
     	addSequential(new AutoDelivery());
     	addSequential(new TouchUp());
     }

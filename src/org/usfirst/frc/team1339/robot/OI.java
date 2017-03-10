@@ -55,6 +55,7 @@ public class OI {
 		//Xbox Buttons
 		//aButton.whenPressed(new ShiftLow());
 		//yButton.whenPressed(new AutoDelivery());
+		yButton.whenPressed(new RunVisionThrottle());
 		xButton.whileHeld(new PixyVisionThrottle());
 		bButton.whileHeld(new RunVisionThrottle());
 		rightBumper.whenPressed(new ShiftHigh());
@@ -62,7 +63,7 @@ public class OI {
 		
 		//Operator Buttons
 		//oneButton.whenPressed(new AutoRight());
-		twoButton.whileHeld(new AutoClimb(0.8, 25));
+		twoButton.whileHeld(new AutoClimb(0.9, 25));
 		threeButton.whenPressed(new GearRampUp());
 		fiveButton.whenPressed(new GearRampDown());
 		fourButton.whenPressed(new GearHolderUp());

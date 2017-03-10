@@ -2,7 +2,6 @@
 package org.usfirst.frc.team1339.robot;
 
 import org.usfirst.frc.team1339.robot.commands.CommandBase;
-import org.usfirst.frc.team1339.robot.commands.groups.AutoDelivery;
 import org.usfirst.frc.team1339.robot.commands.groups.AutoLeft;
 import org.usfirst.frc.team1339.robot.commands.groups.AutoMid;
 import org.usfirst.frc.team1339.robot.commands.groups.AutoRight;
