@@ -39,8 +39,8 @@ public class Robot extends IterativeRobot {
 		autoChooser.addObject("Auto Right", new AutoRight());
 		autoChooser.addObject("Auto Left", new AutoLeft());
 		SmartDashboard.putData("Auto Mode Chooser", autoChooser);
-		
-		CommandBase.chassis.resetGyro();
+		SmartDashboard.putNumber("Current", 0);
+		autonomousCommand = new AutoLeft();
 	}
 
 	/**
@@ -76,7 +76,11 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		
 		//autonomousCommand = (Command) autoChooser.getSelected();
-		autonomousCommand = new AutoMid();
+		
+		//autonomousCommand = new AutoRight();
+		//autonomousCommand = new AutoLeft();
+		CommandBase.chassis.resetEncs();
+		CommandBase.chassis.resetGyro();
 		
 		if (autonomousCommand != null)
 			autonomousCommand.start();

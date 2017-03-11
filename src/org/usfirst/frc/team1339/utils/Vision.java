@@ -22,7 +22,7 @@ public class Vision implements Runnable{
 	private volatile Thread p;
 
 	public Vision(){
-		camera = CameraServer.getInstance().addAxisCamera("10.13.39.37");
+		camera = CameraServer.getInstance().addAxisCamera("10.13.39.11");
 		camera.setResolution(640, 480);
 		cvSink = CameraServer.getInstance().getVideo();
 		pl = new GRIPPipeline();

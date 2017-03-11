@@ -16,12 +16,13 @@ public class StraightMotionProfileLow extends CommandBase {
 
 	protected void initialize() {
 		// TODO Auto-generated method stub
-		Scheduler.getInstance().add(new ShiftLow());
-		chassis.gyroTurnPID.setSetpoint(0);
+		//Scheduler.getInstance().add(new ShiftLow());
+		chassis.gyroTurnPID.setSetpoint(chassis.getSpartanGyro());
 		chassis.chassisMPLow.configureNewProfile(m_goal, m_decelerateVel);
 		initialLeft = chassis.getLeftEnc();
 		initialRight = chassis.getRightEnc();
 		chassis.chassisMPLow.initializeProfile(initialLeft, initialRight);
+		counter = 0;
 	}
 
 	public void execute() {
