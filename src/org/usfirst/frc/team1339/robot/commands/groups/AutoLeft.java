@@ -14,11 +14,11 @@ public class AutoLeft extends CommandGroup {
 
     public AutoLeft() {
     	addSequential(new AutoStartUp());
-    	addSequential(new StraightMotionProfileLow(AngelMath.inchesToClicks(84), 25, 0), 4);
+    	addSequential(new StraightMotionProfileLow(AngelMath.inchesToClicks(75), 25, 0), 2.5);
     	addSequential(new Chill(0.1));
-    	addSequential(new GyroTurn(60), 2);
+    	addSequential(new GyroTurn(60), 1);
     	addSequential(new Chill(0.1));
     	addSequential(new AutoDelivery());
-    	addSequential(new TouchUp());
+    	//addSequential(new TouchUp());
     }
 }

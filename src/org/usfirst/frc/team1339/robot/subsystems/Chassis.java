@@ -227,11 +227,11 @@ public class Chassis extends Subsystem {
 	
 	public void motionProfileLow(){
 		chassisMPLow.calculate(getRightEnc(), getLeftEnc());
-		double gyroOutput = gyroTurnPID.calculate(spartanGyro.getAngle());
+		double gyroOutput = gyroTurnPID.calculate(spartanGyro.getAngle()) * 2;
 		double rightSpeed = chassisMPLow.getRightOutput();
 		double leftSpeed = chassisMPLow.getLeftOutput();
-		//rightSpeed -= gyroOutput;
-		//leftSpeed += gyroOutput;
+		rightSpeed -= gyroOutput;
+		leftSpeed += gyroOutput;
 		SmartDashboard.putNumber("MP right output", rightSpeed);
 		SmartDashboard.putNumber("MP left output", leftSpeed);
 		SmartDashboard.putNumber("Gyro Output", gyroOutput);

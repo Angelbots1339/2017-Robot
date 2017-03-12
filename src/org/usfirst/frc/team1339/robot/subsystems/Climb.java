@@ -32,5 +32,10 @@ public class Climb extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.s
     }
+    
+    public void setComp(boolean val){
+    	if(val) comp.start();
+    	else comp.stop();
+    }
 }
 

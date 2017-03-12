@@ -6,12 +6,10 @@ import org.usfirst.frc.team1339.robot.commands.GearHolderDown;
 import org.usfirst.frc.team1339.robot.commands.GearHolderUp;
 import org.usfirst.frc.team1339.robot.commands.GearRampDown;
 import org.usfirst.frc.team1339.robot.commands.GearRampUp;
-import org.usfirst.frc.team1339.robot.commands.PixyVisionThrottle;
+import org.usfirst.frc.team1339.robot.commands.KillCompressor;
 import org.usfirst.frc.team1339.robot.commands.RunVisionThrottle;
 import org.usfirst.frc.team1339.robot.commands.ShiftHigh;
 import org.usfirst.frc.team1339.robot.commands.ShiftLow;
-import org.usfirst.frc.team1339.robot.commands.StraightMotionProfileLow;
-import org.usfirst.frc.team1339.utils.AngelMath;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -44,28 +42,22 @@ public class OI {
 	private JoystickButton fourButton = new JoystickButton(operatorStick, RobotMap.operatorFourButton);
 	private JoystickButton fiveButton = new JoystickButton(operatorStick, RobotMap.operatorFiveButton);
 	private JoystickButton sixButton = new JoystickButton(operatorStick, RobotMap.operatorSixButton);
-	private JoystickButton sevenButton = new JoystickButton(operatorStick, RobotMap.operatorSevenButton);
 	
 	
 	public OI(){
 		//Xbox Buttons
-		//aButton.whenPressed(new ShiftLow());
-		//yButton.whenPressed(new AutoDelivery());
-		yButton.whenPressed(new StraightMotionProfileLow(AngelMath.inchesToClicks(84), 25, 0));
-		xButton.whileHeld(new PixyVisionThrottle());
 		bButton.whileHeld(new RunVisionThrottle());
 		rightBumper.whenPressed(new ShiftHigh());
 		leftBumper.whenPressed(new ShiftLow());
+		//yButton.whenPressed(new AutoLeft());
 		
 		//Operator Buttons
-		//oneButton.whenPressed(new AutoRight());
+		oneButton.whileHeld(new KillCompressor());
 		twoButton.whileHeld(new AutoClimb(0.9, 39));
 		threeButton.whenPressed(new GearRampUp());
 		fiveButton.whenPressed(new GearRampDown());
 		fourButton.whenPressed(new GearHolderUp());
 		sixButton.whenPressed(new GearHolderDown());
-		//sevenButton.whileHeld(new AutoIntake(0.6));
-		
 	}
 	
 	public Joystick getMadCatzStick(){

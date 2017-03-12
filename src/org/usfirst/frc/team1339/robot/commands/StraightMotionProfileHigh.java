@@ -1,12 +1,20 @@
 package org.usfirst.frc.team1339.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Scheduler;
-
 public class StraightMotionProfileHigh extends CommandBase {
 	
 	private double m_goal, tolerance, initialLeft, initialRight, m_decelerateVel;
 	private int counter;
 	
+	/**
+	 * Allocate a high gear motion profile object with the given constants, goal, input tolerance, and deceleration velocity.
+	 * <p>
+	 * **********
+	 * <p>
+	 * Prior to using this command, shift into high gear.
+	 * @param goal
+	 * @param input_tolerance
+	 * @param decelerateVel
+	 */
 	public StraightMotionProfileHigh(double goal, double input_tolerance, double decelerateVel){
 		requires(chassis);
 		m_goal = goal;

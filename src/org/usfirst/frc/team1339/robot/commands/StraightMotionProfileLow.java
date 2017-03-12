@@ -1,12 +1,20 @@
 package org.usfirst.frc.team1339.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Scheduler;
-
 public class StraightMotionProfileLow extends CommandBase {
 	
 	private double m_goal, tolerance, initialLeft, initialRight, m_decelerateVel;
 	private int counter;
 	
+	/**
+	 * Allocate a low gear motion profile object with the given constants, goal, input tolerance, and deceleration velocity.
+	 * <p>
+	 * ***
+	 * <p>
+	 * Prior to using this command, shift into low gear.
+	 * @param goal
+	 * @param input_tolerance
+	 * @param decelerateVel
+	 */
 	public StraightMotionProfileLow(double goal, double input_tolerance, double decelerateVel){
 		requires(chassis);
 		m_goal = goal;
@@ -16,7 +24,6 @@ public class StraightMotionProfileLow extends CommandBase {
 
 	protected void initialize() {
 		// TODO Auto-generated method stub
-		//Scheduler.getInstance().add(new ShiftLow());
 		chassis.gyroTurnPID.setSetpoint(chassis.getSpartanGyro());
 		chassis.chassisMPLow.configureNewProfile(m_goal, m_decelerateVel);
 		initialLeft = chassis.getLeftEnc();
@@ -36,7 +43,7 @@ public class StraightMotionProfileLow extends CommandBase {
 
 	public boolean isFinished() {
 		// TODO Auto-generated method stub
-		return chassis.chassisMPLow.isFinishedTrajectory() && counter >= 50;
+		return chassis.chassisMPLow.isFinishedTrajectory() && counter >= 10;
 	}
 
 	protected void end() {
