@@ -7,7 +7,6 @@ import org.usfirst.frc.team1339.robot.commands.GearHolderDown;
 import org.usfirst.frc.team1339.robot.commands.GearHolderUp;
 import org.usfirst.frc.team1339.robot.commands.GearRampDown;
 import org.usfirst.frc.team1339.robot.commands.GearRampUp;
-import org.usfirst.frc.team1339.robot.commands.KillCompressor;
 import org.usfirst.frc.team1339.robot.commands.RunVisionThrottle;
 import org.usfirst.frc.team1339.robot.commands.ShiftHigh;
 import org.usfirst.frc.team1339.robot.commands.ShiftLow;

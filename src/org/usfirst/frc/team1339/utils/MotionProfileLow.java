@@ -194,10 +194,14 @@ public class MotionProfileLow {
 	}
 	
 	public double getRightOutput(){
+		rightOutput = Math.min(rightOutput, 1);
+		rightOutput = Math.max(rightOutput, -1);
 		return rightOutput;
 	}
 	
 	public double getLeftOutput(){
+		leftOutput = Math.min(leftOutput, 1);
+		leftOutput = Math.max(leftOutput, -1);
 		return leftOutput;
 	}
 	
