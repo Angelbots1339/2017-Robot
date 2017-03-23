@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Timer;
 
 public class SplineProfileHigh {
 
+	@SuppressWarnings("unused")
 	private double Kp, Ki, Kd, Ka, Kv, cruiseVel, 
 	splineCruiseVel, maxAcc, cruiseVelScaleFactor, splineRadius,
 	splineAngle, totalOuterDistance, lastInnerPos = 0, sumAngle = 0,

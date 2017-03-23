@@ -112,12 +112,12 @@ public class RobotMap {
 	public final static double pixyTurnD = 0;
 
 	//Vision Constants
-	public final static int visionSetPoint = 155;
+	public final static int visionSetPoint = 165;
 
 	//Motion Profile Constants (in Encoder Clicks)
 	public static final double maxLowAcceleration = 6000;
 	public static final double maxHighAcceleration = 15000;
-	public static final double motionProfileFastScaleFactor = 0.95;
+	public static final double motionProfileFastScaleFactor = 0.9;
 	public static final double motionProfileMediumScaleFactor = 0.75;
 	public static final double motionProfileSlowScaleFactor = 0.5;
 	public static final double maxCruiseSpeed = 1500;

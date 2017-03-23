@@ -2,6 +2,7 @@
 package org.usfirst.frc.team1339.robot;
 
 import org.usfirst.frc.team1339.robot.commands.AutoClimb;
+import org.usfirst.frc.team1339.robot.commands.DriveClimber;
 import org.usfirst.frc.team1339.robot.commands.GearHolderDown;
 import org.usfirst.frc.team1339.robot.commands.GearHolderUp;
 import org.usfirst.frc.team1339.robot.commands.GearRampDown;
@@ -42,22 +43,22 @@ public class OI {
 	private JoystickButton fourButton = new JoystickButton(operatorStick, RobotMap.operatorFourButton);
 	private JoystickButton fiveButton = new JoystickButton(operatorStick, RobotMap.operatorFiveButton);
 	private JoystickButton sixButton = new JoystickButton(operatorStick, RobotMap.operatorSixButton);
-	
+	private JoystickButton sevenButton = new JoystickButton(operatorStick, RobotMap.operatorSevenButton);
 	
 	public OI(){
 		//Xbox Buttons
 		bButton.whileHeld(new RunVisionThrottle());
 		rightBumper.whenPressed(new ShiftHigh());
 		leftBumper.whenPressed(new ShiftLow());
-		//yButton.whenPressed(new AutoLeft());
 		
 		//Operator Buttons
-		oneButton.whileHeld(new KillCompressor());
+		//oneButton.whileHeld(new KillCompressor());
 		twoButton.whileHeld(new AutoClimb(0.9, 39));
 		threeButton.whenPressed(new GearRampUp());
 		fiveButton.whenPressed(new GearRampDown());
 		fourButton.whenPressed(new GearHolderUp());
 		sixButton.whenPressed(new GearHolderDown());
+		sevenButton.whileHeld(new DriveClimber(0.9));
 	}
 	
 	public Joystick getMadCatzStick(){

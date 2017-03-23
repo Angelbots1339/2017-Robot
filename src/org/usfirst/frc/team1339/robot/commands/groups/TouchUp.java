@@ -14,7 +14,7 @@ public class TouchUp extends CommandGroup {
     public TouchUp() {
     	addSequential(new GearHolderUp());
     	addSequential(new Chill(.4));
-    	addSequential(new AutoDrive(0.7, .6));
+    	addSequential(new AutoDrive(0.7, .4));//.6
     	addSequential(new Chill(.4));
     	addSequential(new AutoDrive(-1, .25));
     }

@@ -2,10 +2,7 @@
 package org.usfirst.frc.team1339.robot;
 
 import org.usfirst.frc.team1339.robot.commands.CommandBase;
-import org.usfirst.frc.team1339.robot.commands.KillCompressor;
-import org.usfirst.frc.team1339.robot.commands.groups.AutoLeft;
 import org.usfirst.frc.team1339.robot.commands.groups.AutoMid;
-import org.usfirst.frc.team1339.robot.commands.groups.AutoRight;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -39,7 +36,6 @@ public class Robot extends IterativeRobot {
 		//autoChooser.addObject("Auto Right", new AutoRight());
 		//autoChooser.addObject("Auto Left", new AutoLeft());
 		//SmartDashboard.putData("Auto Mode Chooser", autoChooser);
-		SmartDashboard.putNumber("Current", 0);
 		//autonomousCommand = new AutoLeft();
 	}
 
@@ -106,7 +102,7 @@ public class Robot extends IterativeRobot {
 
 		CommandBase.chassis.resetEncs();
 		CommandBase.chassis.resetGyro();
-		CommandBase.climb.setComp(false);
+		//CommandBase.climb.setComp(false);
 	}
 
 	/**
