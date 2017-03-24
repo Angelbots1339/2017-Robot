@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
+	int test = 0;
 	//SendableChooser autoChooser;
 
 	/**
@@ -116,6 +117,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Right Ultrasonic", CommandBase.chassis.getUltraRight());
 		SmartDashboard.putNumber("left encoder", CommandBase.chassis.getLeftEnc());
 		SmartDashboard.putNumber("right encoder", CommandBase.chassis.getRightEnc());
+		SmartDashboard.putNumber("Climb Current", CommandBase.climb.getCurrentDraw());
 	}
 
 	/**

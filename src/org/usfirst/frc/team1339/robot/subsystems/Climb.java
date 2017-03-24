@@ -6,7 +6,6 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Climb extends Subsystem {
 
@@ -22,10 +21,9 @@ public class Climb extends Subsystem {
 		if(throttle > 0.05) comp.stop();
 		else comp.start();
 		climbMotor.set(throttle);
-		SmartDashboard.putNumber("Current", climbMotor.getOutputCurrent());
 	}
 	
-	public double returnCurrentDraw(){
+	public double getCurrentDraw(){
 		return climbMotor.getOutputCurrent();
 	}
 	
