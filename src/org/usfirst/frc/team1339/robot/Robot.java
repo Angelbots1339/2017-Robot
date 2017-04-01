@@ -2,7 +2,7 @@
 package org.usfirst.frc.team1339.robot;
 
 import org.usfirst.frc.team1339.robot.commands.CommandBase;
-import org.usfirst.frc.team1339.robot.commands.groups.AutoMid;
+import org.usfirst.frc.team1339.robot.commands.groups.*;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -77,6 +77,7 @@ public class Robot extends IterativeRobot {
 		//autonomousCommand = new AutoRight();
 		autonomousCommand = new AutoMid();
 		//autonomousCommand = new AutoLeft();
+		//autonomousCommand = new AutoDrive(1, 1.5);
 		CommandBase.chassis.resetEncs();
 		CommandBase.chassis.resetGyro();
 		

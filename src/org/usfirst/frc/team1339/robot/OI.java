@@ -52,7 +52,7 @@ public class OI {
 		
 		//Operator Buttons
 		//oneButton.whileHeld(new KillCompressor());
-		twoButton.whileHeld(new AutoClimb(0.9, 39));
+		twoButton.whileHeld(new AutoClimb(1, 39));
 		threeButton.whenPressed(new GearRampUp());
 		fiveButton.whenPressed(new GearRampDown());
 		fourButton.whenPressed(new GearHolderUp());
