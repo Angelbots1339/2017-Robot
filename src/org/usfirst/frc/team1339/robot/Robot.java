@@ -2,16 +2,12 @@
 package org.usfirst.frc.team1339.robot;
 
 import org.usfirst.frc.team1339.robot.commands.CommandBase;
-import org.usfirst.frc.team1339.robot.commands.groups.AutoDelivery;
-import org.usfirst.frc.team1339.robot.commands.groups.AutoLeft;
-import org.usfirst.frc.team1339.robot.commands.groups.AutoMid;
-import org.usfirst.frc.team1339.robot.commands.groups.AutoRight;
+import org.usfirst.frc.team1339.robot.commands.groups.*;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
@@ -25,7 +21,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
-	SendableChooser autoChooser;
+	int test = 0;
+	//SendableChooser autoChooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -34,15 +31,13 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		CommandBase.init();
-		autonomousCommand = new AutoDelivery();
 		
-		autoChooser = new SendableChooser<Command>();
-		autoChooser.addDefault("Auto Mid", new AutoMid());
-		autoChooser.addObject("Auto Right", new AutoRight());
-		autoChooser.addObject("Auto Left", new AutoLeft());
-		SmartDashboard.putData("Auto Mode Chooser", autoChooser);
-		
-		CommandBase.chassis.resetGyro();
+		//autoChooser = new SendableChooser();
+		//autoChooser.addDefault("Auto Mid", new AutoMid());
+		//autoChooser.addObject("Auto Right", new AutoRight());
+		//autoChooser.addObject("Auto Left", new AutoLeft());
+		//SmartDashboard.putData("Auto Mode Chooser", autoChooser);
+		//autonomousCommand = new AutoLeft();
 	}
 
 	/**
@@ -77,7 +72,14 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		
-		autonomousCommand = (Command) autoChooser.getSelected();
+		//autonomousCommand = (Command) autoChooser.getSelected();
+		
+		//autonomousCommand = new AutoRight();
+		autonomousCommand = new AutoMid();
+		//autonomousCommand = new AutoLeft();
+		//autonomousCommand = new AutoDrive(1, 1.5);
+		CommandBase.chassis.resetEncs();
+		CommandBase.chassis.resetGyro();
 		
 		if (autonomousCommand != null)
 			autonomousCommand.start();
@@ -99,7 +101,10 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+
 		CommandBase.chassis.resetEncs();
+		CommandBase.chassis.resetGyro();
+		//CommandBase.climb.setComp(false);
 	}
 
 	/**
@@ -113,6 +118,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Right Ultrasonic", CommandBase.chassis.getUltraRight());
 		SmartDashboard.putNumber("left encoder", CommandBase.chassis.getLeftEnc());
 		SmartDashboard.putNumber("right encoder", CommandBase.chassis.getRightEnc());
+		SmartDashboard.putNumber("Climb Current", CommandBase.climb.getCurrentDraw());
 	}
 
 	/**

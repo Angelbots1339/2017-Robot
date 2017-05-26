@@ -58,7 +58,7 @@ public class MotionProfileLow {
 	public void configureNewProfile(double distance, double decelerateSpeed){
 		this.goal = distance;
 		this.maxAcc = RobotMap.maxLowAcceleration;
-		this.cruiseVelScaleFactor = RobotMap.motionProfileFastScaleFactor;
+		this.cruiseVelScaleFactor = RobotMap.motionProfileSlowScaleFactor;
 		if(distance < 0){
 			this.maxAcc *= -1;
 		}
@@ -194,10 +194,14 @@ public class MotionProfileLow {
 	}
 	
 	public double getRightOutput(){
+		rightOutput = Math.min(rightOutput, 1);
+		rightOutput = Math.max(rightOutput, -1);
 		return rightOutput;
 	}
 	
 	public double getLeftOutput(){
+		leftOutput = Math.min(leftOutput, 1);
+		leftOutput = Math.max(leftOutput, -1);
 		return leftOutput;
 	}
 	

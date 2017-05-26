@@ -1,19 +1,15 @@
+
 package org.usfirst.frc.team1339.robot;
 
 import org.usfirst.frc.team1339.robot.commands.AutoClimb;
-import org.usfirst.frc.team1339.robot.commands.AutoIntake;
+import org.usfirst.frc.team1339.robot.commands.DriveClimber;
 import org.usfirst.frc.team1339.robot.commands.GearHolderDown;
 import org.usfirst.frc.team1339.robot.commands.GearHolderUp;
 import org.usfirst.frc.team1339.robot.commands.GearRampDown;
 import org.usfirst.frc.team1339.robot.commands.GearRampUp;
-import org.usfirst.frc.team1339.robot.commands.PixyVisionThrottle;
 import org.usfirst.frc.team1339.robot.commands.RunVisionThrottle;
 import org.usfirst.frc.team1339.robot.commands.ShiftHigh;
 import org.usfirst.frc.team1339.robot.commands.ShiftLow;
-import org.usfirst.frc.team1339.robot.commands.StraightMotionProfileLow;
-import org.usfirst.frc.team1339.robot.commands.UltraGear;
-import org.usfirst.frc.team1339.robot.commands.groups.AutoRight;
-import org.usfirst.frc.team1339.utils.AngelMath;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -48,25 +44,20 @@ public class OI {
 	private JoystickButton sixButton = new JoystickButton(operatorStick, RobotMap.operatorSixButton);
 	private JoystickButton sevenButton = new JoystickButton(operatorStick, RobotMap.operatorSevenButton);
 	
-	
 	public OI(){
 		//Xbox Buttons
-		aButton.whenPressed(new ShiftLow());
-		yButton.whenPressed(new ShiftHigh());
-		xButton.whileHeld(new PixyVisionThrottle());
 		bButton.whileHeld(new RunVisionThrottle());
-		rightBumper.whenPressed(new StraightMotionProfileLow(AngelMath.inchesToClicks(12*8), 25, 0));
-		leftBumper.whenPressed(new UltraGear(12, 1));
+		rightBumper.whenPressed(new ShiftHigh());
+		leftBumper.whenPressed(new ShiftLow());
 		
 		//Operator Buttons
-		oneButton.whenPressed(new AutoRight());
-		twoButton.whileHeld(new AutoClimb(0.8, 25));
+		//oneButton.whileHeld(new KillCompressor());
+		twoButton.whileHeld(new AutoClimb(1, 39));
 		threeButton.whenPressed(new GearRampUp());
 		fiveButton.whenPressed(new GearRampDown());
 		fourButton.whenPressed(new GearHolderUp());
 		sixButton.whenPressed(new GearHolderDown());
-		sevenButton.whileHeld(new AutoIntake(0.6));
-		
+		sevenButton.whileHeld(new DriveClimber(0.9));
 	}
 	
 	public Joystick getMadCatzStick(){

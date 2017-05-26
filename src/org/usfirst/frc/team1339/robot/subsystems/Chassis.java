@@ -10,7 +10,6 @@ import org.usfirst.frc.team1339.utils.SynchronousPID;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -22,7 +21,6 @@ public class Chassis extends Subsystem {
 	private CANTalon rightFrontMotor, rightBackMotor,
 	leftFrontMotor, leftBackMotor;
 
-	private Compressor comp = new Compressor();
 
 	//Sensors
 	private ADXRS450_Gyro spartanGyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
@@ -102,7 +100,7 @@ public class Chassis extends Subsystem {
 	}
 
 	public int getLeftEnc(){
-		return leftEnc.get() * 2;
+		return leftEnc.get();
 	}
 
 	public void resetRightEnc(){
@@ -229,11 +227,11 @@ public class Chassis extends Subsystem {
 	
 	public void motionProfileLow(){
 		chassisMPLow.calculate(getRightEnc(), getLeftEnc());
-		double gyroOutput = gyroTurnPID.calculate(spartanGyro.getAngle());
-		double rightSpeed = chassisMPLow.getRightOutput();
-		double leftSpeed = chassisMPLow.getLeftOutput();
-		//rightSpeed -= gyroOutput;
-		//leftSpeed += gyroOutput;
+		double gyroOutput = gyroTurnPID.calculate(spartanGyro.getAngle()) * 4;//2
+		double rightSpeed = chassisMPLow.getRightOutput() * .75;
+		double leftSpeed = chassisMPLow.getLeftOutput() * .75; 
+		rightSpeed -= gyroOutput;
+		leftSpeed += gyroOutput;
 		SmartDashboard.putNumber("MP right output", rightSpeed);
 		SmartDashboard.putNumber("MP left output", leftSpeed);
 		SmartDashboard.putNumber("Gyro Output", gyroOutput);
@@ -260,7 +258,9 @@ public class Chassis extends Subsystem {
 	}
 
 	public void setMotorValues(double right, double left){
-		SmartDashboard.putBoolean("Pressurized?", comp.getPressureSwitchValue());
+		if(Math.abs(left) < 0.075) left = 0;
+		if(Math.abs(right) < 0.075) right = 0;
+		
 		rightFrontMotor.set(-right);
 		rightBackMotor.set(-right);		
 		leftFrontMotor.set(left);
@@ -275,14 +275,14 @@ public class Chassis extends Subsystem {
 		if (Math.abs(throttle) > 0.1) turningThrottleScale = Math.abs(throttle) * 2;
 		else turningThrottleScale = 0.75;
 
-		right -= turn * turningThrottleScale;  
-		left += turn * turningThrottleScale;
+		right += turn * turningThrottleScale;  
+		left -= turn * turningThrottleScale;
 
 		if(Math.abs(right) <= 0.05)
 			right = 0;
 		if(Math.abs(left) <= 0.05)
 			left = 0;
 
-		setMotorValues(left, right);
+		setMotorValues(right, left);
 	}
 }

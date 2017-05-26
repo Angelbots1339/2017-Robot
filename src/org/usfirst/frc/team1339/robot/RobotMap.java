@@ -61,10 +61,10 @@ public class RobotMap {
 	public final static int climbMotor = 8;
 
 	//Solenoids
-	public final static int shiftIn = 7;
-	public final static int shiftOut = 6;
-	public final static int gearRampDown = 0;
-	public final static int gearRampUp = 1;
+	public final static int shiftIn = 6;
+	public final static int shiftOut = 7;
+	public final static int gearRampDown = 5;
+	public final static int gearRampUp = 4;
 	public final static int gearHolderDown = 2;
 	public final static int gearHolderUp = 3;
 
@@ -86,22 +86,27 @@ public class RobotMap {
 	public final static int bitThreePort = 16;
 
 	//PID Values
+	//Gyro
 	public final static double gyroTurnP = 0.025;//.0275
 	public final static double gyroTurnI = 0;
 	public final static double gyroTurnD = 0;
-
-	public final static double ultraP = 0.031;
+	
+	//Ultrasonics
+	public final static double ultraP = 0.02;
 	public final static double ultraI = 0;
-	public final static double ultraD = 0.0;
-
+	public final static double ultraD = 0.005;
+	
+	//Turning Vision
 	public final static double visionTurnP = 0.0025;
 	public final static double visionTurnI = 0;
 	public final static double visionTurnD = 0;
-
+	
+	//Throttle Vision
 	public final static double visionThrottleP = 0.02;
 	public final static double visionThrottleI = 0;
 	public final static double visionThrottleD = 0;
-
+	
+	//Pixy Camera
 	public final static double pixyTurnP = 0.0035;
 	public final static double pixyTurnI = 0;
 	public final static double pixyTurnD = 0;
@@ -110,9 +115,9 @@ public class RobotMap {
 	public final static int visionSetPoint = 175;
 
 	//Motion Profile Constants (in Encoder Clicks)
-	public static final double maxLowAcceleration = 7500;
+	public static final double maxLowAcceleration = 6000;
 	public static final double maxHighAcceleration = 15000;
-	public static final double motionProfileFastScaleFactor = 0.95;
+	public static final double motionProfileFastScaleFactor = 0.9;
 	public static final double motionProfileMediumScaleFactor = 0.75;
 	public static final double motionProfileSlowScaleFactor = 0.5;
 	public static final double maxCruiseSpeed = 1500;
