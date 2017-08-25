@@ -10,6 +10,8 @@ import org.usfirst.frc.team1339.robot.commands.GearRampUp;
 import org.usfirst.frc.team1339.robot.commands.RunVisionThrottle;
 import org.usfirst.frc.team1339.robot.commands.ShiftHigh;
 import org.usfirst.frc.team1339.robot.commands.ShiftLow;
+import org.usfirst.frc.team1339.robot.commands.StraightMotionProfileLow;
+import org.usfirst.frc.team1339.utils.AngelMath;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -22,6 +24,7 @@ public class OI {
 	
 	private Joystick xboxStick = new Joystick(RobotMap.xboxPort);
 	private Joystick operatorStick = new Joystick(RobotMap.operatorPort);
+	//private Joystick saitekDrive = new Joystick(RobotMap.saitekOne);
 	
 	
 	//Joystick Buttons
@@ -43,12 +46,20 @@ public class OI {
 	private JoystickButton fiveButton = new JoystickButton(operatorStick, RobotMap.operatorFiveButton);
 	private JoystickButton sixButton = new JoystickButton(operatorStick, RobotMap.operatorSixButton);
 	private JoystickButton sevenButton = new JoystickButton(operatorStick, RobotMap.operatorSevenButton);
-	
+	/*
+	private JoystickButton twoButtonSaitek = new JoystickButton(saitekDrive, RobotMap.driveTwo);
+	private JoystickButton threeButtonSaitek = new JoystickButton(saitekDrive, RobotMap.driveThree);
+	private JoystickButton oneButtonSaitek = new JoystickButton(saitekDrive, 1);
+	*/
 	public OI(){
 		//Xbox Buttons
-		bButton.whileHeld(new RunVisionThrottle());
+		//aButton.whenPressed(new StraightMotionProfileLow(AngelMath.inchesToClicks(84), 25, 0));
+		//oneButtonSaitek.whileHeld(new RunVisionThrottle());
 		rightBumper.whenPressed(new ShiftHigh());
 		leftBumper.whenPressed(new ShiftLow());
+		
+		//twoButtonSaitek.whenPressed(new ShiftHigh());
+		//threeButtonSaitek.whenPressed(new ShiftLow());
 		
 		//Operator Buttons
 		//oneButton.whileHeld(new KillCompressor());
@@ -63,6 +74,11 @@ public class OI {
 	public Joystick getMadCatzStick(){
 		return operatorStick;
 	}
+	/*
+	public Joystick getSaitek(){
+		return saitekDrive;
+	}
+	*/
 	public Joystick getXboxStick(){
 		return xboxStick;
 	}

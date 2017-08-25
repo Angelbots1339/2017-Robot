@@ -11,6 +11,7 @@ public class RobotMap {
 	//Controller Ports
 	public final static int xboxPort = 0;
 	public final static int operatorPort = 1;
+	//public final static int saitekOne = 2;
 
 	//Xbox Axis
 	public final static int xboxLeftXAxis = 0;
@@ -46,6 +47,14 @@ public class RobotMap {
 	public final static int operatorFiveButton = 5;
 	public final static int operatorSixButton = 6;
 	public final static int operatorSevenButton = 7;
+	
+	//Saitek
+	//public final static int saitekThrottle = 1;
+	//public final static int saitekTurn = 0;
+	
+	//Saitek
+	public final static int driveTwo = 2;
+	public final static int driveThree = 3;
 
 	//Drive Motors
 	public final static int leftFront = 4;

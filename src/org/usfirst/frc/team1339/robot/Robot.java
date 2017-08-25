@@ -75,8 +75,8 @@ public class Robot extends IterativeRobot {
 		//autonomousCommand = (Command) autoChooser.getSelected();
 		
 		//autonomousCommand = new AutoRight();
-		autonomousCommand = new AutoMid();
-		//autonomousCommand = new AutoLeft();
+		//autonomousCommand = new AutoMid();
+		autonomousCommand = new AutoLeft();
 		//autonomousCommand = new AutoDrive(1, 1.5);
 		CommandBase.chassis.resetEncs();
 		CommandBase.chassis.resetGyro();

@@ -12,13 +12,13 @@ import edu.wpi.cscore.CvSink;
 import edu.wpi.first.wpilibj.CameraServer;
 
 public class Vision implements Runnable{
-
+	
 	private AxisCamera camera;
 	private Object imgLock = new Object();
 	private CvSink cvSink;
 	private GRIPPipeline pl;
 	private ArrayList<Integer> centerX;
-	private ArrayList<Integer> heights;
+	private ArrayList<Integer> areas;
 	private volatile Thread p;
 
 	public Vision(){
@@ -27,11 +27,12 @@ public class Vision implements Runnable{
 		cvSink = CameraServer.getInstance().getVideo();
 		pl = new GRIPPipeline();
 		centerX = new ArrayList<Integer>();
-		heights = new ArrayList<Integer>();
+		areas = new ArrayList<Integer>();
 	}
 
 	public void start(){
 		p = new Thread(this, "Vision Thread");
+		p.setDaemon(true);
 		p.start();
 	}
 
@@ -46,15 +47,31 @@ public class Vision implements Runnable{
 			e.printStackTrace();
 		}
 		
+		/*int[] areas = getArea();
+		int maxIndex = areas[0];
+		for(int i = 0; i < areas.length; i++){
+			if(areas[i] > areas[maxIndex]){
+				maxIndex = i;
+			}
+		}
+		areas[maxIndex] = 0;
+
+		int max2Index = areas[0];
+		for(int i = 0; i < areas.length; i++){
+			if(areas[i] > areas[max2Index]){
+				max2Index = i;
+			}
+		}*/
+
 		return output;
 	}
 
-	public synchronized int[] getHeight(){
-		int length = heights.size();
+	public synchronized int[] getArea(){ //Actually height
+		int length = areas.size();
 		int[] output = new int[length];
 		try{
 			for(int x = 0; x < length; x++)
-				output[x] = heights.get(x);
+				output[x] = areas.get(x);
 		} catch(Exception e){
 			e.printStackTrace();
 		}
@@ -72,11 +89,11 @@ public class Vision implements Runnable{
 				ArrayList<MatOfPoint> output = pl.filterContoursOutput();
 				synchronized(imgLock){
 					centerX.clear();
-					heights.clear();
+					areas.clear();
 					for(int x = 0; x < output.size(); x++){
 						Rect r = Imgproc.boundingRect(pl.filterContoursOutput().get(x));
 						centerX.add(r.x + (r.width / 2));
-						heights.add(r.height);
+						areas.add(r.height);
 					}
 				}
 			}
@@ -88,8 +105,7 @@ public class Vision implements Runnable{
 
 	public void stop(){
 		centerX.clear();
-		heights.clear();
-
+		areas.clear();
 		p = null;
 	}
 }
