@@ -1,8 +1,11 @@
 
 package org.usfirst.frc.team1339.robot;
 
+import java.io.IOException;
+
 import org.usfirst.frc.team1339.robot.commands.CommandBase;
 import org.usfirst.frc.team1339.robot.commands.groups.*;
+import org.usfirst.frc.team1339.utils.Server;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -29,6 +32,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		CommandBase.init();
+		Server server = new Server(8080);
+		try {
+			server.start();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
