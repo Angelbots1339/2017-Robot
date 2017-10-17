@@ -273,7 +273,7 @@ public class Chassis extends Subsystem {
 		double turningThrottleScale;
 
 		if (Math.abs(throttle) > 0.1) turningThrottleScale = Math.abs(throttle) * 2;
-		else turningThrottleScale = 0.75;
+		else turningThrottleScale = 1;
 
 		right += turn * turningThrottleScale;  
 		left -= turn * turningThrottleScale;

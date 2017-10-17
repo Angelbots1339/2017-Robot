@@ -18,7 +18,7 @@ public class AutoGear extends CommandBase{
 	
 	public void execute(){
 		int[] centerX = vision.getCenterX();
-		int[] heights = vision.getHeight();
+		int[] heights = vision.getArea();
 		SmartDashboard.putString("CENTERX", Arrays.toString(centerX));
 		SmartDashboard.putString("heights", Arrays.toString(heights));
 		chassis.autoGear(centerX, heights);

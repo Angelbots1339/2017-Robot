@@ -19,12 +19,12 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	
+
 	private Joystick xboxStick = new Joystick(RobotMap.xboxPort);
 	private Joystick operatorStick = new Joystick(RobotMap.operatorPort);
 	
 	
-	//Joystick Buttons
+	//Xbox Buttons
 	private JoystickButton aButton = new JoystickButton(xboxStick, RobotMap.xboxAButton);
 	private JoystickButton bButton = new JoystickButton(xboxStick, RobotMap.xboxBButton);
 	private JoystickButton xButton = new JoystickButton(xboxStick, RobotMap.xboxXButton);
@@ -36,30 +36,30 @@ public class OI {
 	private JoystickButton rightStickButton = new JoystickButton(xboxStick, RobotMap.xboxRightStickButton);
 	private JoystickButton leftStickButton = new JoystickButton(xboxStick, RobotMap.xboxLeftStickButton);
 	
-	private JoystickButton oneButton = new JoystickButton(operatorStick, RobotMap.operatorOneButton);
+	//Operator Buttons
 	private JoystickButton twoButton = new JoystickButton(operatorStick, RobotMap.operatorTwoButton);
 	private JoystickButton threeButton = new JoystickButton(operatorStick, RobotMap.operatorThreeButton);
 	private JoystickButton fourButton = new JoystickButton(operatorStick, RobotMap.operatorFourButton);
 	private JoystickButton fiveButton = new JoystickButton(operatorStick, RobotMap.operatorFiveButton);
 	private JoystickButton sixButton = new JoystickButton(operatorStick, RobotMap.operatorSixButton);
 	private JoystickButton sevenButton = new JoystickButton(operatorStick, RobotMap.operatorSevenButton);
-	
 	public OI(){
-		//Xbox Buttons
-		bButton.whileHeld(new RunVisionThrottle());
+		//Xbox Functions
 		rightBumper.whenPressed(new ShiftHigh());
 		leftBumper.whenPressed(new ShiftLow());
 		
-		//Operator Buttons
-		//oneButton.whileHeld(new KillCompressor());
+		//Operator Functions
 		twoButton.whileHeld(new AutoClimb(1, 39));
 		threeButton.whenPressed(new GearRampUp());
 		fiveButton.whenPressed(new GearRampDown());
 		fourButton.whenPressed(new GearHolderUp());
 		sixButton.whenPressed(new GearHolderDown());
 		sevenButton.whileHeld(new DriveClimber(0.9));
+		
+		bButton.whileHeld(new RunVisionThrottle());
 	}
 	
+	//Get Functions
 	public Joystick getMadCatzStick(){
 		return operatorStick;
 	}

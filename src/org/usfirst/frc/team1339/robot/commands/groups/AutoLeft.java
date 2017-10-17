@@ -28,7 +28,7 @@ public class AutoLeft extends CommandGroup {
 		addSequential(new TouchUp());*/
 		
 		addSequential(new AutoStartUp());
-     	addSequential(new StraightMotionProfileLow(AngelMath.inchesToClicks(84), 25, 0), 4);
+     	addSequential(new StraightMotionProfileLow(AngelMath.inchesToClicks(75), 25, 0), 4);
      	addSequential(new Chill(0.1));
      	addSequential(new GyroTurn(60), 2);
      	addSequential(new Chill(0.1));

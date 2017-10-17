@@ -46,6 +46,10 @@ public class RobotMap {
 	public final static int operatorFiveButton = 5;
 	public final static int operatorSixButton = 6;
 	public final static int operatorSevenButton = 7;
+	
+	//Saitek
+	public final static int driveTwo = 2;
+	public final static int driveThree = 3;
 
 	//Drive Motors
 	public final static int leftFront = 4;
@@ -85,7 +89,7 @@ public class RobotMap {
 	public final static int bitTwoPort = 15;
 	public final static int bitThreePort = 16;
 
-	//PID Values
+	//PID Values:
 	//Gyro
 	public final static double gyroTurnP = 0.025;//.0275
 	public final static double gyroTurnI = 0;

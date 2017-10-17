@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoDelivery extends CommandGroup {
 
     public AutoDelivery() {
-    	addSequential(new UltraGear(10, .85), 3);
+    	addSequential(new UltraGear(8, .85), 3);
     	//addSequential(new GearHolderDown());
     	//addSequential(new Chill(0.1));
     	//addSequential(new AutoDrive(-1, .25));
