@@ -16,8 +16,7 @@ public class CurvedMotionProfile extends CommandBase{
 
 	@Override
 	protected void initialize() {
-		// TODO Auto-generated method stub\
-		//oi.GyroPID.setSetpoint(Math.toDegrees(m_angle));
+		// TODO Auto-generated method stub
 		chassis.chassisSP.configureSplineProfile(m_radius, m_angle, m_startVel, m_direction);
 		chassis.chassisSP.initializeProfile(chassis.getLeftEnc(), chassis.getRightEnc(),
 				chassis.getSpartanGyro());
@@ -40,7 +39,6 @@ public class CurvedMotionProfile extends CommandBase{
 	@Override
 	protected void end() {
 		// TODO Auto-generated method stub
-		//chassis.gyroPID();
 	}
 
 	@Override

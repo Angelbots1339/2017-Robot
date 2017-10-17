@@ -11,7 +11,6 @@ public class RobotMap {
 	//Controller Ports
 	public final static int xboxPort = 0;
 	public final static int operatorPort = 1;
-	//public final static int saitekOne = 2;
 
 	//Xbox Axis
 	public final static int xboxLeftXAxis = 0;
@@ -47,10 +46,6 @@ public class RobotMap {
 	public final static int operatorFiveButton = 5;
 	public final static int operatorSixButton = 6;
 	public final static int operatorSevenButton = 7;
-	
-	//Saitek
-	//public final static int saitekThrottle = 1;
-	//public final static int saitekTurn = 0;
 	
 	//Saitek
 	public final static int driveTwo = 2;
@@ -94,7 +89,7 @@ public class RobotMap {
 	public final static int bitTwoPort = 15;
 	public final static int bitThreePort = 16;
 
-	//PID Values
+	//PID Values:
 	//Gyro
 	public final static double gyroTurnP = 0.025;//.0275
 	public final static double gyroTurnI = 0;

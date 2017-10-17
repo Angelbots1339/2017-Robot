@@ -17,12 +17,9 @@ public class ArcadeDrive extends CommandBase{
 	}
 
 	protected void execute(){
-		//stick = oi.getSaitek();
 		stick = oi.getXboxStick();
 		throttle = stick.getRawAxis(RobotMap.xboxLeftYAxis);
 		turn = stick.getRawAxis(RobotMap.xboxRightXAxis);
-		//throttle = stick.getRawAxis(RobotMap.saitekThrottle);
-		//turn = stick.getRawAxis(RobotMap.saitekTurn);
 		
 		
 		chassis.driveWithJoystick(throttle, turn);

@@ -21,8 +21,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
-	int test = 0;
-	//SendableChooser autoChooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -31,13 +29,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		CommandBase.init();
-		
-		//autoChooser = new SendableChooser();
-		//autoChooser.addDefault("Auto Mid", new AutoMid());
-		//autoChooser.addObject("Auto Right", new AutoRight());
-		//autoChooser.addObject("Auto Left", new AutoLeft());
-		//SmartDashboard.putData("Auto Mode Chooser", autoChooser);
-		//autonomousCommand = new AutoLeft();
 	}
 
 	/**
@@ -67,17 +58,9 @@ public class Robot extends IterativeRobot {
 	 * to the switch structure below with additional strings & commands.
 	 */
 	
-	
-	
 	@Override
 	public void autonomousInit() {
-		
-		//autonomousCommand = (Command) autoChooser.getSelected();
-		
-		//autonomousCommand = new AutoRight();
-		//autonomousCommand = new AutoMid();
 		autonomousCommand = new AutoLeft();
-		//autonomousCommand = new AutoDrive(1, 1.5);
 		CommandBase.chassis.resetEncs();
 		CommandBase.chassis.resetGyro();
 		
@@ -104,7 +87,6 @@ public class Robot extends IterativeRobot {
 
 		CommandBase.chassis.resetEncs();
 		CommandBase.chassis.resetGyro();
-		//CommandBase.climb.setComp(false);
 	}
 
 	/**
