@@ -21,13 +21,21 @@ public class Server {
 		this.port = port;
 	}
 	
-	public void start() throws IOException{
+	public boolean start(){
 		HttpServer server;
-		server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext("/", new RootHandler());
-        server.createContext("/post", new PostHandler());
-        server.start();
-        System.out.println("Server starting...");
+		boolean success = false;
+		try {
+			server = HttpServer.create(new InetSocketAddress(port), 0);
+	        server.createContext("/", new RootHandler());
+	        server.createContext("/post", new PostHandler());
+	        server.start();
+	        
+	        success = true;
+	        System.out.println("Server starting...");
+		} catch (IOException e) {
+			System.out.println("Server start failure.");
+		}
+		return success;
 	}
 
      class RootHandler implements HttpHandler {
