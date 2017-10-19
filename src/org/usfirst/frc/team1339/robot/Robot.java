@@ -1,17 +1,14 @@
 
 package org.usfirst.frc.team1339.robot;
 
-import java.io.IOException;
-
-import org.usfirst.frc.team1339.robot.commands.AutoDrive;
 import org.usfirst.frc.team1339.robot.commands.CommandBase;
 import org.usfirst.frc.team1339.robot.commands.groups.AutoLeft;
 import org.usfirst.frc.team1339.robot.commands.groups.AutoMid;
 import org.usfirst.frc.team1339.robot.commands.groups.AutoRight;
-import org.usfirst.frc.team1339.utils.AutonomousModeSelector;
 import org.usfirst.frc.team1339.utils.Server;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,8 +22,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
-	AutonomousModeSelector autoSelector;
+	
+	Server server;
+	Command autonomousCommand;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -35,13 +33,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		CommandBase.init();
-		autoSelector = new AutonomousModeSelector();
-		autoSelector.add("Do nothing", null);
-		autoSelector.add("Auto Left", new AutoLeft());
-		autoSelector.add("Auto Right", new AutoRight());
-		autoSelector.add("Auto Mid", new AutoMid());
-		autoSelector.add("Cross Baseline", new AutoDrive(0.5, 3));
-		Server server = new Server(8080);
+		server = new Server(8080);
+		server.autonomousSelector.add("Chill", null);
+		server.autonomousSelector.add("Auto Left", new AutoLeft());
+		server.autonomousSelector.add("Auto Right", new AutoRight());
+		server.autonomousSelector.add("Auto Mid", new AutoMid());
+		server.autonomousSelector.setCurrentMode(0);
 		server.start();
 	}
 
@@ -74,7 +71,7 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = new AutoLeft();
+		autonomousCommand = server.autonomousSelector.getCurrentModeCommand();
 		CommandBase.chassis.resetEncs();
 		CommandBase.chassis.resetGyro();
 		

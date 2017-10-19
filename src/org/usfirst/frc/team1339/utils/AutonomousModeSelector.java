@@ -33,7 +33,7 @@ public class AutonomousModeSelector {
 	 */
 	public AutonomousModeSelector(){
 		modes = new ArrayList<Mode>();
-		currentMode = -1;
+		
 	}
 	
 	/**
