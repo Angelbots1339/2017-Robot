@@ -12,5 +12,8 @@
 	<classpathentry kind="var" path="cscore" sourcepath="cscore.sources"/>
 	<classpathentry kind="lib" path="C:/Users/earobotics/wpilib/user/java/lib/json-simple-1.1.jar" sourcepath="C:/Users/earobotics/wpilib/user/java/lib/json-simple-1.1-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Users/earobotics/wpilib/user/java/lib/TalonSRXLibJava.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/json-simple-1.1-sources.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/json-simple-1.1.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/TalonSRXLibJava.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

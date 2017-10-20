@@ -6,16 +6,12 @@
 		<script src="jquery-3.2.1.min.js"></script>
 		<script>
 $(document).ready(function(){
-	setInterval(function(){
-		$("div#radioBtns").empty();
-		$.get("getModes", function(data){
-			var obj = $.parseJSON(data);
-			$.each(obj, function(key, data){
-				$("div#radioBtns").append("<input type=\"radio\" name=\"auto\" value=\"" + key + "\"/> " + data + "<br/>");
-			
-			});
+	$.get("getModes", function(data){
+		var obj = $.parseJSON(data);
+		$.each(obj, function(key, data){
+			$("div#radioBtns").append("<input type=\"radio\" name=\"auto\" value=\"" + key + "\"/> " + data + "<br/>");
 		});
-	}, 200);
+	});
 		
     $("button#submit").click(function(){
     	var num = $("input[name='auto']:checked").val();
@@ -31,10 +27,15 @@ $(document).ready(function(){
 		</script>
 	</head>
 	<body>
-		<div align="center">
-		<h1>Select your autonomous mode</h1>
-		<div id="radioBtns"></div>
-		<button id="submit">Change auto</button>
+		<div align="center" id="auto">
+			<h1>Select your autonomous mode</h1>
+			<div id="radioBtns"></div>
+			<button id="submit">Change auto</button>
 		</div>
+		<br/>
+		<br/>
+		<br/>
+		<div align="center" id="cam">
+			<img src="http://10.13.39.12/mjpg/video.mjpg" alt=":("/>
 	</body>
 </html>
