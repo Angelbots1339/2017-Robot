@@ -19,12 +19,15 @@ public class Server {
 
 	private int port;
 	private String modesJSON;
+	
 	public AutonomousModeSelector autonomousSelector;
+	public ValueDisplay valueDisplay;
 	
 
 	public Server(int port){
 		this.port = port;
 		autonomousSelector = new AutonomousModeSelector();
+		valueDisplay = new ValueDisplay();
 	}
 
 	public boolean start(){
@@ -42,6 +45,7 @@ public class Server {
 			server.createContext("/", new RootHandler());
 			server.createContext("/setMode", new PostModeHandler());
 			server.createContext("/getModes", new GetModesHandler());
+			server.createContext("/getValues", new GetValuesHandler());
 			server.start();
 
 			success = true;
@@ -82,6 +86,17 @@ public class Server {
 			t.sendResponseHeaders(200, modesJSON.length());
 			OutputStream os = t.getResponseBody();
 			os.write(modesJSON.getBytes());
+			os.close();
+		}
+	}
+	
+	class GetValuesHandler implements HttpHandler {
+		@Override
+		public void handle(HttpExchange t) throws IOException {
+			String values = valueDisplay.getJSON();
+			t.sendResponseHeaders(200, values.length());
+			OutputStream os = t.getResponseBody();
+			os.write(values.getBytes());
 			os.close();
 		}
 	}

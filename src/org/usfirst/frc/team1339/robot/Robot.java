@@ -33,12 +33,13 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		CommandBase.init();
-		server = new Server(8080);
+		server = new Server(8099);
 		server.autonomousSelector.add("Chill", null);
 		server.autonomousSelector.add("Auto Left", new AutoLeft());
 		server.autonomousSelector.add("Auto Right", new AutoRight());
 		server.autonomousSelector.add("Auto Mid", new AutoMid());
 		server.autonomousSelector.setCurrentMode(0);
+		server.valueDisplay.putValue("Gyro", "Disabled");
 		server.start();
 	}
 
@@ -106,6 +107,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		server.valueDisplay.putValue("Gyro", Math.round(CommandBase.chassis.getSpartanGyro() * 1000.0) / 1000.0);
 		SmartDashboard.putNumber("Gyro", CommandBase.chassis.getSpartanGyro());
 		SmartDashboard.putNumber("Left Ultrasonic", CommandBase.chassis.getUltraLeft());
 		SmartDashboard.putNumber("Right Ultrasonic", CommandBase.chassis.getUltraRight());
