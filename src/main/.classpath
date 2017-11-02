@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/2017-Robot_main/java"/>
+	<classpathentry kind="src" path="/src/main/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Gradle: edu.wpi.first.wpilibj:athena:2017.2.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Gradle: edu.wpi.first.wpilib.networktables.java:NetworkTables:arm:3.1.7"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Gradle: edu.wpi.first.wpilib.networktables.java:NetworkTables:desktop:3.1.7"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Gradle: org.opencv:opencv-java:3.1.0"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Gradle: edu.wpi.cscore.java:cscore:arm:1.0.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Gradle: thirdparty.frc.ctre:Toolsuite-Java:4.4.1.14"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Gradle: thirdparty.frc.kauai:Navx-Java:3.0.323"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Gradle: :json-simple-1.1:"/>
+	<classpathentry kind="output" path="out/production/classes"/>
+</classpath>

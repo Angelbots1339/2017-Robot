@@ -64,8 +64,13 @@ public class Chassis extends Subsystem {
 	public Chassis(){
 		rightFrontMotor = new CANTalon(RobotMap.rightFront);
 		rightBackMotor = new CANTalon(RobotMap.rightBack);
+		rightBackMotor.changeControlMode(CANTalon.TalonControlMode.Follower);
+		rightBackMotor.set(RobotMap.rightFront);
+
 		leftFrontMotor = new CANTalon(RobotMap.leftFront);
 		leftBackMotor = new CANTalon(RobotMap.leftBack);
+		leftBackMotor.changeControlMode(CANTalon.TalonControlMode.Follower);
+		leftBackMotor.set(RobotMap.leftFront);
 
 		ultraLeft.setAutomaticMode(true);
 		ultraRight.setAutomaticMode(true);
@@ -262,9 +267,9 @@ public class Chassis extends Subsystem {
 		if(Math.abs(right) < 0.075) right = 0;
 		
 		rightFrontMotor.set(-right);
-		rightBackMotor.set(-right);		
+		//rightBackMotor.set(-right);
 		leftFrontMotor.set(left);
-		leftBackMotor.set(left);
+		//leftBackMotor.set(left);
 	}
 
 	public void driveWithJoystick(double throttle, double turn){

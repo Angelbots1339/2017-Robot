@@ -27,7 +27,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	AutonomousModeSelector autoSelector;
+	Server server;
 	Command autonomousCommand;
 
 	/**
@@ -37,14 +37,15 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		CommandBase.init();
-		autoSelector = new AutonomousModeSelector();
-		autoSelector.add("Do nothing", null);
-		autoSelector.add("Auto Left", new AutoLeft());
-		autoSelector.add("Auto Right", new AutoRight());
-		autoSelector.add("Auto Mid", new AutoMid());
-		autoSelector.add("Cross Baseline", new AutoDrive(0.5, 3));
 
-		Server server = new Server(8080);
+		server = new Server(8080);
+		server.autonomousSelector = new AutonomousModeSelector();
+		server.autonomousSelector.add("Do nothing", null);
+		server.autonomousSelector.add("Auto Left", new AutoLeft());
+		server.autonomousSelector.add("Auto Right", new AutoRight());
+		server.autonomousSelector.add("Auto Mid", new AutoMid());
+		server.autonomousSelector.add("Cross Baseline", new AutoDrive(0.5, 3));
+		server.autonomousSelector.setCurrentMode(0);
 		server.start();
 	}
 
@@ -77,7 +78,7 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = new AutoLeft();
+		autonomousCommand = server.autonomousSelector.getCurrentModeCommand();
 		CommandBase.chassis.resetEncs();
 		CommandBase.chassis.resetGyro();
 		
