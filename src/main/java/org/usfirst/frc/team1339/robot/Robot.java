@@ -43,6 +43,7 @@ public class Robot extends IterativeRobot {
 		autoSelector.add("Auto Right", new AutoRight());
 		autoSelector.add("Auto Mid", new AutoMid());
 		autoSelector.add("Cross Baseline", new AutoDrive(0.5, 3));
+
 		Server server = new Server(8080);
 		server.start();
 	}
