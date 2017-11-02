@@ -3,6 +3,7 @@ package org.usfirst.frc.team1339.robot;
 
 import java.io.IOException;
 
+import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1339.robot.commands.AutoDrive;
 import org.usfirst.frc.team1339.robot.commands.CommandBase;
 import org.usfirst.frc.team1339.robot.commands.groups.AutoLeft;
@@ -27,6 +28,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	AutonomousModeSelector autoSelector;
+	Command autonomousCommand;
 
 	/**
 	 * This function is run when the robot is first started up and should be

@@ -14,14 +14,14 @@ public class ArcadeDrive extends CommandBase{
 	}
 
 	protected void initialize(){
+
 	}
 
 	protected void execute(){
 		stick = oi.getXboxStick();
 		throttle = stick.getRawAxis(RobotMap.xboxLeftYAxis);
 		turn = stick.getRawAxis(RobotMap.xboxRightXAxis);
-		
-		
+
 		chassis.driveWithJoystick(throttle, turn);
 	}
 
@@ -30,7 +30,7 @@ public class ArcadeDrive extends CommandBase{
 	}
 	
 	protected void end(){
-		
+
 	}
 	
 	protected void interrupted(){
