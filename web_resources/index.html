@@ -24,19 +24,20 @@ $(document).ready(function(){
         });
     });
     
-    /*setInterval(function(){
+    setInterval(function(){
     	$.get("getValues", function(data){
     		var obj = $.parseJSON(data);
     		$.each(obj, function(key, data){
-    			if($("#" + key).length == 0){
-    				$("div#valueDisplay").append("<span id=\"" + key + "\">" + key + ":  " + data + "</span>");
+    			id = "#" + key;
+    			if($(id).length == 0){
+    				$("div#valueDisplay").append("<span id=\"" + key + "\">" + key + ":  " + data + "</span><br/>");
     			}
     			else{
     				$("span#" + key).text(key + ":  " + data)
     			}
     		});
     	});
-    }, 50);*/
+    }, 50);
 });
 		</script>
 	</head>
@@ -55,6 +56,6 @@ $(document).ready(function(){
 		<br/>
 		<br/>
 		<br/>
-		<div align="center" id="valueDisplay"></div>
+		<div id="valueDisplay"></div>
 	</body>
 </html>

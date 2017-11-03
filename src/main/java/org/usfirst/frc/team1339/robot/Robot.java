@@ -113,6 +113,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		server.valueDisplay.putValue("RightEnc", CommandBase.chassis.getRightEnc());
+		server.valueDisplay.putValue("LeftEnc", CommandBase.chassis.getLeftEnc());
 		SmartDashboard.putNumber("Gyro", CommandBase.chassis.getSpartanGyro());
 		SmartDashboard.putNumber("Left Ultrasonic", CommandBase.chassis.getUltraLeft());
 		SmartDashboard.putNumber("Right Ultrasonic", CommandBase.chassis.getUltraRight());

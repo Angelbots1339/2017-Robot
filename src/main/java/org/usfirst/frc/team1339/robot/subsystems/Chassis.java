@@ -28,8 +28,10 @@ public class Chassis extends Subsystem {
 			RobotMap.ultraLeftIn);
 	private Ultrasonic ultraRight = new Ultrasonic(RobotMap.ultraRightOut,
 			RobotMap.ultraRightIn);
-	private Encoder leftEnc = new Encoder(RobotMap.leftDriveAEncoder, RobotMap.leftDriveBEncoder, true);
-	private Encoder rightEnc = new Encoder(RobotMap.rightDriveAEncoder, RobotMap.rightDriveBEncoder);
+	//private Encoder leftEnc = new Encoder(RobotMap.leftDriveAEncoder, RobotMap.leftDriveBEncoder, true);
+	//private Encoder rightEnc = new Encoder(RobotMap.rightDriveAEncoder, RobotMap.rightDriveBEncoder);
+
+
 
 	//PID
 	public SynchronousPID gyroTurnPID = new SynchronousPID
@@ -63,11 +65,15 @@ public class Chassis extends Subsystem {
 
 	public Chassis(){
 		rightFrontMotor = new CANTalon(RobotMap.rightFront);
+		rightFrontMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		rightFrontMotor.reverseSensor(false);
 		rightBackMotor = new CANTalon(RobotMap.rightBack);
 		rightBackMotor.changeControlMode(CANTalon.TalonControlMode.Follower);
 		rightBackMotor.set(RobotMap.rightFront);
 
 		leftFrontMotor = new CANTalon(RobotMap.leftFront);
+		leftFrontMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		leftFrontMotor.reverseSensor(true);
 		leftBackMotor = new CANTalon(RobotMap.leftBack);
 		leftBackMotor.changeControlMode(CANTalon.TalonControlMode.Follower);
 		leftBackMotor.set(RobotMap.leftFront);
@@ -100,20 +106,22 @@ public class Chassis extends Subsystem {
 		return ultraRight.getRangeInches();
 	}
 
-	public int getRightEnc(){
-		return rightEnc.get();
+	public double getRightEnc(){
+		return rightFrontMotor.getPosition();
 	}
 
-	public int getLeftEnc(){
-		return leftEnc.get();
+	public double getLeftEnc(){
+		return leftFrontMotor.getPosition();
 	}
 
 	public void resetRightEnc(){
-		rightEnc.reset();
+		//rightFrontMotor.sensor
+		rightFrontMotor.setPosition(0);
 	}
 
 	public void resetLeftEnc(){
-		leftEnc.reset();
+	//	leftEnc.reset();
+		leftFrontMotor.setPosition(0);
 	}
 
 	public void resetEncs(){
@@ -126,6 +134,10 @@ public class Chassis extends Subsystem {
 		double left = -output;
 		double right = output;
 		setMotorValues(right, left);
+	}
+
+	public void talonPositionControl(double leftSetpoint, double rightSetpoint){
+
 	}
 
 	public void runVisionPid(int[] centerX){
