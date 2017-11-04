@@ -128,6 +128,11 @@ public class RobotMap {
 	public static double robotWidth;
 	public static double maxSplineVel;
 
+	//Talon Position PID
+	public static final double talonPosKp = 0;
+	public static final double talonPosKi = 0;
+	public static final double talonPosKd = 0;
+
 	//Spline PID, Acceleration, and Velocity Constants.
 	public static final double splineMPKp = 0.02;//0.02;
 	public static final double splineMPKi = 0.0;

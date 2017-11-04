@@ -1,15 +1,7 @@
 
 package org.usfirst.frc.team1339.robot;
 
-import org.usfirst.frc.team1339.robot.commands.AutoClimb;
-import org.usfirst.frc.team1339.robot.commands.DriveClimber;
-import org.usfirst.frc.team1339.robot.commands.GearHolderDown;
-import org.usfirst.frc.team1339.robot.commands.GearHolderUp;
-import org.usfirst.frc.team1339.robot.commands.GearRampDown;
-import org.usfirst.frc.team1339.robot.commands.GearRampUp;
-import org.usfirst.frc.team1339.robot.commands.RunVisionThrottle;
-import org.usfirst.frc.team1339.robot.commands.ShiftHigh;
-import org.usfirst.frc.team1339.robot.commands.ShiftLow;
+import org.usfirst.frc.team1339.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -57,6 +49,7 @@ public class OI {
 		sevenButton.whileHeld(new DriveClimber(0.9));
 		
 		bButton.whileHeld(new RunVisionThrottle());
+		aButton.whileHeld(new HoldPosition());
 	}
 	
 	//Get Functions

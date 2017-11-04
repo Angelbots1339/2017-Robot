@@ -10,7 +10,6 @@ import org.usfirst.frc.team1339.utils.SynchronousPID;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -63,10 +62,16 @@ public class Chassis extends Subsystem {
 			RobotMap.splineMPKd, RobotMap.splineMPKa, 
 			RobotMap.splineMPKv);
 
+	private CANTalon.TalonControlMode currentMode;
+
 	public Chassis(){
+		currentMode = CANTalon.TalonControlMode.PercentVbus;
+
 		rightFrontMotor = new CANTalon(RobotMap.rightFront);
 		rightFrontMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		rightFrontMotor.reverseSensor(false);
+		rightFrontMotor.setPID(RobotMap.talonPosKp, RobotMap.talonPosKi, RobotMap.talonPosKd);
+
 		rightBackMotor = new CANTalon(RobotMap.rightBack);
 		rightBackMotor.changeControlMode(CANTalon.TalonControlMode.Follower);
 		rightBackMotor.set(RobotMap.rightFront);
@@ -74,9 +79,14 @@ public class Chassis extends Subsystem {
 		leftFrontMotor = new CANTalon(RobotMap.leftFront);
 		leftFrontMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		leftFrontMotor.reverseSensor(true);
+		leftFrontMotor.setPID(RobotMap.talonPosKp, RobotMap.talonPosKi, RobotMap.talonPosKd);
+
 		leftBackMotor = new CANTalon(RobotMap.leftBack);
 		leftBackMotor.changeControlMode(CANTalon.TalonControlMode.Follower);
 		leftBackMotor.set(RobotMap.leftFront);
+
+		leftFrontMotor.changeControlMode(currentMode);
+		rightFrontMotor.changeControlMode(currentMode);
 
 		ultraLeft.setAutomaticMode(true);
 		ultraRight.setAutomaticMode(true);
@@ -136,8 +146,28 @@ public class Chassis extends Subsystem {
 		setMotorValues(right, left);
 	}
 
-	public void talonPositionControl(double leftSetpoint, double rightSetpoint){
+	public void setBrakes(boolean brake){
+		rightFrontMotor.enableBrakeMode(brake);
+		rightBackMotor.enableBrakeMode(brake);
+		leftFrontMotor.enableBrakeMode(brake);
+		leftBackMotor.enableBrakeMode(brake);
+	}
 
+	public void setTalonMode(CANTalon.TalonControlMode mode){
+		leftFrontMotor.changeControlMode(mode);
+		rightFrontMotor.changeControlMode(mode);
+		currentMode = mode;
+	}
+
+	public void talonPositionControl(double leftSetpoint, double rightSetpoint){
+		if(currentMode != CANTalon.TalonControlMode.Position) {
+			setTalonMode(CANTalon.TalonControlMode.Position);
+		}
+
+		setBrakes(true);
+
+		leftFrontMotor.set(leftSetpoint);
+		rightFrontMotor.set(rightSetpoint);
 	}
 
 	public void runVisionPid(int[] centerX){

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1339.robot.commands;
 
+import com.ctre.CANTalon;
 import org.usfirst.frc.team1339.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -14,7 +15,8 @@ public class ArcadeDrive extends CommandBase{
 	}
 
 	protected void initialize(){
-
+		chassis.setBrakes(false);
+		chassis.setTalonMode(CANTalon.TalonControlMode.PercentVbus);
 	}
 
 	protected void execute(){
