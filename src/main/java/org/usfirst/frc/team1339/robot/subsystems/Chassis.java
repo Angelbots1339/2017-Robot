@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1339.robot.subsystems;
 
+import org.usfirst.frc.team1339.robot.Robot;
 import org.usfirst.frc.team1339.robot.RobotMap;
 import org.usfirst.frc.team1339.robot.commands.ArcadeDrive;
 import org.usfirst.frc.team1339.utils.MotionProfileHigh;
@@ -70,6 +71,8 @@ public class Chassis extends Subsystem {
 		rightFrontMotor = new CANTalon(RobotMap.rightFront);
 		rightFrontMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		rightFrontMotor.reverseSensor(false);
+		rightFrontMotor.setInverted(true);
+		rightFrontMotor.reverseOutput(false);
 		rightFrontMotor.setPID(RobotMap.talonPosKp, RobotMap.talonPosKi, RobotMap.talonPosKd);
 
 		rightBackMotor = new CANTalon(RobotMap.rightBack);
@@ -79,6 +82,8 @@ public class Chassis extends Subsystem {
 		leftFrontMotor = new CANTalon(RobotMap.leftFront);
 		leftFrontMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		leftFrontMotor.reverseSensor(true);
+		leftFrontMotor.setInverted(false);
+		leftFrontMotor.reverseOutput(true);
 		leftFrontMotor.setPID(RobotMap.talonPosKp, RobotMap.talonPosKi, RobotMap.talonPosKd);
 
 		leftBackMotor = new CANTalon(RobotMap.leftBack);
@@ -125,12 +130,10 @@ public class Chassis extends Subsystem {
 	}
 
 	public void resetRightEnc(){
-		//rightFrontMotor.sensor
 		rightFrontMotor.setPosition(0);
 	}
 
 	public void resetLeftEnc(){
-	//	leftEnc.reset();
 		leftFrontMotor.setPosition(0);
 	}
 
@@ -168,6 +171,14 @@ public class Chassis extends Subsystem {
 
 		leftFrontMotor.set(leftSetpoint);
 		rightFrontMotor.set(rightSetpoint);
+	}
+
+	public void updateDashboard(){
+		Robot.server.valueDisplay.putValue("Left Output", leftFrontMotor.getOutputVoltage());
+		Robot.server.valueDisplay.putValue("Right Output", rightFrontMotor.getOutputVoltage());
+
+		Robot.server.valueDisplay.putValue("Left Error", leftFrontMotor.getClosedLoopError());
+		Robot.server.valueDisplay.putValue("Right Error", rightFrontMotor.getClosedLoopError());
 	}
 
 	public void runVisionPid(int[] centerX){
@@ -308,7 +319,7 @@ public class Chassis extends Subsystem {
 		if(Math.abs(left) < 0.075) left = 0;
 		if(Math.abs(right) < 0.075) right = 0;
 		
-		rightFrontMotor.set(-right);
+		rightFrontMotor.set(right);
 		//rightBackMotor.set(-right);
 		leftFrontMotor.set(left);
 		//leftBackMotor.set(left);

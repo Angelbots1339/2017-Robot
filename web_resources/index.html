@@ -28,9 +28,9 @@ $(document).ready(function(){
     	$.get("getValues", function(data){
     		var obj = $.parseJSON(data);
     		$.each(obj, function(key, data){
-    			id = "#" + key;
-    			if($(id).length == 0){
-    				$("div#valueDisplay").append("<span id=\"" + key + "\">" + key + ":  " + data + "</span><br/>");
+    			id = key.replace(/\s+/g, '');
+    			if($("#" + id).length == 0){
+    				$("div#valueDisplay").append("<span id=\"" + id + "\">" + key + ":  " + data + "</span><br/>");
     			}
     			else{
     				$("span#" + key).text(key + ":  " + data)

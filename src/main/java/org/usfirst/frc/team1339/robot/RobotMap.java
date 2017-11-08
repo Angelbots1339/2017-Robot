@@ -129,7 +129,7 @@ public class RobotMap {
 	public static double maxSplineVel;
 
 	//Talon Position PID
-	public static final double talonPosKp = 0;
+	public static final double talonPosKp = 4;
 	public static final double talonPosKi = 0;
 	public static final double talonPosKd = 0;
 

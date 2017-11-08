@@ -13,6 +13,10 @@ public class ValueDisplay {
 	public void putValue(String name, Object value){
 		json.put(name, value);
 	}
+
+	public void clear(){
+		json.clear();
+	}
 	
 	public String getJSON(){
 		return json.toJSONString();
