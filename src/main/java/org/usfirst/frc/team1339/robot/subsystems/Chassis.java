@@ -23,7 +23,7 @@ public class Chassis extends Subsystem {
 
 
 	//Sensors
-	private ADXRS450_Gyro spartanGyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
+	private ADXRS450_Gyro spartanGyro;// = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
 	private Ultrasonic ultraLeft = new Ultrasonic(RobotMap.ultraLeftOut,
 			RobotMap.ultraLeftIn);
 	private Ultrasonic ultraRight = new Ultrasonic(RobotMap.ultraRightOut,
@@ -102,7 +102,7 @@ public class Chassis extends Subsystem {
 	}
 
 	public double getSpartanGyro() {
-		return spartanGyro.getAngle();
+		return 0;//spartanGyro.getAngle();
 	}
 
 	public double getSpartanGyroRate(){
@@ -110,7 +110,7 @@ public class Chassis extends Subsystem {
 	}
 
 	public void resetGyro(){
-		spartanGyro.reset();
+		//spartanGyro.reset();
 	}
 
 	public double getUltraLeft(){
